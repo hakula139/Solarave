@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f3128a9103c6c47ce8ab5736f30f8d84
+guid: 8ba6ca67b8b7546bfa4e0dba4a718863
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,421 +104,505 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: simple_auto_scratch
+      name: frame_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 90
-        width: 78
-        height: 10
+        y: 907
+        width: 440
+        height: 720
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97dee38c4803e49ddb2a48830cd2d682
-      internalID: -766722672
+      spriteID: 6cf20b1ec0002470da52c81a9261c9f9
+      internalID: 534338018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch
+      name: frame_1
       rect:
         serializedVersion: 2
-        x: 81
-        y: 90
-        width: 78
-        height: 10
+        x: 461
+        y: 907
+        width: 440
+        height: 720
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdb1427d6df0d4a6fa01d5458cefef11
-      internalID: -1276057551
+      spriteID: f1b733c4ed4384e3ba240d74cddb0474
+      internalID: 1085198726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white
+      name: frame_2
       rect:
         serializedVersion: 2
-        x: 162
-        y: 90
-        width: 44
-        height: 10
+        x: 905
+        y: 1586
+        width: 377
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a20a72d8fe584e4fb894a339b0ecfc0
-      internalID: -1418206178
+      spriteID: 111cce071cb5d465c840dfd573def996
+      internalID: 1917015255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_black
+      name: frame_3
       rect:
         serializedVersion: 2
-        x: 209
-        y: 90
-        width: 34
-        height: 10
+        x: 1616
+        y: 1094
+        width: 84
+        height: 533
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a656973eeea084d0791b1cdf471cd1b4
-      internalID: 1029808635
+      spriteID: bd24607c33cf3498daf24b5633cbe7b7
+      internalID: -872038802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_auto_scratch_mine
+      name: frame_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 74
-        width: 78
-        height: 10
+        x: 905
+        y: 1536
+        width: 377
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72d7cf85d4fe54bdca5222a8e7a1fecc
-      internalID: 1300341140
+      spriteID: 1cbc63165d701492999f4d25afbcd82e
+      internalID: -1780774953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch_mine
+      name: frame_5
       rect:
         serializedVersion: 2
-        x: 81
-        y: 74
-        width: 78
-        height: 10
+        x: 929
+        y: 963
+        width: 666
+        height: 525
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76f794ab77c23410e808c59a1432a8cd
-      internalID: 1327701227
+      spriteID: 02db57bcb396d438aa4a78edf0cecf2e
+      internalID: -1820418306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white_mine
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 74
-        width: 44
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 11f331db058584d70ab29494ffa038d5
-      internalID: -1392541558
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple_black_mine
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 74
-        width: 34
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3de7863b488c7472e99b432991be0c10
-      internalID: -1764770836
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple_auto_scratch_ln_head
+      name: frame_6
       rect:
         serializedVersion: 2
         x: 0
-        y: 53
-        width: 78
-        height: 15
+        y: 847
+        width: 842
+        height: 39
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d691068a3cba40c6987502271450e05
-      internalID: 1694365086
+      spriteID: 602d9b14a79e94a1eaa06c8818304b8e
+      internalID: -73411581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch_ln_head
+      name: frame_7
       rect:
         serializedVersion: 2
-        x: 81
-        y: 53
-        width: 78
-        height: 15
+        x: 929
+        y: 426
+        width: 506
+        height: 525
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed8c26cb1098841a3975f99fad067d85
-      internalID: -1168501198
+      spriteID: 390a89aafd5d649c78a0104416bb0f8d
+      internalID: -2140127070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white_ln_head
+      name: frame_8
       rect:
         serializedVersion: 2
-        x: 162
-        y: 53
-        width: 44
-        height: 15
+        x: 1447
+        y: 560
+        width: 172
+        height: 377
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fb38a8bcef82486b83a17d56e3056cd
-      internalID: 1697764800
+      spriteID: 0c6a231f828a74f8e8ba2032e004d35b
+      internalID: 314550656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_black_ln_head
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 53
-        width: 34
-        height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84554aaa90306490ba33bd6bb0d44241
-      internalID: -1310978747
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple_auto_scratch_ln_tail
+      name: frame_9
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
-        width: 78
-        height: 15
+        y: 779
+        width: 274
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf4b257cd9e874e188bda336fddd85f2
-      internalID: 1902509902
+      spriteID: 504aff6a84d554930856d13146a093aa
+      internalID: -1069572971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch_ln_tail
+      name: frame_10
       rect:
         serializedVersion: 2
-        x: 81
-        y: 32
-        width: 78
-        height: 15
+        x: 307
+        y: 698
+        width: 162
+        height: 129
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16cdf1b5b09b44e3db9412f7c3740863
-      internalID: 95527115
+      spriteID: 19c2bc11fb8394c23bf07bd7f4292350
+      internalID: -308603014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white_ln_tail
+      name: frame_11
       rect:
         serializedVersion: 2
-        x: 162
-        y: 32
-        width: 44
-        height: 15
+        x: 480
+        y: 701
+        width: 111
+        height: 115
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f93a1af99009c481986abdd4566ab841
-      internalID: 880168058
+      spriteID: 3f1ad0c8409ac48fe891e4204dcf11ce
+      internalID: -1792299983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_black_ln_tail
+      name: frame_12
       rect:
         serializedVersion: 2
-        x: 209
-        y: 32
-        width: 34
-        height: 15
+        x: 691
+        y: 700
+        width: 230
+        height: 124
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6794c673ce01469d9335f7323fee928
-      internalID: -985976417
+      spriteID: e15652330c72a41c087b1b3c1da42ea5
+      internalID: 1971811943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_auto_scratch_ln
+      name: frame_13
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 699
+        width: 244
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12d2f8f81c1844a9380c979d89a049f9
+      internalID: 1055561835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_14
       rect:
         serializedVersion: 2
         x: 0
+        y: 620
+        width: 841
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c69ee45ccfe24812b1ab8c1836176a3
+      internalID: 2068934256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 461
+        width: 430
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 915254b2049764573b5882946a9c06b3
+      internalID: -397165076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_16
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 461
+        width: 433
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0b4dd785e88649eda879a309131c5e5
+      internalID: -1416804495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_17
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 524
+        width: 172
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 415aea17f7ba94ada9b9ff841c850790
+      internalID: -1890685024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_18
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 473
+        width: 172
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 113d42bf9035d484faa9a3e30b85ab7c
+      internalID: -1684806945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 392
+        width: 400
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a71b1360eba9f4da98267f061511481f
+      internalID: 1610176320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_20
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 422
+        width: 172
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb3fc674b350a49f6bc9a1bcd69887b2
+      internalID: -1232968338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 260
+        width: 262
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f2aa507511654c96a26979352e57582
+      internalID: 323531898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame_22
+      rect:
+        serializedVersion: 2
+        x: 364
         y: 0
-        width: 78
-        height: 26
+        width: 429
+        height: 382
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1ffcc06e1b3a4d4da5cac124c4a10ba
-      internalID: 1326062585
+      spriteID: b4172e207fe8e48c5850b8ff2f33ac54
+      internalID: 639865931
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch_ln
+      name: frame_23
       rect:
         serializedVersion: 2
-        x: 81
-        y: 0
-        width: 78
-        height: 26
+        x: 929
+        y: 1
+        width: 400
+        height: 419
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98bb8ecb331ec4e9c92d3ddc0565ffcb
-      internalID: -880756294
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple_white_ln
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 0
-        width: 44
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f64f680ef56054bf4bc403687eb13630
-      internalID: -2072317569
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: simple_black_ln
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 0
-        width: 34
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dff34f7f615e34d64acd0787e7ab1dd8
-      internalID: 1537610245
+      spriteID: 58f4385d293544b9590f3db93e3386b2
+      internalID: 1076292569
       vertices: []
       indices: 
       edges: []
@@ -534,26 +618,30 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      simple_auto_scratch_ln_head: 1694365086
-      simple_scratch_mine: 1327701227
-      white: -1418206178
-      simple_auto_scratch: -766722672
-      black_ln: 1537610245
-      scratch_ln_tail: 95527115
-      white_ln_head: 1697764800
-      simple_scratch: -1276057551
-      black_mine: -1764770836
-      simple_auto_scratch_ln_tail: 1902509902
-      black_ln_tail: -985976417
-      black_ln_head: -1310978747
-      black: 1029808635
-      simple_auto_scratch_ln: 1326062585
-      white_mine: -1392541558
-      white_ln: -2072317569
-      scratch_ln_head: -1168501198
-      scratch_ln: -880756294
-      white_ln_tail: 880168058
-      simple_auto_scratch_mine: 1300341140
+      frame_2: 1917015255
+      frame_23: 1076292569
+      frame_22: 639865931
+      frame_6: -73411581
+      frame_7: -2140127070
+      frame_8: 314550656
+      frame_3: -872038802
+      frame_1: 1085198726
+      frame_16: -1416804495
+      frame_20: -1232968338
+      frame_12: 1971811943
+      frame_19: 1610176320
+      frame_9: -1069572971
+      frame_10: -308603014
+      frame_13: 1055561835
+      frame_15: -397165076
+      frame_14: 2068934256
+      frame_17: -1890685024
+      frame_11: -1792299983
+      frame_0: 534338018
+      frame_18: -1684806945
+      frame_4: -1780774953
+      frame_5: -1820418306
+      frame_21: 323531898
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
