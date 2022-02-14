@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: simple_auto_scratch
+      name: auto_scratch
       rect:
         serializedVersion: 2
         x: 0
@@ -125,7 +125,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch
+      name: scratch
       rect:
         serializedVersion: 2
         x: 81
@@ -146,7 +146,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white
+      name: white
       rect:
         serializedVersion: 2
         x: 162
@@ -167,7 +167,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_black
+      name: black
       rect:
         serializedVersion: 2
         x: 209
@@ -188,7 +188,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_auto_scratch_mine
+      name: auto_scratch_mine
       rect:
         serializedVersion: 2
         x: 0
@@ -209,7 +209,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch_mine
+      name: scratch_mine
       rect:
         serializedVersion: 2
         x: 81
@@ -230,7 +230,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white_mine
+      name: white_mine
       rect:
         serializedVersion: 2
         x: 162
@@ -251,7 +251,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_black_mine
+      name: black_mine
       rect:
         serializedVersion: 2
         x: 209
@@ -272,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_auto_scratch_ln_head
+      name: auto_scratch_ln_head
       rect:
         serializedVersion: 2
         x: 0
@@ -293,7 +293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch_ln_head
+      name: scratch_ln_head
       rect:
         serializedVersion: 2
         x: 81
@@ -314,7 +314,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white_ln_head
+      name: white_ln_head
       rect:
         serializedVersion: 2
         x: 162
@@ -335,7 +335,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_black_ln_head
+      name: black_ln_head
       rect:
         serializedVersion: 2
         x: 209
@@ -356,7 +356,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_auto_scratch_ln_tail
+      name: auto_scratch_ln_tail
       rect:
         serializedVersion: 2
         x: 0
@@ -377,7 +377,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch_ln_tail
+      name: scratch_ln_tail
       rect:
         serializedVersion: 2
         x: 81
@@ -398,7 +398,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white_ln_tail
+      name: white_ln_tail
       rect:
         serializedVersion: 2
         x: 162
@@ -419,7 +419,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_black_ln_tail
+      name: black_ln_tail
       rect:
         serializedVersion: 2
         x: 209
@@ -440,7 +440,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_auto_scratch_ln
+      name: auto_scratch_ln
       rect:
         serializedVersion: 2
         x: 0
@@ -461,7 +461,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_scratch_ln
+      name: scratch_ln
       rect:
         serializedVersion: 2
         x: 81
@@ -482,7 +482,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_white_ln
+      name: white_ln
       rect:
         serializedVersion: 2
         x: 162
@@ -503,7 +503,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: simple_black_ln
+      name: black_ln
       rect:
         serializedVersion: 2
         x: 209
