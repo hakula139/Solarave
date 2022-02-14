@@ -419,7 +419,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: keys_1p
+      name: buttons_frame_1p
       rect:
         serializedVersion: 2
         x: 0
@@ -440,7 +440,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: keys_2p
+      name: buttons_frame_2p
       rect:
         serializedVersion: 2
         x: 468
@@ -623,12 +623,14 @@ TextureImporter:
       bpm: 1055561835
       bgm_extend: -1820418306
       judge_detail_wide: 1971811943
+      buttons_frame_1p: -397165076
       bgm_normal: -2140127070
       frame_20: -1232968338
       disable_lane: -872038802
       score_graph: 314550656
       judge_detail: -308603014
       title_bar: 1085198726
+      buttons_frame_2p: -1416804495
       flash_0: 323531898
       frame_2p: -1890685024
       frame_17: -1780774953
@@ -638,10 +640,8 @@ TextureImporter:
       bgm_small: 534338018
       judge_detail_small: -1792299983
       frame_1p: -1416804495
-      keys_2p: -397165076
       score: -308603014
       top_bar: 1610176320
-      keys_1p: -1069572971
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
