@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 142725237}
   - component: {fileID: 142725239}
   - component: {fileID: 142725240}
+  - component: {fileID: 142725241}
   m_Layer: 0
   m_Name: button_2
   m_TagString: Activator
@@ -232,7 +233,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.34}
@@ -248,6 +249,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.1}
   m_EdgeRadius: 0
+--- !u!50 &142725241
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142725236}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &143285083
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +282,7 @@ GameObject:
   - component: {fileID: 143285084}
   - component: {fileID: 143285086}
   - component: {fileID: 143285087}
+  - component: {fileID: 143285088}
   m_Layer: 0
   m_Name: button_3
   m_TagString: Activator
@@ -357,7 +380,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.38}
@@ -373,6 +396,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.1}
   m_EdgeRadius: 0
+--- !u!50 &143285088
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143285083}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &243996006
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +429,7 @@ GameObject:
   - component: {fileID: 243996007}
   - component: {fileID: 243996009}
   - component: {fileID: 243996010}
+  - component: {fileID: 243996011}
   m_Layer: 0
   m_Name: button_5
   m_TagString: Activator
@@ -482,7 +527,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.38}
@@ -498,6 +543,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.1}
   m_EdgeRadius: 0
+--- !u!50 &243996011
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243996006}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &248113392
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 248113394}
   - component: {fileID: 248113393}
+  - component: {fileID: 248113397}
   - component: {fileID: 248113396}
   m_Layer: 0
   m_Name: note_2
@@ -609,6 +676,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &248113397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248113392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c884482202aac42289fd0d59293c33f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isClickable: 0
+  keyAssigned: 100
 --- !u!1 &275994893
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +702,7 @@ GameObject:
   - component: {fileID: 275994894}
   - component: {fileID: 275994896}
   - component: {fileID: 275994897}
+  - component: {fileID: 275994898}
   m_Layer: 0
   m_Name: button_1
   m_TagString: Activator
@@ -718,7 +800,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.38}
@@ -734,6 +816,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.1}
   m_EdgeRadius: 0
+--- !u!50 &275994898
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275994893}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &388081470
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +1053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 598777223}
   - component: {fileID: 598777224}
+  - component: {fileID: 598777227}
   - component: {fileID: 598777226}
   m_Layer: 0
   m_Name: note_1
@@ -1051,6 +1155,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.44, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &598777227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598777222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c884482202aac42289fd0d59293c33f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isClickable: 0
+  keyAssigned: 115
 --- !u!1 &608173436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,6 +1228,7 @@ GameObject:
   - component: {fileID: 862691459}
   - component: {fileID: 862691461}
   - component: {fileID: 862691462}
+  - component: {fileID: 862691463}
   m_Layer: 0
   m_Name: button_7
   m_TagString: Activator
@@ -1207,7 +1326,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.38}
@@ -1223,6 +1342,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.34, y: 0.1}
   m_EdgeRadius: 0
+--- !u!50 &862691463
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862691458}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &879235262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,6 +1843,7 @@ GameObject:
   - component: {fileID: 1478612031}
   - component: {fileID: 1478612033}
   - component: {fileID: 1478612034}
+  - component: {fileID: 1478612035}
   m_Layer: 0
   m_Name: button_6
   m_TagString: Activator
@@ -1800,7 +1941,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.34}
@@ -1816,6 +1957,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.1}
   m_EdgeRadius: 0
+--- !u!50 &1478612035
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478612030}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1533946076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,6 +2240,7 @@ GameObject:
   - component: {fileID: 2067538436}
   - component: {fileID: 2067538438}
   - component: {fileID: 2067538439}
+  - component: {fileID: 2067538440}
   m_Layer: 0
   m_Name: button_4
   m_TagString: Activator
@@ -2175,7 +2338,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.34}
@@ -2191,3 +2354,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.1}
   m_EdgeRadius: 0
+--- !u!50 &2067538440
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067538435}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
