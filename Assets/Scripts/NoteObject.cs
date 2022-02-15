@@ -12,24 +12,25 @@ public class NoteObject : MonoBehaviour {
 
   // Update is called once per frame.
   void Update() {
-    if (Input.GetKeyDown(keyAssigned)) {
-      if (isClickable) {
-        gameObject.SetActive(false);
+    if (isClickable) {
+      if (Input.GetKeyDown(keyAssigned)) {
+        isClickable = false;
         GameManager.instance.NoteHit();
       }
     }
   }
 
   private void OnTriggerEnter2D(Collider2D other) {
-    if (other.tag == "Activator") {
+    if (other.CompareTag("Activator")) {
       isClickable = true;
     }
   }
 
   private void OnTriggerExit2D(Collider2D other) {
-    if (other.tag == "Activator") {
+    if (isClickable && other.CompareTag("Activator")) {
       isClickable = false;
       GameManager.instance.NoteMissed();
     }
+    gameObject.SetActive(false);
   }
 }
