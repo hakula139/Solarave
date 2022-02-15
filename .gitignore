@@ -2,6 +2,8 @@
 
 .DS_Store
 *.log
+BMS/
+BMS.meta
 
 
 ## Unity
