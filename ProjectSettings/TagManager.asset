@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Notes
+    uniqueID: 155537965
+    locked: 0
+  - name: ButtonFrame
+    uniqueID: 2083288225
+    locked: 0
