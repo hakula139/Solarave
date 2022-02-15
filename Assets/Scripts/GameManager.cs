@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -12,13 +11,15 @@ public class GameManager : MonoBehaviour {
 
   public int exScore;
   public TMP_Text exScoreText;
+  public int combo;
+  public TMP_Text comboText;
+  public int maxCombo;
+  public TMP_Text maxComboText;
 
-  // Start is called before the first frame update.
   void Start() {
     instance = this;
   }
 
-  // Update is called once per frame.
   void Update() {
     if (!hasStarted) {
       if (Input.anyKeyDown) {
@@ -30,12 +31,20 @@ public class GameManager : MonoBehaviour {
   }
 
   public void NoteHit() {
+    Debug.Log("GREAT");
+
     exScore += 1;
     exScoreText.text = $"{exScore:0000}";
-    Debug.Log("GREAT");
+    combo += 1;
+    comboText.text = combo.ToString();
+    maxCombo = Math.Max(combo, maxCombo);
+    maxComboText.text = $"{maxCombo:0000}";
   }
 
   public void NoteMissed() {
     Debug.Log("POOR");
+
+    combo = 0;
+    comboText.text = "";
   }
 }

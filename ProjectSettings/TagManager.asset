@@ -48,3 +48,6 @@ TagManager:
   - name: ButtonFrame
     uniqueID: 2083288225
     locked: 0
+  - name: Text
+    uniqueID: 2385493663
+    locked: 0
