@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
   public static GameManager instance;
@@ -8,6 +9,9 @@ public class GameManager : MonoBehaviour {
   public AudioSource bgm;
   public bool hasStarted;
   public BeatScroller bs;
+
+  public int exScore;
+  public TMP_Text exScoreText;
 
   // Start is called before the first frame update.
   void Start() {
@@ -26,6 +30,8 @@ public class GameManager : MonoBehaviour {
   }
 
   public void NoteHit() {
+    exScore += 1;
+    exScoreText.text = $"{exScore:0000}";
     Debug.Log("GREAT");
   }
 
