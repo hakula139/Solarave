@@ -2,19 +2,28 @@ using System;
 using UnityEngine;
 using TMPro;
 
+public enum NoteExScores {
+  PGREAT = 2,
+  GREAT = 1,
+  GOOD = 0,
+  BAD = 0,
+  POOR = 0,
+}
+
 public class GameManager : MonoBehaviour {
   public static GameManager instance;
+  public BeatScroller bs;
 
   public AudioSource bgm;
   public bool hasStarted;
-  public BeatScroller bs;
 
-  public int exScore;
   public TMP_Text exScoreText;
-  public int combo;
-  public TMP_Text comboText;
-  public int maxCombo;
+  public TMP_Text judgeText;
   public TMP_Text maxComboText;
+
+  private int exScore;
+  private int combo;
+  private int maxCombo;
 
   void Start() {
     instance = this;
@@ -30,21 +39,42 @@ public class GameManager : MonoBehaviour {
     }
   }
 
-  public void NoteHit() {
-    Debug.Log("GREAT");
-
-    exScore += 1;
-    exScoreText.text = $"{exScore:0000}";
-    combo += 1;
-    comboText.text = combo.ToString();
+  public void NoteJudge(NoteExScores score, bool isComboBreak = false) {
+    exScore += (int)score;
+    combo = isComboBreak ? 0 : combo + 1;
     maxCombo = Math.Max(combo, maxCombo);
+
+    exScoreText.text = $"{exScore:0000}";
     maxComboText.text = $"{maxCombo:0000}";
   }
 
-  public void NoteMissed() {
-    Debug.Log("POOR");
+  public void PgreatJudge() {
+    NoteJudge(NoteExScores.PGREAT);
 
-    combo = 0;
-    comboText.text = "";
+    judgeText.text = $"GREAT  {combo}";
+  }
+
+  public void GreatJudge() {
+    NoteJudge(NoteExScores.GREAT);
+
+    judgeText.text = $"GREAT  {combo}";
+  }
+
+  public void GoodJudge() {
+    NoteJudge(NoteExScores.GOOD);
+
+    judgeText.text = $"GOOD  {combo}";
+  }
+
+  public void BadJudge() {
+    NoteJudge(NoteExScores.BAD, true);
+
+    judgeText.text = "BAD";
+  }
+
+  public void PoorJudge() {
+    NoteJudge(NoteExScores.POOR, true);
+
+    judgeText.text = "POOR";
   }
 }
