@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
   public void PgreatJudge() {
     NoteJudge(NoteExScores.PGREAT);
 
-    judgeText.text = $"GREAT  {combo}";
+    judgeText.text = $"PGREAT  {combo}";
   }
 
   public void GreatJudge() {
