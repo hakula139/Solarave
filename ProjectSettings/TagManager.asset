@@ -51,6 +51,9 @@ TagManager:
   - name: FumenFrame
     uniqueID: 155537965
     locked: 0
+  - name: Indicators
+    uniqueID: 3659130647
+    locked: 0
   - name: Canvas
     uniqueID: 2385493663
     locked: 0

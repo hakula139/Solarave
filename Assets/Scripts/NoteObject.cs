@@ -11,8 +11,6 @@ public class NoteObject : MonoBehaviour {
       isClickable = false;
 
       var d = Mathf.Abs(transform.position.y - baseY);
-      Debug.Log(d);
-
       if (d < 0.1f) {
         GameManager.instance.PgreatJudge();
       } else if (d < 0.2f) {

@@ -13,6 +13,7 @@ public enum NoteExScores {
 public class GameManager : MonoBehaviour {
   public static GameManager instance;
   public BeatScroller bs;
+  public Animator pgreatAnim, greatAnim, goodAnim, badAnim, poorAnim;
 
   public AudioSource bgm;
   public bool hasStarted;
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour {
 
   public void PgreatJudge() {
     NoteJudge(NoteExScores.PGREAT);
-
+    pgreatAnim.Play("pgreat");
     judgeText.text = $"PGREAT  {combo}";
   }
 
