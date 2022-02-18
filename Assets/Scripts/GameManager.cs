@@ -1,17 +1,8 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public enum JudgeState {
-  PGREAT = 5,
-  GREAT = 4,
-  GOOD = 3,
-  BAD = 2,
-  POOR = 1,
-}
-
-public enum NoteExScores {
+public enum NoteExScore {
   PGREAT = 2,
   GREAT = 1,
   GOOD = 0,
@@ -34,6 +25,8 @@ public class GameManager : MonoBehaviour {
   private int exScore;
   private int combo;
   private int maxCombo;
+  private float lastJudgeTime;
+  private const float JudgeDuration = 1f;
 
   void Start() {
     instance = this;
@@ -47,51 +40,49 @@ public class GameManager : MonoBehaviour {
         bgm.Play();
       }
     }
+
+    if (Time.time - lastJudgeTime > JudgeDuration) {
+      judgeAnimator.Play("Idle");
+    }
   }
 
-  IEnumerator ExitJudgeAnimation(float duration = 1) {
-    yield return new WaitForSeconds(duration);
-    judgeAnimator.SetInteger("state", 0);
-  }
-
-  public void NoteJudge(NoteExScores score, bool isComboBreak = false) {
+  public void NoteJudge(NoteExScore score, bool isComboBreak = false) {
     exScore += (int)score;
     combo = isComboBreak ? 0 : combo + 1;
     maxCombo = Math.Max(combo, maxCombo);
+    lastJudgeTime = Time.time;
 
     exScoreText.text = $"{exScore:0000}";
     maxComboText.text = $"{maxCombo:0000}";
-
-    StartCoroutine(ExitJudgeAnimation());
   }
 
   public void PgreatJudge() {
-    NoteJudge(NoteExScores.PGREAT);
-    judgeAnimator.SetInteger("state", (int)JudgeState.PGREAT);
+    NoteJudge(NoteExScore.PGREAT);
+    judgeAnimator.Play("Pgreat");
     judgeText.text = $"PGREAT  {combo}";
   }
 
   public void GreatJudge() {
-    NoteJudge(NoteExScores.GREAT);
-    judgeAnimator.SetInteger("state", (int)JudgeState.GREAT);
+    NoteJudge(NoteExScore.GREAT);
+    judgeAnimator.Play("Great");
     judgeText.text = $"GREAT  {combo}";
   }
 
   public void GoodJudge() {
-    NoteJudge(NoteExScores.GOOD);
-    judgeAnimator.SetInteger("state", (int)JudgeState.GOOD);
+    NoteJudge(NoteExScore.GOOD);
+    judgeAnimator.Play("Good");
     judgeText.text = $"GOOD  {combo}";
   }
 
   public void BadJudge() {
-    NoteJudge(NoteExScores.BAD, true);
-    judgeAnimator.SetInteger("state", (int)JudgeState.BAD);
+    NoteJudge(NoteExScore.BAD, isComboBreak: true);
+    judgeAnimator.Play("Bad");
     judgeText.text = "BAD";
   }
 
   public void PoorJudge() {
-    NoteJudge(NoteExScores.POOR, true);
-    judgeAnimator.SetInteger("state", (int)JudgeState.POOR);
+    NoteJudge(NoteExScore.POOR, isComboBreak: true);
+    judgeAnimator.Play("Poor");
     judgeText.text = "POOR";
   }
 }
