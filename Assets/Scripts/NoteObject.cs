@@ -6,7 +6,7 @@ public class NoteObject : MonoBehaviour {
 
   private float baseY;
 
-  void Update() {
+  public void Update() {
     if (isClickable && Input.GetKeyDown(keyAssigned)) {
       isClickable = false;
 

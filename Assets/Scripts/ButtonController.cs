@@ -5,11 +5,11 @@ public class ButtonController : MonoBehaviour {
 
   public KeyCode keyAssigned;
 
-  void Start() {
+  public void Start() {
     sr = GetComponent<SpriteRenderer>();
   }
 
-  void Update() {
+  public void Update() {
     if (Input.GetKeyDown(keyAssigned)) {
       sr.color = new Color(1, 1, 1, 0.25f);
     }

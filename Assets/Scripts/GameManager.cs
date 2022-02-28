@@ -2,37 +2,43 @@ using System;
 using UnityEngine;
 using TMPro;
 
-public enum NoteExScore {
-  PGREAT = 2,
-  GREAT = 1,
-  GOOD = 0,
-  BAD = 0,
-  POOR = 0,
+public enum Judge {
+  PGREAT,
+  GREAT,
+  GOOD,
+  BAD,
+  POOR,
 }
 
 public class GameManager : MonoBehaviour {
   public static GameManager instance;
   public BeatScroller bs;
-  public Animator judgeAnimator;
 
   public AudioSource bgm;
   public bool hasStarted;
 
-  public TMP_Text exScoreText;
-  public TMP_Text maxComboText;
-  public TMP_Text comboText;
+  public TMP_Text exScoreTMP;
+  public TMP_Text maxComboTMP;
+  public TMP_Text judgeTMP;
 
   private int exScore;
   private int combo;
   private int maxCombo;
-  private float lastJudgeTime = 0f;
+  private float lastJudgeTime;
   private const float JudgeDuration = 1f;
 
-  void Start() {
+  private int totalNotes;
+  private int pgreatCount;
+  private int greatCount;
+  private int goodCount;
+  private int badCount;
+  private int poorCount;
+
+  public void Start() {
     instance = this;
   }
 
-  void Update() {
+  public void Update() {
     if (!hasStarted) {
       if (Input.anyKeyDown) {
         hasStarted = true;
@@ -42,45 +48,44 @@ public class GameManager : MonoBehaviour {
     }
 
     if (lastJudgeTime > 0f && Time.time - lastJudgeTime > JudgeDuration) {
-      judgeAnimator.Play("Idle");
-      comboText.text = "";
+      judgeTMP.text = " ";
       lastJudgeTime = 0f;
     }
   }
 
-  public void NoteJudge(NoteExScore score, bool isComboBreak = false) {
-    exScore += (int)score;
+  protected void NoteJudge(Judge judge, int score = 0, bool isComboBreak = false) {
+    exScore += score;
     combo = isComboBreak ? 0 : combo + 1;
     maxCombo = Math.Max(combo, maxCombo);
     lastJudgeTime = Time.time;
 
-    exScoreText.text = $"{exScore:0000}";
-    maxComboText.text = $"{maxCombo:0000}";
-    comboText.text = combo > 0 ? combo.ToString() : "";
+    exScoreTMP.text = $"{exScore:0000}";
+    maxComboTMP.text = $"{maxCombo:0000}";
+    judgeTMP.text = SpriteAssetHelper.GetJudge(judge) + (combo > 0 ? $"  {SpriteAssetHelper.GetInteger(judge, combo)}" : "");
   }
 
   public void PgreatJudge() {
-    NoteJudge(NoteExScore.PGREAT);
-    judgeAnimator.Play("Pgreat");
+    NoteJudge(judge: Judge.PGREAT, score: 2);
+    pgreatCount++;
   }
 
   public void GreatJudge() {
-    NoteJudge(NoteExScore.GREAT);
-    judgeAnimator.Play("Great");
+    NoteJudge(judge: Judge.GREAT, score: 1);
+    greatCount++;
   }
 
   public void GoodJudge() {
-    NoteJudge(NoteExScore.GOOD);
-    judgeAnimator.Play("Good");
+    NoteJudge(judge: Judge.GOOD);
+    goodCount++;
   }
 
   public void BadJudge() {
-    NoteJudge(NoteExScore.BAD, isComboBreak: true);
-    judgeAnimator.Play("Bad");
+    NoteJudge(judge: Judge.BAD, isComboBreak: true);
+    badCount++;
   }
 
   public void PoorJudge() {
-    NoteJudge(NoteExScore.POOR, isComboBreak: true);
-    judgeAnimator.Play("Poor");
+    NoteJudge(judge: Judge.POOR, isComboBreak: true);
+    poorCount++;
   }
 }
