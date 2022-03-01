@@ -2,6 +2,8 @@
 
 .DS_Store
 *.log
+BMS/
+BMS.meta
 
 
 ## Unity
@@ -40,6 +42,7 @@ ExportedObj/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+mono_crash.*.json
 
 # Builds
 *.apk
