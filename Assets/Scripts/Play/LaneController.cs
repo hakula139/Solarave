@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour {
+public class LaneController : MonoBehaviour {
   private SpriteRenderer sr;
 
   public KeyCode keyAssigned;

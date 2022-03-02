@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 142725240}
   - component: {fileID: 142725241}
   m_Layer: 0
-  m_Name: Button2
+  m_Name: Key2
   m_TagString: Activator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 143285087}
   - component: {fileID: 143285088}
   m_Layer: 0
-  m_Name: Button3
+  m_Name: Key3
   m_TagString: Activator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 243996010}
   - component: {fileID: 243996011}
   m_Layer: 0
-  m_Name: Button5
+  m_Name: Key5
   m_TagString: Activator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 275994897}
   - component: {fileID: 275994898}
   m_Layer: 0
-  m_Name: Button1
+  m_Name: Key1
   m_TagString: Activator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1975,7 +1975,7 @@ GameObject:
   - component: {fileID: 862691462}
   - component: {fileID: 862691463}
   m_Layer: 0
-  m_Name: Button7
+  m_Name: Key7
   m_TagString: Activator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2119,7 +2119,7 @@ GameObject:
   - component: {fileID: 879235264}
   - component: {fileID: 879235263}
   m_Layer: 0
-  m_Name: ButtonsFrame
+  m_Name: KeysFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2900,8 +2900,8 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
   m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
+  m_InputActionsPerSecond: 100
+  m_RepeatDelay: 0.02
   m_ForceModuleActive: 0
 --- !u!114 &1292422637
 MonoBehaviour:
@@ -3168,7 +3168,7 @@ GameObject:
   - component: {fileID: 1478612034}
   - component: {fileID: 1478612035}
   m_Layer: 0
-  m_Name: Button6
+  m_Name: Key6
   m_TagString: Activator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3439,7 +3439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1585536386}
   m_Layer: 0
-  m_Name: Buttons
+  m_Name: Keys
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3649,7 +3649,7 @@ GameObject:
   - component: {fileID: 2067538439}
   - component: {fileID: 2067538440}
   m_Layer: 0
-  m_Name: Button4
+  m_Name: Key4
   m_TagString: Activator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
