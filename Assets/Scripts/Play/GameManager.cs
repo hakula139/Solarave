@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
   public void Start() {
     instance = this;
+    totalNotes = FindObjectsOfType<NoteObject>().Length;
   }
 
   public void Update() {
