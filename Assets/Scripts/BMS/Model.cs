@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace BMS {
   public class Model {
-    public HeaderSection header;
-    public ChannelSection content;
+    public HeaderSection header = new();
+    public ChannelSection content = new();
 
     public static Model Parse(string path) {
       var realPath = Path.Join(Application.streamingAssetsPath, path);
@@ -17,7 +17,7 @@ namespace BMS {
 
       var model = new Model();
       try {
-        using (StreamReader sr = new StreamReader(realPath)) {
+        using (StreamReader sr = new(realPath)) {
           while (!sr.EndOfStream) {
             model.ReadLine(sr.ReadLine());
           }
@@ -36,13 +36,13 @@ namespace BMS {
       if (!IntegerHelper.IsInteger(line.Substring(1, 3))) {
         // Header section logic.
         var lineSplit = line.Split(' ', 2);
-        var keyword = lineSplit[0].Substring(1).ToLower();
+        var keyword = lineSplit[0][1..].ToLower();
         var value = lineSplit.Length > 1 ? lineSplit[1] : "";
         ReadHeaderLine(keyword, value);
       } else {
         // Channel section logic.
         var lineSplit = line.Split(':', 2);
-        var channel = lineSplit[0].Substring(1).ToLower();
+        var channel = lineSplit[0][1..].ToLower();
         var value = lineSplit.Length > 1 ? lineSplit[1] : "";
         ReadChannelLine(channel, value);
       }
@@ -93,14 +93,14 @@ namespace BMS {
           break;
         default:
           if (keyword.StartsWith("wav")) {
-            var wavId = IntegerHelper.ParseBase36(keyword.Substring(3));
+            var wavId = IntegerHelper.ParseBase36(keyword[3..]);
             if (!IntegerHelper.InBounds(wavId, header.wavPaths)) {
               Debug.LogWarningFormat("wav index overflow, keyword=<{0}>", keyword);
               break;
             }
             header.wavPaths[wavId] = value;
           } else if (keyword.StartsWith("bmp")) {
-            var bgaId = IntegerHelper.ParseBase36(keyword.Substring(3));
+            var bgaId = IntegerHelper.ParseBase36(keyword[3..]);
             if (!IntegerHelper.InBounds(bgaId, header.bgaPaths)) {
               Debug.LogWarningFormat("bmp index overflow, keyword=<{0}>", keyword);
               break;
@@ -117,9 +117,9 @@ namespace BMS {
       if (string.IsNullOrEmpty(value)) return;
 
       var measureId = int.Parse(channel.Substring(0, 3));
-      var channelId = (Channel)IntegerHelper.ParseBase36(channel.Substring(3));
+      var channelId = (Channel)IntegerHelper.ParseBase36(channel[3..]);
       while (content.data.Count < measureId + 1) {
-        content.data.Append(new Measure());
+        content.data.Add(new Measure());
       }
 
       switch (channelId) {

@@ -10,7 +10,7 @@ public class BeatScroller : MonoBehaviour {
 
   public void Update() {
     if (isEnabled) {
-      transform.position -= new Vector3(0f, bpm * Time.deltaTime, 0f);
+      transform.Translate(Vector3.down * bpm * Time.deltaTime);
     }
   }
 }

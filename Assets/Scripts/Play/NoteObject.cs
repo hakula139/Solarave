@@ -1,16 +1,15 @@
 using UnityEngine;
 
 public class NoteObject : MonoBehaviour {
-  public bool isClickable;
+  public bool isClickable = false;
+  public float time;
   public KeyCode keyAssigned;
-
-  private float baseY;
 
   public void Update() {
     if (isClickable && Input.GetKeyDown(keyAssigned)) {
       isClickable = false;
 
-      var d = Mathf.Abs(transform.position.y - baseY);
+      var d = Mathf.Abs(transform.position.y - time);
       if (d < 0.1f) {
         GameManager.instance.PgreatJudge();
       } else if (d < 0.2f) {
@@ -26,7 +25,6 @@ public class NoteObject : MonoBehaviour {
   private void OnTriggerEnter2D(Collider2D other) {
     if (other.CompareTag("Activator")) {
       isClickable = true;
-      baseY = other.transform.position.y + other.offset.y;
     }
   }
 

@@ -22,10 +22,10 @@ namespace BMS {
 
   public class Measure {
     public float length = 1f;
-    public List<Note> notes;
+    public List<Note> notes = new();
   }
 
   public class ChannelSection {
-    public List<Measure> data = new List<Measure>();
+    public List<Measure> data = new();
   }
 }

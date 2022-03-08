@@ -12,10 +12,6 @@ public enum Judge {
 
 public class GameManager : MonoBehaviour {
   public static GameManager instance;
-  public BeatScroller bs;
-
-  public AudioSource bgm;
-  public bool hasStarted;
 
   public TMP_Text exScoreTMP;
   public TMP_Text maxComboTMP;
@@ -40,14 +36,6 @@ public class GameManager : MonoBehaviour {
   }
 
   public void Update() {
-    if (!hasStarted) {
-      if (Input.anyKeyDown) {
-        hasStarted = true;
-        bs.isEnabled = true;
-        bgm.Play();
-      }
-    }
-
     if (lastJudgeTime > 0f && Time.time - lastJudgeTime > JudgeDuration) {
       judgeTMP.text = " ";
       lastJudgeTime = 0f;
