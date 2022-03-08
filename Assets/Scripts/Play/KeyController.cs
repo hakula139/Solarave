@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class LaneController : MonoBehaviour {
-  private SpriteRenderer sr;
+public class KeyController : MonoBehaviour {
+  protected SpriteRenderer sr;
 
   public KeyCode keyAssigned;
   public NoteObject notePrefab;
@@ -25,5 +25,24 @@ public class LaneController : MonoBehaviour {
     noteObj.keyAssigned = keyAssigned;
     noteObj.time = 0;
     Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteObj.transform.position, noteObj.keyAssigned, noteObj.time);
+  }
+}
+
+public class ScratchController : KeyController {
+  public new void Update() {
+    if (Input.GetKeyDown(keyAssigned)) {
+      sr.transform.Rotate(Vector3.back * Time.deltaTime);
+    }
+    if (Input.GetKeyUp(keyAssigned)) {
+      sr.transform.Rotate(Vector3.forward * Time.deltaTime);
+    }
+  }
+}
+
+public class BgmController : KeyController {
+  public new void Start() {
+  }
+
+  public new void Update() {
   }
 }

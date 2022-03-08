@@ -123,40 +123,63 @@ namespace BMS {
       }
 
       int measureId = int.Parse(channel.Substring(0, 3));
-      Channel channelId = (Channel)IntegerHelper.ParseBase36(channel[3..]);
-      while (content.data.Count < measureId + 1) {
-        content.data.Add(new Measure());
+      Channel channelId = (Channel)int.Parse(channel[3..]);
+      while (content.measures.Count < measureId + 1) {
+        content.measures.Add(new Measure());
       }
 
       switch (channelId) {
         case Channel.LengthOfMeasure:
-          content.data[measureId].length = float.Parse(value);
-          return;
-        default: break;
+          content.measures[measureId].length = float.Parse(value);
+          break;
+        default:
+          ReadValue(measureId, channelId, value);
+          break;
       }
+    }
 
+    private bool ValidateValue(int measureId, Channel channelId, string value) {
       if (value.Length % 2 != 0) {
-        Debug.LogWarningFormat("invalid syntax: incorrect length, channel=<{0}>, value=<{1}>", channel, value);
-        return;
+        Debug.LogWarningFormat("invalid syntax: incorrect length, measureId=<{0}> channelId=<{1}> value=<{2}>", measureId, channelId, value);
+        return false;
       }
       if (value.All(c => c == '0')) {
         // Empty measure.
+        return false;
+      }
+      return true;
+    }
+
+    private void ReadValue(int measureId, Channel channelId, string value) {
+      if (!ValidateValue(measureId, channelId, value)) {
         return;
       }
 
       int meter = value.Length / 2;
       for (int i = 0; i < meter; i++) {
-        int wavId = IntegerHelper.ParseBase36(value.Substring(i * 2, 2));
-        if (wavId == 0) {
+        int id = IntegerHelper.ParseBase36(value.Substring(i * 2, 2));
+        if (id == 0) {
           continue;
         }
 
-        Note note = new() {
-          channelId = channelId,
-          wavPath = header.wavPaths[wavId],
-          position = (float)i / meter,
-        };
-        content.data[measureId].notes.Add(note);
+        switch (channelId) {
+          case Channel.BgaBase:
+          case Channel.BgaPoor:
+          case Channel.BgaLayer:
+            content.measures[measureId].bgas.Add(new Bga {
+              channelId = channelId,
+              bgaPath = header.bgaPaths[id],
+              position = (float)i / meter,
+            });
+            break;
+          default:
+            content.measures[measureId].notes.Add(new Note {
+              channelId = channelId,
+              wavPath = header.wavPaths[id],
+              position = (float)i / meter,
+            });
+            break;
+        }
       }
     }
   }

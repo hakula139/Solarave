@@ -4,6 +4,9 @@ namespace BMS {
   public enum Channel {
     Bgm = 1,
     LengthOfMeasure = 2,
+    BgaBase = 4,
+    BgaPoor = 6,
+    BgaLayer = 7,
     Scratch = 16,
     Key1 = 11,
     Key2 = 12,
@@ -14,6 +17,12 @@ namespace BMS {
     Key7 = 19,
   };
 
+  public class Bga {
+    public Channel channelId;
+    public string bgaPath;
+    public float position;
+  }
+
   public class Note {
     public Channel channelId;
     public string wavPath;
@@ -22,10 +31,11 @@ namespace BMS {
 
   public class Measure {
     public float length = 1f;
+    public List<Bga> bgas = new();
     public List<Note> notes = new();
   }
 
   public class ChannelSection {
-    public List<Measure> data = new();
+    public List<Measure> measures = new();
   }
 }
