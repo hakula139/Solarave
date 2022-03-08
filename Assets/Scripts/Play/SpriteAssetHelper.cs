@@ -10,23 +10,22 @@ public class SpriteAssetHelper {
   }
 
   public static string GetJudge(Judge judge) {
-    switch (judge) {
-      case Judge.PGREAT: return ToSpriteAnimation(40, 42);
-      case Judge.GREAT: return ToSprite("great");
-      case Judge.GOOD: return ToSprite("good");
-      case Judge.BAD: return ToSprite("bad");
-      default: return ToSprite("poor");
-    }
+    return judge switch {
+      Judge.PGREAT => ToSpriteAnimation(40, 42),
+      Judge.GREAT => ToSprite("great"),
+      Judge.GOOD => ToSprite("good"),
+      Judge.BAD => ToSprite("bad"),
+      Judge.POOR => ToSprite("poor"),
+      _ => "",  // should not reach here.
+    };
   }
 
   public static string GetInteger(Judge judge, int integer) {
-    if (judge != Judge.PGREAT) {
-      return integer.ToString().Aggregate("", (acc, digit) => acc + ToSprite(digit.ToString()));
-    } else {
-      return integer.ToString().Aggregate("", (acc, digit) => {
-        var start = 10 + 3 * (digit - '0');
-        return acc + ToSpriteAnimation(start, start + 2);
-      });
-    }
+    return judge != Judge.PGREAT
+        ? integer.ToString().Aggregate("", (acc, digit) => acc + ToSprite(digit.ToString()))
+        : integer.ToString().Aggregate("", (acc, digit) => {
+          int start = 10 + (3 * (digit - '0'));
+          return acc + ToSpriteAnimation(start, start + 2);
+        });
   }
 }

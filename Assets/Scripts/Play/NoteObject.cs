@@ -9,7 +9,7 @@ public class NoteObject : MonoBehaviour {
     if (isClickable && Input.GetKeyDown(keyAssigned)) {
       isClickable = false;
 
-      var d = Mathf.Abs(transform.position.y - time);
+      float d = Mathf.Abs(transform.position.y - time);
       if (d < 0.1f) {
         GameManager.instance.PgreatJudge();
       } else if (d < 0.2f) {

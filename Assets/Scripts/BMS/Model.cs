@@ -9,13 +9,13 @@ namespace BMS {
     public ChannelSection content = new();
 
     public static Model Parse(string path) {
-      var realPath = Path.Join(Application.streamingAssetsPath, path);
+      string realPath = Path.Join(Application.streamingAssetsPath, path);
       if (!File.Exists(realPath)) {
         Debug.LogErrorFormat("file not found, path=<{0}>", path);
         return null;
       }
 
-      var model = new Model();
+      Model model = new();
       try {
         using (StreamReader sr = new(realPath)) {
           while (!sr.EndOfStream) {
@@ -30,26 +30,30 @@ namespace BMS {
     }
 
     protected void ReadLine(string line) {
-      Debug.LogFormat("parsing: line=<{0}>", line);
-      if (line.Length < 2 || !line.StartsWith('#')) return;
+      // Debug.LogFormat("parsing: line=<{0}>", line);
+      if (line.Length < 2 || !line.StartsWith('#')) {
+        return;
+      }
 
       if (!IntegerHelper.IsInteger(line.Substring(1, 3))) {
         // Header section logic.
-        var lineSplit = line.Split(' ', 2);
-        var keyword = lineSplit[0][1..].ToLower();
-        var value = lineSplit.Length > 1 ? lineSplit[1] : "";
+        string[] lineSplit = line.Split(' ', 2);
+        string keyword = lineSplit[0][1..].ToLower();
+        string value = lineSplit.Length > 1 ? lineSplit[1] : "";
         ReadHeaderLine(keyword, value);
       } else {
         // Channel section logic.
-        var lineSplit = line.Split(':', 2);
-        var channel = lineSplit[0][1..].ToLower();
-        var value = lineSplit.Length > 1 ? lineSplit[1] : "";
+        string[] lineSplit = line.Split(':', 2);
+        string channel = lineSplit[0][1..].ToLower();
+        string value = lineSplit.Length > 1 ? lineSplit[1] : "";
         ReadChannelLine(channel, value);
       }
     }
 
     private void ReadHeaderLine(string keyword, string value) {
-      if (string.IsNullOrEmpty(value)) return;
+      if (string.IsNullOrEmpty(value)) {
+        return;
+      }
 
       switch (keyword) {
         case "player":
@@ -93,14 +97,14 @@ namespace BMS {
           break;
         default:
           if (keyword.StartsWith("wav")) {
-            var wavId = IntegerHelper.ParseBase36(keyword[3..]);
+            int wavId = IntegerHelper.ParseBase36(keyword[3..]);
             if (!IntegerHelper.InBounds(wavId, header.wavPaths)) {
               Debug.LogWarningFormat("wav index overflow, keyword=<{0}>", keyword);
               break;
             }
             header.wavPaths[wavId] = value;
           } else if (keyword.StartsWith("bmp")) {
-            var bgaId = IntegerHelper.ParseBase36(keyword[3..]);
+            int bgaId = IntegerHelper.ParseBase36(keyword[3..]);
             if (!IntegerHelper.InBounds(bgaId, header.bgaPaths)) {
               Debug.LogWarningFormat("bmp index overflow, keyword=<{0}>", keyword);
               break;
@@ -114,10 +118,12 @@ namespace BMS {
     }
 
     private void ReadChannelLine(string channel, string value) {
-      if (string.IsNullOrEmpty(value)) return;
+      if (string.IsNullOrEmpty(value)) {
+        return;
+      }
 
-      var measureId = int.Parse(channel.Substring(0, 3));
-      var channelId = (Channel)IntegerHelper.ParseBase36(channel[3..]);
+      int measureId = int.Parse(channel.Substring(0, 3));
+      Channel channelId = (Channel)IntegerHelper.ParseBase36(channel[3..]);
       while (content.data.Count < measureId + 1) {
         content.data.Add(new Measure());
       }
@@ -126,6 +132,7 @@ namespace BMS {
         case Channel.LengthOfMeasure:
           content.data[measureId].length = float.Parse(value);
           return;
+        default: break;
       }
 
       if (value.Length % 2 != 0) {
@@ -137,15 +144,19 @@ namespace BMS {
         return;
       }
 
-      var meter = value.Length / 2;
+      int meter = value.Length / 2;
       for (int i = 0; i < meter; i++) {
-        var wavId = IntegerHelper.ParseBase36(value.Substring(i * 2, 2));
-        if (wavId == 0) continue;
+        int wavId = IntegerHelper.ParseBase36(value.Substring(i * 2, 2));
+        if (wavId == 0) {
+          continue;
+        }
 
-        var note = new Note();
-        note.channelId = channelId;
-        note.wavPath = header.wavPaths[wavId];
-        note.position = (float)i / meter;
+        Note note = new() {
+          channelId = channelId,
+          wavPath = header.wavPaths[wavId],
+          position = (float)i / meter,
+        };
+        content.data[measureId].notes.Add(note);
       }
     }
   }

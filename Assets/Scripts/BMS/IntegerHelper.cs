@@ -13,7 +13,7 @@ public class IntegerHelper {
         Debug.LogWarningFormat("failed to parse number, number=<{0}>", number);
         parsedDigit = 0;
       }
-      return acc * 36 + parsedDigit;
+      return (acc * 36) + parsedDigit;
     });
   }
 

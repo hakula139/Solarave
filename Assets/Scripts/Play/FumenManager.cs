@@ -24,16 +24,12 @@ public class FumenManager : MonoBehaviour {
   public float measureBaseLength = 1f;
   public float noteBaseY;
   public float noteSpawnY;
-  public float noteDespawnY {
-    get {
-      return noteBaseY * 2 - noteSpawnY;
-    }
-  }
+  public float NoteDespawnY => (noteBaseY * 2) - noteSpawnY;
 
   public void Start() {
     instance = this;
     laneMap = FindObjectsOfType<LaneController>().ToDictionary(l => l.name, l => l);
-    laneNameMap = new Dictionary<BMS.Channel, string>{
+    laneNameMap = new() {
       {BMS.Channel.Bgm, "Bgm"},
       {BMS.Channel.Scratch, "Scratch"},
       {BMS.Channel.Key1, "Key1"},
@@ -53,11 +49,11 @@ public class FumenManager : MonoBehaviour {
   }
 
   public void SetupNotes() {
-    bms.content.data.Aggregate(0f, (startY, measure) => {
+    _ = bms.content.data.Aggregate(0f, (startY, measure) => {
       measure.notes.ForEach(note => {
         laneMap[laneNameMap[note.channelId]].SetupNote(startY, measure.length, note);
       });
-      return startY + measure.length * measureBaseLength;
+      return startY + (measure.length * measureBaseLength);
     });
 
     Invoke(nameof(StartPlaying), startDelay);

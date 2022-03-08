@@ -20,9 +20,10 @@ public class LaneController : MonoBehaviour {
   }
 
   public void SetupNote(float start, float length, BMS.Note note) {
-    var noteObj = Instantiate(notePrefab, transform);
-    noteObj.transform.Translate(Vector3.up * (start + length * note.position));
+    NoteObject noteObj = Instantiate(notePrefab, transform);
+    noteObj.transform.Translate(Vector3.up * (start + (length * note.position)));
     noteObj.keyAssigned = keyAssigned;
     noteObj.time = 0;
+    Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteObj.transform.position, noteObj.keyAssigned, noteObj.time);
   }
 }
