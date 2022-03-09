@@ -5,6 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Activator
+  - NoteScratch
+  - Note1
+  - Note2
+  - Note3
+  - Note4
+  - Note5
+  - Note6
+  - Note7
+  - NoteBgm
   layers:
   - Default
   - TransparentFX

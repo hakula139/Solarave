@@ -18,6 +18,11 @@ public class NoteObject : MonoBehaviour {
 
     if (isClickable) {
       if (Input.GetKeyDown(lane.keyAssigned)) {
+        GameObject[] notesInThisLane = GameObject.FindGameObjectsWithTag(tag);
+        if (notesInThisLane[0].GetComponent<NoteObject>().time < time) {
+          return;
+        }
+
         if (error <= FumenManager.instance.pgreatRange) {
           Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, lane.scroller.currentTime, time);
           GameManager.instance.PgreatJudge();
