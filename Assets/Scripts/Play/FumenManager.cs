@@ -12,18 +12,13 @@ public class FumenManager : MonoBehaviour {
 
   public string filePath;
 
-  // In milliseconds.
-  public float startDelay;
-  public float inputLatency;
-  public float pgreatRange;
-  public float greatRange;
-  public float goodRange;
-  public float badRange;
-  public float poorRange;
-
-  public float noteBaseY;
-  public float noteSpawnY;
-  public float NoteDespawnY => (noteBaseY * 2) - noteSpawnY;
+  public float startDelay;  // ms
+  public float inputLatency;  // ms
+  public float pgreatRange;  // ms
+  public float greatRange;  // ms
+  public float goodRange;  // ms
+  public float badRange;  // ms
+  public float poorRange;  // ms
 
   public void Start() {
     instance = this;
@@ -48,17 +43,16 @@ public class FumenManager : MonoBehaviour {
   }
 
   public void Initialize() {
+    scroller.bpm = bms.header.bpm;
     _ = bms.content.measures.Aggregate(0f, (startY, measure) => {
-      float measureLength = measure.length * scroller.baseSpeed * scroller.hiSpeed / 100;
       measure.bgas.ForEach(bga => {
         // TODO: Initialize BGA.
       });
       measure.notes.ForEach(note => {
-        keyMap[keyNameMap[note.channelId]].SetupNote(startY, measureLength, note);
+        keyMap[keyNameMap[note.channelId]].SetupNote(startY, measure.length, note);
       });
-      return startY + measureLength;
+      return startY + measure.length;
     });
-    scroller.bpm = bms.header.bpm;
     Invoke(nameof(StartPlaying), startDelay / 1000f);
   }
 

@@ -42,24 +42,26 @@ public class GameManager : MonoBehaviour {
     }
   }
 
-  protected void NoteJudge(Judge judge, int score = 0, bool isComboBreak = false) {
-    exScore += score;
-    combo = isComboBreak ? 0 : combo + 1;
+  protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1) {
+    exScore += scoreAdded;
+    combo += comboAdded;
     maxCombo = Math.Max(combo, maxCombo);
     lastJudgeTime = Time.time;
 
     exScoreTMP.text = $"{exScore:0000}";
     maxComboTMP.text = $"{maxCombo:0000}";
-    judgeTMP.text = SpriteAssetHelper.GetJudge(judge) + (combo > 0 ? $"  {SpriteAssetHelper.GetInteger(judge, combo)}" : "");
+    string judgeText = SpriteAssetHelper.GetJudge(judge);
+    string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.GetInteger(judge, combo)}" : "";
+    judgeTMP.text = judgeText + comboText;
   }
 
   public void PgreatJudge() {
-    NoteJudge(judge: Judge.PGREAT, score: 2);
+    NoteJudge(judge: Judge.PGREAT, scoreAdded: 2);
     pgreatCount++;
   }
 
   public void GreatJudge() {
-    NoteJudge(judge: Judge.GREAT, score: 1);
+    NoteJudge(judge: Judge.GREAT, scoreAdded: 1);
     greatCount++;
   }
 
@@ -69,12 +71,18 @@ public class GameManager : MonoBehaviour {
   }
 
   public void BadJudge() {
-    NoteJudge(judge: Judge.BAD, isComboBreak: true);
+    NoteJudge(judge: Judge.BAD, comboAdded: -combo);
     badCount++;
   }
 
+  // 空 POOR
   public void PoorJudge() {
-    NoteJudge(judge: Judge.POOR, isComboBreak: true);
+    NoteJudge(judge: Judge.POOR, comboAdded: 0);
+    poorCount++;
+  }
+
+  public void MissJudge() {
+    NoteJudge(judge: Judge.POOR, comboAdded: -combo);
     poorCount++;
   }
 }

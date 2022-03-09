@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class KeyController : MonoBehaviour {
   protected SpriteRenderer sr;
+  public FumenScroller scroller;
 
   public KeyCode keyAssigned;
   public GameObject fumenArea;
@@ -22,11 +23,13 @@ public class KeyController : MonoBehaviour {
 
   public void SetupNote(float start, float length, BMS.Note note) {
     GameObject noteClone = Instantiate(notePrefab, fumenArea.transform);
-    noteClone.transform.Translate(Vector3.up * (start + (length * note.position)));
+    float y = start + (length * note.position);
+    noteClone.transform.Translate(Vector3.up * y * scroller.baseSpeed * scroller.hiSpeed / 100f);
     noteClone.SetActive(true);
+
     NoteObject noteObject = noteClone.GetComponent<NoteObject>();
-    noteObject.keyAssigned = keyAssigned;
-    noteObject.time = 0;
-    Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, noteObject.keyAssigned, noteObject.time);
+    noteObject.time = y * 240000f / scroller.bpm;
+
+    // Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, keyAssigned, noteObject.time);
   }
 }

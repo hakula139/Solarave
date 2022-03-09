@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 100
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 248113392}
@@ -553,6 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 102
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 564270383}
@@ -702,6 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 106
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 308124294}
@@ -731,7 +734,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248113392}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -804,7 +807,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -815,7 +818,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &248113397
 MonoBehaviour:
@@ -831,7 +834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClickable: 0
   time: 0
-  keyAssigned: 100
+  lane: {fileID: 142725242}
 --- !u!1 &275994893
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,6 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 115
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 598777222}
@@ -1028,7 +1032,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1039,7 +1043,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &308124297
 MonoBehaviour:
@@ -1055,7 +1059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClickable: 0
   time: 0
-  keyAssigned: 106
+  lane: {fileID: 243996012}
 --- !u!212 &308124298
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1063,7 +1067,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308124294}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1506,7 +1510,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1517,7 +1521,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &564270386
 MonoBehaviour:
@@ -1533,7 +1537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClickable: 0
   time: 0
-  keyAssigned: 102
+  lane: {fileID: 143285089}
 --- !u!212 &564270387
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1541,7 +1545,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564270383}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1627,7 +1631,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598777222}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1685,7 +1689,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1696,7 +1700,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &598777227
 MonoBehaviour:
@@ -1712,7 +1716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClickable: 0
   time: 0
-  keyAssigned: 115
+  lane: {fileID: 275994899}
 --- !u!1 &608173436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,6 +1910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0254354a7c7491caeaeb09d77f7c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 97
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 2009950147}
@@ -2055,6 +2060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d517eeb7206254a2abbd84c575216190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 0
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 742817138}
@@ -2152,7 +2158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 742817139}
   - component: {fileID: 742817142}
-  - component: {fileID: 742817141}
+  - component: {fileID: 742817143}
   - component: {fileID: 742817140}
   m_Layer: 0
   m_Name: NoteBgm
@@ -2189,7 +2195,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2200,23 +2206,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
---- !u!114 &742817141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742817138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c884482202aac42289fd0d59293c33f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isClickable: 0
-  time: 0
-  keyAssigned: 0
 --- !u!212 &742817142
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2224,7 +2215,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742817138}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2269,6 +2260,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &742817143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742817138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acc6dad0c10245fdbe1686fb43fc738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isClickable: 0
+  time: 0
+  lane: {fileID: 672147486}
 --- !u!1 &802926722
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,7 +2322,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2327,7 +2333,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &802926725
 MonoBehaviour:
@@ -2343,7 +2349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClickable: 0
   time: 0
-  keyAssigned: 32
+  lane: {fileID: 2067538441}
 --- !u!212 &802926726
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2351,7 +2357,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802926722}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2542,6 +2548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 108
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 1011033330}
@@ -2879,7 +2886,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2890,7 +2897,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &1011033333
 MonoBehaviour:
@@ -2906,7 +2913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClickable: 0
   time: 0
-  keyAssigned: 108
+  lane: {fileID: 862691464}
 --- !u!212 &1011033334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2914,7 +2921,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011033330}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3006,7 +3013,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3017,7 +3024,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &1066171039
 MonoBehaviour:
@@ -3033,7 +3040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClickable: 0
   time: 0
-  keyAssigned: 107
+  lane: {fileID: 1478612036}
 --- !u!212 &1066171040
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3041,7 +3048,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066171036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3201,15 +3208,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scroller: {fileID: 1470654907}
   filePath: "BMS/\u7D05\u6708\u591C\u60F3 \uFF5EScarlet Nocturne\uFF5E/_N.bms"
-  startDelay: 2000
+  startDelay: 1000
   inputLatency: 0
   pgreatRange: 21
   greatRange: 60
   goodRange: 120
   badRange: 200
   poorRange: 1000
-  noteBaseY: 0
-  noteSpawnY: 2
 --- !u!4 &1158891048
 Transform:
   m_ObjectHideFlags: 0
@@ -3737,6 +3742,7 @@ MonoBehaviour:
   bpm: 130
   baseSpeed: 4
   hiSpeed: 300
+  currentTime: 0
 --- !u!1 &1478612030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,6 +3889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 107
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 1066171036}
@@ -4051,7 +4058,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009950147}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -4110,7 +4117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isClickable: 0
   time: 0
-  keyAssigned: 97
+  lane: {fileID: 664815780}
 --- !u!61 &2009950151
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4124,7 +4131,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -2.75}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4135,7 +4142,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1.6}
+  m_Size: {x: 0.05, y: 6}
   m_EdgeRadius: 0
 --- !u!1 &2022813201
 GameObject:
@@ -4367,6 +4374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scroller: {fileID: 1470654907}
   keyAssigned: 32
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 802926722}
