@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FumenManager : MonoBehaviour {
   public static FumenManager instance;
-  public BeatScroller bs;
+  public FumenScroller scroller;
   private BMS.Model bms;
 
   private Dictionary<string, KeyController> keyMap;
@@ -21,7 +21,6 @@ public class FumenManager : MonoBehaviour {
   public float badRange;
   public float poorRange;
 
-  public float measureBaseLength = 1f;
   public float noteBaseY;
   public float noteSpawnY;
   public float NoteDespawnY => (noteBaseY * 2) - noteSpawnY;
@@ -50,20 +49,20 @@ public class FumenManager : MonoBehaviour {
 
   public void Initialize() {
     _ = bms.content.measures.Aggregate(0f, (startY, measure) => {
+      float measureLength = measure.length * scroller.baseSpeed * scroller.hiSpeed / 100;
       measure.bgas.ForEach(bga => {
         // TODO: Initialize BGA.
       });
       measure.notes.ForEach(note => {
-        keyMap[keyNameMap[note.channelId]].SetupNote(startY, measure.length, note);
+        keyMap[keyNameMap[note.channelId]].SetupNote(startY, measureLength, note);
       });
-      return startY + (measure.length * measureBaseLength);
+      return startY + measureLength;
     });
-
-    Invoke(nameof(StartPlaying), startDelay);
+    scroller.bpm = bms.header.bpm;
+    Invoke(nameof(StartPlaying), startDelay / 1000f);
   }
 
   public void StartPlaying() {
-    bs.bpm = bms.header.bpm;
-    bs.isEnabled = true;
+    scroller.isEnabled = true;
   }
 }
