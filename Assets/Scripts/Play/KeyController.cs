@@ -4,6 +4,7 @@ public class KeyController : MonoBehaviour {
   protected SpriteRenderer sr;
 
   public KeyCode keyAssigned;
+  public GameObject fumenArea;
   public NoteObject notePrefab;
 
   public void Start() {
@@ -20,7 +21,7 @@ public class KeyController : MonoBehaviour {
   }
 
   public void SetupNote(float start, float length, BMS.Note note) {
-    NoteObject noteObj = Instantiate(notePrefab, transform);
+    NoteObject noteObj = Instantiate(notePrefab, fumenArea.transform);
     noteObj.transform.Translate(Vector3.up * (start + (length * note.position)));
     noteObj.keyAssigned = keyAssigned;
     noteObj.time = 0;
