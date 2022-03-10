@@ -2,13 +2,12 @@
 
 .DS_Store
 *.log
-BMS/
-BMS.meta
 
 
 ## Unity
 
-[Aa]ssets/AssetStoreTools*
+[Aa]ssets/[Aa]sset[Ss]tore[Tt]ools*
+[Aa]ssets/[Ss]treaming[Aa]ssets/
 [Bb]uild/
 [Bb]uilds/
 [Ll]ibrary/
