@@ -8,7 +8,6 @@ public class KeyController : MonoBehaviour {
   public KeyCode keyAssigned;
   public GameObject fumenArea;
   public GameObject notePrefab;
-
   public Queue<GameObject> notes = new();
 
   public void Start() {
@@ -18,8 +17,10 @@ public class KeyController : MonoBehaviour {
   public void Update() {
     if (Input.GetKeyDown(keyAssigned)) {
       sr.color = new Color(1, 1, 1, 0.25f);
-      GameObject note = notes.Peek();
-      JudgeNote(note);
+      GameObject note;
+      if (notes.TryPeek(out note)) {
+        JudgeNote(note);
+      }
     }
 
     if (Input.GetKeyUp(keyAssigned)) {
@@ -32,10 +33,10 @@ public class KeyController : MonoBehaviour {
     float y = start + (length * note.position);
     noteClone.transform.Translate(Vector3.up * y * scroller.baseSpeed * scroller.hiSpeed / 100f);
     noteClone.SetActive(true);
+    notes.Enqueue(noteClone);
 
     NoteObject noteObject = noteClone.GetComponent<NoteObject>();
     noteObject.time = y * 240000f / scroller.bpm;
-    notes.Enqueue(noteClone);
 
     // Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, keyAssigned, noteObject.time);
   }
