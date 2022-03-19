@@ -6,12 +6,20 @@ public class NoteObject : MonoBehaviour {
   public bool isClickable = false;
   public float time;
   public KeyController lane;
+  public float spawnY;
+  public float despawnY;
 
   public void Start() {
     sr = GetComponent<SpriteRenderer>();
   }
 
   public void Update() {
+    if (transform.position.y < despawnY) {
+      sr.enabled = false;
+    } else if (transform.position.y < spawnY) {
+      sr.enabled = true;
+    }
+
     float currentTime = FumenScroller.instance.currentTime;
     float d = currentTime - time;
 
@@ -23,21 +31,9 @@ public class NoteObject : MonoBehaviour {
         _ = lane.notes.Dequeue();
       }
       gameObject.SetActive(false);
-    }
-  }
-
-  private void OnTriggerEnter2D(Collider2D other) {
-    if (other.CompareTag("Activator")) {
-      sr.enabled = true;
+    } else if (d >= -FumenManager.instance.badRange) {
+    } else if (d >= -FumenManager.instance.poorRange) {
       isClickable = true;
-    } else if (other.CompareTag("BgmTrigger")) {
-      ((BgmController)lane).PlayKeySound();
-    }
-  }
-
-  private void OnTriggerExit2D(Collider2D other) {
-    if (other.CompareTag("Activator")) {
-      sr.enabled = false;
     }
   }
 }
