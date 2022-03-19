@@ -72,7 +72,7 @@ public class KeyController : MonoBehaviour {
     }
 
     NoteObject noteObject = note.GetComponent<NoteObject>();
-    float d = scroller.currentTime - noteObject.time - FumenManager.instance.inputLatency;
+    float d = scroller.currentTime - noteObject.time - FumenManager.instance.inputLatency + audioLoader.outputLatency;
     float error = Mathf.Abs(d);
     bool isEarly = d < 0;
 

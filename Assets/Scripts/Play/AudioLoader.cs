@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class AudioLoader : MonoBehaviour {
   private AudioSource[] audioSources = new AudioSource[36 * 36];
-  public float delay;  // ms
+  public float outputLatency;  // ms
 
   public void Start() {
     audioSources = audioSources.Select(_ => {
@@ -29,8 +29,8 @@ public class AudioLoader : MonoBehaviour {
 
   public void Play(int wavId, float time) {
     if (audioSources[wavId].clip is not null) {
-      audioSources[wavId].PlayScheduled((time + delay) / 1000f);
-      Debug.LogFormat("play key sound: wavId=<{0}> time=<{1}>", wavId, time + delay);
+      audioSources[wavId].PlayScheduled((time + outputLatency) / 1000f);
+      Debug.LogFormat("play key sound: wavId=<{0}> time=<{1}>", wavId, time + outputLatency);
     }
   }
 }
