@@ -3,14 +3,13 @@ using UnityEngine;
 public class ScratchController : KeyController {
   public new void Update() {
     if (Input.GetKey(keyAssigned)) {
-      sr.transform.Rotate(Vector3.forward * 360f * Time.deltaTime);
+      sr.transform.Rotate(360f * Time.deltaTime * Vector3.forward);
     } else {
-      sr.transform.Rotate(Vector3.back * 360f * Time.deltaTime);
+      sr.transform.Rotate(360f * Time.deltaTime * Vector3.back);
     }
 
     if (Input.GetKeyDown(keyAssigned)) {
-      GameObject note;
-      if (notes.TryPeek(out note)) {
+      if (notes.TryPeek(out GameObject note)) {
         JudgeNote(note);
       }
     }

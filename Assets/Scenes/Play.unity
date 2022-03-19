@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 100
   fumenArea: {fileID: 1470654905}
@@ -554,6 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 102
   fumenArea: {fileID: 1470654905}
@@ -704,6 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 106
   fumenArea: {fileID: 1470654905}
@@ -981,6 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 115
   fumenArea: {fileID: 1470654905}
@@ -1145,7 +1149,7 @@ Transform:
   - {fileID: 917973203}
   - {fileID: 879235264}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &403222414
 GameObject:
@@ -1229,7 +1233,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &491817767
 GameObject:
@@ -1910,6 +1914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0254354a7c7491caeaeb09d77f7c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 97
   fumenArea: {fileID: 1470654905}
@@ -2060,6 +2065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d517eeb7206254a2abbd84c575216190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 0
   fumenArea: {fileID: 1470654905}
@@ -2146,7 +2152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742817138
 GameObject:
@@ -2548,6 +2554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 108
   fumenArea: {fileID: 1470654905}
@@ -3175,7 +3182,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1158891046
 GameObject:
@@ -3206,6 +3213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95dc24c021e481e91620413ddd5f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   filePath: "BMS/\u7D05\u6708\u591C\u60F3 \uFF5EScarlet Nocturne\uFF5E/_N.bms"
   startDelay: 1000
@@ -3228,7 +3236,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1173614423
 GameObject:
@@ -3430,7 +3438,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1381692863
 GameObject:
@@ -3442,6 +3450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1381692864}
   - component: {fileID: 1381692865}
+  - component: {fileID: 1381692866}
   m_Layer: 0
   m_Name: Scratch
   m_TagString: Untagged
@@ -3517,6 +3526,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1381692866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381692863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0254354a7c7491caeaeb09d77f7c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
+  scroller: {fileID: 1470654907}
+  keyAssigned: 97
+  fumenArea: {fileID: 1470654905}
+  notePrefab: {fileID: 2009950147}
 --- !u!1 &1420166649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3683,7 +3709,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1470654905
 GameObject:
@@ -3889,6 +3915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 107
   fumenArea: {fileID: 1470654905}
@@ -3932,6 +3959,51 @@ Transform:
   - {fileID: 672147481}
   m_Father: {fileID: 879235264}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1634941354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1634941356}
+  - component: {fileID: 1634941355}
+  m_Layer: 0
+  m_Name: AudioLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1634941355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634941354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6614031401a4f50a38be5881fbae7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 64
+--- !u!4 &1634941356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634941354}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1964827836
 GameObject:
@@ -4226,7 +4298,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2067538435
 GameObject:
@@ -4374,6 +4446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioLoader: {fileID: 1634941355}
   scroller: {fileID: 1470654907}
   keyAssigned: 32
   fumenArea: {fileID: 1470654905}
@@ -4413,7 +4486,7 @@ RectTransform:
   - {fileID: 101400985}
   - {fileID: 491817768}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

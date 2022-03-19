@@ -19,7 +19,7 @@ public class NoteObject : MonoBehaviour {
         Debug.LogFormat("miss: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, lane.scroller.currentTime, time);
         GameManager.instance.MissJudge();
         isClickable = false;
-        lane.notes.Dequeue();
+        _ = lane.notes.Dequeue();
       }
       gameObject.SetActive(false);
     }
