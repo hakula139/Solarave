@@ -30,7 +30,7 @@ public class NoteObject : MonoBehaviour {
       sr.enabled = true;
       isClickable = true;
     } else if (other.CompareTag("BgmTrigger")) {
-      // ((BgmController)lane).PlayKeySound();
+      ((BgmController)lane).PlayKeySound();
     }
   }
 

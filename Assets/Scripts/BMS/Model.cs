@@ -22,6 +22,10 @@ namespace BMS {
             model.ReadLine(sr.ReadLine());
           }
         }
+        model.content.measures.ForEach(measure => {
+          measure.bgas.Sort((x, y) => x.position.CompareTo(y.position));
+          measure.notes.Sort((x, y) => x.position.CompareTo(y.position));
+        });
         return model;
       } catch (Exception e) {
         Debug.LogErrorFormat("failed to parse bms file, path=<{0}> exception=<{1}>", path, e.ToString());
