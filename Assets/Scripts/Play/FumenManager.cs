@@ -21,7 +21,7 @@ public class FumenManager : MonoBehaviour {
   public float badRange;      // ms
   public float poorRange;     // ms
 
-  private void OnEnable() {
+  private void Awake() {
     instance = this;
   }
 

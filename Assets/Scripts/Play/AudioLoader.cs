@@ -9,7 +9,7 @@ public class AudioLoader : MonoBehaviour {
   private AudioSource[] audioSources = new AudioSource[36 * 36];
   public float outputLatency;  // ms
 
-  private void OnEnable() {
+  private void Awake() {
     instance = this;
   }
 
@@ -36,7 +36,7 @@ public class AudioLoader : MonoBehaviour {
   public void Play(int wavId, float time) {
     if (audioSources[wavId].clip is not null) {
       audioSources[wavId].PlayScheduled((time + outputLatency + FumenScroller.instance.offset) / 1000f);
-      Debug.LogFormat("play key sound: wavId=<{0}> time=<{1}>", wavId, time + outputLatency);
+      // Debug.LogFormat("play key sound: wavId=<{0}> time=<{1}>", wavId, time + outputLatency);
     }
   }
 }

@@ -11,7 +11,7 @@ public class FumenScroller : MonoBehaviour {
   public float currentTime;  // ms
   public float offset;       // ms
 
-  private void OnEnable() {
+  private void Awake() {
     instance = this;
   }
 

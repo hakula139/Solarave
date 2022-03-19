@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
   private int badCount;
   private int poorCount;
 
-  private void OnEnable() {
+  private void Awake() {
     instance = this;
   }
 
