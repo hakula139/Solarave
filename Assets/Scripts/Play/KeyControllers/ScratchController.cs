@@ -9,9 +9,8 @@ public class ScratchController : KeyController {
     }
 
     if (Input.GetKeyDown(keyAssigned)) {
-      if (notes.TryPeek(out GameObject note)) {
-        JudgeNote(note);
-      }
+      JudgeNote();
+      PlayKeySound();
     }
   }
 }

@@ -29,6 +29,8 @@ public class NoteObject : MonoBehaviour {
     if (other.CompareTag("Activator")) {
       sr.enabled = true;
       isClickable = true;
+    } else if (other.CompareTag("BgmTrigger")) {
+      // ((BgmController)lane).PlayKeySound();
     }
   }
 

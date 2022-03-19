@@ -24,7 +24,11 @@ public class FumenManager : MonoBehaviour {
 
   public void Start() {
     instance = this;
-    keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l);
+    keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l.name switch {
+      "KeyBgm" => (BgmController)l,
+      "KeyScratch" => (ScratchController)l,
+      _ => l,
+    });
     keyNameMap = new() {
       { BMS.Channel.Bgm, "KeyBgm" },
       { BMS.Channel.Scratch, "KeyScratch" },

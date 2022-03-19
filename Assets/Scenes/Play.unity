@@ -1783,7 +1783,7 @@ GameObject:
   - component: {fileID: 664815779}
   m_Layer: 0
   m_Name: KeyScratch
-  m_TagString: Untagged
+  m_TagString: Activator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1879,7 +1879,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.78, y: 0.1}
+  m_Size: {x: 0.5, y: 0.1}
   m_EdgeRadius: 0
 --- !u!50 &664815779
 Rigidbody2D:
@@ -1934,7 +1934,7 @@ GameObject:
   - component: {fileID: 672147482}
   m_Layer: 0
   m_Name: KeyBgm
-  m_TagString: Untagged
+  m_TagString: BgmTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3450,7 +3450,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1381692864}
   - component: {fileID: 1381692865}
-  - component: {fileID: 1381692866}
   m_Layer: 0
   m_Name: Scratch
   m_TagString: Untagged
@@ -3526,23 +3525,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1381692866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381692863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe0254354a7c7491caeaeb09d77f7c27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
-  keyAssigned: 97
-  fumenArea: {fileID: 1470654905}
-  notePrefab: {fileID: 2009950147}
 --- !u!1 &1420166649
 GameObject:
   m_ObjectHideFlags: 0

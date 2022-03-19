@@ -20,18 +20,8 @@ public class KeyController : MonoBehaviour {
   public void Update() {
     if (Input.GetKeyDown(keyAssigned)) {
       sr.color = new Color(1, 1, 1, 0.25f);
-      if (notes.TryPeek(out GameObject note)) {
-        JudgeNote(note);
-      }
-
-      // Find the latest key sound to play.
-      while (keySounds.TryPeek(out KeySound keySound) && scroller.currentTime >= keySound.time) {
-        currentKeySound = keySound;
-        _ = keySounds.Dequeue();
-      }
-      if (currentKeySound is not null) {
-        PlayKeySound();
-      }
+      JudgeNote();
+      PlayKeySound();
     }
 
     if (Input.GetKeyUp(keyAssigned)) {
@@ -39,7 +29,7 @@ public class KeyController : MonoBehaviour {
     }
   }
 
-  public void SetupNote(float start, float length, BMS.Note note) {
+  public virtual void SetupNote(float start, float length, BMS.Note note) {
     GameObject noteClone = Instantiate(notePrefab, fumenArea.transform);
     float y = start + (length * note.position);
     noteClone.transform.Translate(scroller.baseSpeed * scroller.hiSpeed * y * Vector3.up / 100f);
@@ -58,20 +48,31 @@ public class KeyController : MonoBehaviour {
     public float time;
   }
 
-  protected void SetupKeySound(int wavId, float time) {
+  public virtual void SetupKeySound(int wavId, float time) {
     keySounds.Enqueue(new() {
       wavId = wavId,
       time = time - FumenManager.instance.poorRange,
     });
   }
 
-  protected void PlayKeySound() {
-    audioLoader.Play(currentKeySound.wavId, scroller.currentTime);
+  public virtual void PlayKeySound() {
+    // Find the latest key sound to play.
+    while (keySounds.TryPeek(out KeySound keySound) && scroller.currentTime >= keySound.time) {
+      currentKeySound = keySound;
+      _ = keySounds.Dequeue();
+    }
+    if (currentKeySound is not null) {
+      audioLoader.Play(currentKeySound.wavId, scroller.currentTime);
+    }
   }
 
-  public void JudgeNote(GameObject note) {
+  public void JudgeNote() {
+    if (!notes.TryPeek(out GameObject note)) {
+      return;
+    }
+
     NoteObject noteObject = note.GetComponent<NoteObject>();
-    float d = scroller.currentTime - noteObject.time;
+    float d = scroller.currentTime - noteObject.time - FumenManager.instance.inputLatency;
     float error = Mathf.Abs(d);
     bool isEarly = d < 0;
 
