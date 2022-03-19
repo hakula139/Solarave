@@ -6,7 +6,8 @@
 
 ## Unity
 
-[Aa]ssets/AssetStoreTools*
+[Aa]ssets/[Aa]sset[Ss]tore[Tt]ools*
+[Aa]ssets/[Ss]treaming[Aa]ssets/
 [Bb]uild/
 [Bb]uilds/
 [Ll]ibrary/
@@ -40,6 +41,7 @@ ExportedObj/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+mono_crash.*.json
 
 # Builds
 *.apk
