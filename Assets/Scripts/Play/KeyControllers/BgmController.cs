@@ -13,7 +13,7 @@ public class BgmController : KeyController {
     // Find the latest key sound to play.
     if (keySounds.TryDequeue(out KeySound keySound)) {
       if (keySound is not null) {
-        audioLoader.Play(keySound.wavId, keySound.time);
+        AudioLoader.instance.Play(keySound.wavId, keySound.time);
       }
     }
   }

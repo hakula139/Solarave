@@ -30,8 +30,11 @@ public class GameManager : MonoBehaviour {
   private int badCount;
   private int poorCount;
 
-  public void Start() {
+  private void OnEnable() {
     instance = this;
+  }
+
+  public void Start() {
     totalNotes = FindObjectsOfType<NoteObject>().Length;
   }
 

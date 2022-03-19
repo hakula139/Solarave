@@ -4,8 +4,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class AudioLoader : MonoBehaviour {
+  public static AudioLoader instance;
+
   private AudioSource[] audioSources = new AudioSource[36 * 36];
   public float outputLatency;  // ms
+
+  private void OnEnable() {
+    instance = this;
+  }
 
   public void Start() {
     audioSources = audioSources.Select(_ => {
@@ -29,7 +35,7 @@ public class AudioLoader : MonoBehaviour {
 
   public void Play(int wavId, float time) {
     if (audioSources[wavId].clip is not null) {
-      audioSources[wavId].PlayScheduled((time + outputLatency) / 1000f);
+      audioSources[wavId].PlayScheduled((time + outputLatency + FumenScroller.instance.offset) / 1000f);
       Debug.LogFormat("play key sound: wavId=<{0}> time=<{1}>", wavId, time + outputLatency);
     }
   }

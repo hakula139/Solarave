@@ -404,8 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 100
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 248113392}
@@ -555,8 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 102
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 564270383}
@@ -706,8 +702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 106
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 308124294}
@@ -984,8 +978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 115
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 598777222}
@@ -1998,8 +1990,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d517eeb7206254a2abbd84c575216190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 0
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 742817138}
@@ -2487,8 +2477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 108
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 1011033330}
@@ -3146,8 +3134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95dc24c021e481e91620413ddd5f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   filePath: "BMS/\u7D05\u6708\u591C\u60F3 \uFF5EScarlet Nocturne\uFF5E/_N.bms"
   startDelay: 1000
   inputLatency: 0
@@ -3520,8 +3506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0254354a7c7491caeaeb09d77f7c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 97
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 2009950147}
@@ -3751,6 +3735,7 @@ MonoBehaviour:
   baseSpeed: 4
   hiSpeed: 300
   currentTime: 0
+  offset: 0
 --- !u!1 &1478612030
 GameObject:
   m_ObjectHideFlags: 0
@@ -3897,8 +3882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 107
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 1066171036}
@@ -3971,7 +3954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6614031401a4f50a38be5881fbae7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outputLatency: 0
+  outputLatency: 48
 --- !u!4 &1634941356
 Transform:
   m_ObjectHideFlags: 0
@@ -4428,8 +4411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioLoader: {fileID: 1634941355}
-  scroller: {fileID: 1470654907}
   keyAssigned: 32
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 802926722}

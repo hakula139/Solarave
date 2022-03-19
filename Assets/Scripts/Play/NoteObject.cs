@@ -12,11 +12,12 @@ public class NoteObject : MonoBehaviour {
   }
 
   public void Update() {
-    float d = lane.scroller.currentTime - time;
+    float currentTime = FumenScroller.instance.currentTime;
+    float d = currentTime - time;
 
     if (d > FumenManager.instance.badRange) {
       if (isClickable) {
-        Debug.LogFormat("miss: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, lane.scroller.currentTime, time);
+        Debug.LogFormat("miss: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, time);
         GameManager.instance.MissJudge();
         isClickable = false;
         _ = lane.notes.Dequeue();

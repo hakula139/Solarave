@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class KeyController : MonoBehaviour {
   protected SpriteRenderer sr;
-  public AudioLoader audioLoader;
-  public FumenScroller scroller;
 
   public KeyCode keyAssigned;
   public GameObject fumenArea;
@@ -32,12 +30,13 @@ public class KeyController : MonoBehaviour {
   public virtual void SetupNote(float start, float length, BMS.Note note) {
     GameObject noteClone = Instantiate(notePrefab, fumenArea.transform);
     float y = start + (length * note.position);
-    noteClone.transform.Translate(scroller.baseSpeed * scroller.hiSpeed * y * Vector3.up / 100f);
+    float ratio = FumenScroller.instance.baseSpeed * FumenScroller.instance.hiSpeed / 100f;
+    noteClone.transform.Translate(ratio * y * Vector3.up);
     noteClone.SetActive(true);
     notes.Enqueue(noteClone);
 
     NoteObject noteObject = noteClone.GetComponent<NoteObject>();
-    noteObject.time = y * 240000f / scroller.bpm;
+    noteObject.time = y * 240000f / FumenScroller.instance.bpm;
     // Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, keyAssigned, noteObject.time);
 
     SetupKeySound(note.wavId, noteObject.time);
@@ -57,12 +56,13 @@ public class KeyController : MonoBehaviour {
 
   public virtual void PlayKeySound() {
     // Find the latest key sound to play.
-    while (keySounds.TryPeek(out KeySound keySound) && scroller.currentTime >= keySound.time) {
+    float currentTime = FumenScroller.instance.currentTime;
+    while (keySounds.TryPeek(out KeySound keySound) && currentTime >= keySound.time) {
       currentKeySound = keySound;
       _ = keySounds.Dequeue();
     }
     if (currentKeySound is not null) {
-      audioLoader.Play(currentKeySound.wavId, scroller.currentTime);
+      AudioLoader.instance.Play(currentKeySound.wavId, currentTime);
     }
   }
 
@@ -71,30 +71,31 @@ public class KeyController : MonoBehaviour {
       return;
     }
 
+    float currentTime = FumenScroller.instance.currentTime;
     NoteObject noteObject = note.GetComponent<NoteObject>();
-    float d = scroller.currentTime - noteObject.time - FumenManager.instance.inputLatency + audioLoader.outputLatency;
+    float d = currentTime - noteObject.time - FumenManager.instance.inputLatency + AudioLoader.instance.outputLatency;
     float error = Mathf.Abs(d);
     bool isEarly = d < 0;
 
     if (noteObject.isClickable) {
       if (error <= FumenManager.instance.badRange) {
         if (error <= FumenManager.instance.pgreatRange) {
-          Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, scroller.currentTime, noteObject.time);
+          Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
           GameManager.instance.PgreatJudge();
         } else if (error <= FumenManager.instance.greatRange) {
-          Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, scroller.currentTime, noteObject.time);
+          Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
           GameManager.instance.GreatJudge();
         } else if (error <= FumenManager.instance.goodRange) {
-          Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, scroller.currentTime, noteObject.time);
+          Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
           GameManager.instance.GoodJudge();
         } else {
-          Debug.LogFormat("bad: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, scroller.currentTime, noteObject.time);
+          Debug.LogFormat("bad: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
           GameManager.instance.BadJudge();
         }
         noteObject.isClickable = false;
         _ = notes.Dequeue();
       } else if (error <= FumenManager.instance.poorRange && isEarly) {
-        Debug.LogFormat("poor: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, scroller.currentTime, noteObject.time);
+        Debug.LogFormat("poor: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
         GameManager.instance.PoorJudge();
       }
     }

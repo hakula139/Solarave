@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class FumenManager : MonoBehaviour {
   public static FumenManager instance;
-  public AudioLoader audioLoader;
-  public FumenScroller scroller;
+
   private BMS.Model bms;
 
   private Dictionary<string, KeyController> keyMap;
@@ -22,8 +21,11 @@ public class FumenManager : MonoBehaviour {
   public float badRange;      // ms
   public float poorRange;     // ms
 
-  public void Start() {
+  private void OnEnable() {
     instance = this;
+  }
+
+  public void Start() {
     keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l.name switch {
       "KeyBgm" => (BgmController)l,
       "KeyScratch" => (ScratchController)l,
@@ -52,7 +54,7 @@ public class FumenManager : MonoBehaviour {
     string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, filePath)).FullName;
 
     // Initialize BPM.
-    scroller.bpm = bms.header.bpm;
+    FumenScroller.instance.bpm = bms.header.bpm;
 
     // Initialize key sounds.
     foreach ((string relativeWavPath, int wavId) in bms.header.wavPaths.Select((item, i) => (item, i))) {
@@ -64,9 +66,9 @@ public class FumenManager : MonoBehaviour {
       if (!File.Exists(wavPath) && !File.Exists(wavPath = wavPath.Replace(".wav", ".ogg"))) {
         Debug.LogWarningFormat("audio file not found, path=<{0}>", wavPath);
       } else if (wavPath.EndsWith(".wav")) {
-        _ = StartCoroutine(audioLoader.Load(wavPath, wavId, AudioType.WAV));
+        _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV));
       } else if (wavPath.EndsWith(".ogg")) {
-        _ = StartCoroutine(audioLoader.Load(wavPath, wavId, AudioType.OGGVORBIS));
+        _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS));
       }
     }
 
@@ -85,6 +87,7 @@ public class FumenManager : MonoBehaviour {
   }
 
   public void StartPlaying() {
-    scroller.isEnabled = true;
+    FumenScroller.instance.offset = (float)AudioSettings.dspTime * 1000f;
+    FumenScroller.instance.isEnabled = true;
   }
 }
