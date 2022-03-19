@@ -2640,7 +2640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95dc24c021e481e91620413ddd5f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: "BMS/\u7D05\u6708\u591C\u60F3 \uFF5EScarlet Nocturne\uFF5E/_N.bms"
+  filePath: "BMS/\u7D05\u6708\u591C\u60F3 \uFF5EScarlet Nocturne\uFF5E/_H.bms"
   startDelay: 1000
   inputLatency: 0
   pgreatRange: 21
