@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
 public class FumenManager : MonoBehaviour {
   public static FumenManager instance;
-  public FumenScroller scroller;
+
   private BMS.Model bms;
 
   private Dictionary<string, KeyController> keyMap;
@@ -12,17 +13,24 @@ public class FumenManager : MonoBehaviour {
 
   public string filePath;
 
-  public float startDelay;  // ms
+  public float startDelay;    // ms
   public float inputLatency;  // ms
-  public float pgreatRange;  // ms
-  public float greatRange;  // ms
-  public float goodRange;  // ms
-  public float badRange;  // ms
-  public float poorRange;  // ms
+  public float pgreatRange;   // ms
+  public float greatRange;    // ms
+  public float goodRange;     // ms
+  public float badRange;      // ms
+  public float poorRange;     // ms
+
+  private void Awake() {
+    instance = this;
+  }
 
   public void Start() {
-    instance = this;
-    keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l);
+    keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l.name switch {
+      "KeyBgm" => (BgmController)l,
+      "KeyScratch" => (ScratchController)l,
+      _ => l,
+    });
     keyNameMap = new() {
       { BMS.Channel.Bgm, "KeyBgm" },
       { BMS.Channel.Scratch, "KeyScratch" },
@@ -43,20 +51,43 @@ public class FumenManager : MonoBehaviour {
   }
 
   public void Initialize() {
-    scroller.bpm = bms.header.bpm;
+    string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, filePath)).FullName;
+
+    // Initialize BPM.
+    FumenScroller.instance.bpm = bms.header.bpm;
+
+    // Initialize key sounds.
+    foreach ((string relativeWavPath, int wavId) in bms.header.wavPaths.Select((item, i) => (item, i))) {
+      if (string.IsNullOrEmpty(relativeWavPath)) {
+        continue;
+      }
+
+      string wavPath = Path.Combine(baseDir, relativeWavPath);
+      if (!File.Exists(wavPath) && !File.Exists(wavPath = wavPath.Replace(".wav", ".ogg"))) {
+        Debug.LogWarningFormat("audio file not found, path=<{0}>", wavPath);
+      } else if (wavPath.EndsWith(".wav")) {
+        _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV));
+      } else if (wavPath.EndsWith(".ogg")) {
+        _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS));
+      }
+    }
+
     _ = bms.content.measures.Aggregate(0f, (startY, measure) => {
       measure.bgas.ForEach(bga => {
         // TODO: Initialize BGA.
       });
       measure.notes.ForEach(note => {
+        // Initialize notes.
         keyMap[keyNameMap[note.channelId]].SetupNote(startY, measure.length, note);
       });
       return startY + measure.length;
     });
+
     Invoke(nameof(StartPlaying), startDelay / 1000f);
   }
 
   public void StartPlaying() {
-    scroller.isEnabled = true;
+    FumenScroller.instance.offset = (float)AudioSettings.dspTime * 1000f;
+    FumenScroller.instance.isEnabled = true;
   }
 }

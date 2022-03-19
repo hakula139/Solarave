@@ -1,12 +1,19 @@
 using UnityEngine;
 
 public class FumenScroller : MonoBehaviour {
+  public static FumenScroller instance;
+
   public bool isEnabled = false;
   public float bpm;
-  public float baseSpeed = 1f;
+  public float baseSpeed;
   public float hiSpeed;
   protected float Speed => bpm * baseSpeed * hiSpeed / 24000f * Time.deltaTime;
-  public float currentTime = 0f;  // ms
+  public float currentTime;  // ms
+  public float offset;       // ms
+
+  private void Awake() {
+    instance = this;
+  }
 
   public void Update() {
     if (isEnabled) {

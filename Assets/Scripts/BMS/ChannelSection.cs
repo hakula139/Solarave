@@ -19,13 +19,13 @@ namespace BMS {
 
   public class Bga {
     public Channel channelId;
-    public string bgaPath;
+    public int bgaId;
     public float position;
   }
 
   public class Note {
     public Channel channelId;
-    public string wavPath;
+    public int wavId;
     public float position;
   }
 

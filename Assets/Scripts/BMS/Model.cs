@@ -9,9 +9,9 @@ namespace BMS {
     public ChannelSection content = new();
 
     public static Model Parse(string path) {
-      string realPath = Path.Join(Application.streamingAssetsPath, path);
+      string realPath = Path.Combine(Application.streamingAssetsPath, path);
       if (!File.Exists(realPath)) {
-        Debug.LogErrorFormat("file not found, path=<{0}>", path);
+        Debug.LogErrorFormat("bms file not found, path=<{0}>", realPath);
         return null;
       }
 
@@ -22,6 +22,10 @@ namespace BMS {
             model.ReadLine(sr.ReadLine());
           }
         }
+        model.content.measures.ForEach(measure => {
+          measure.bgas.Sort((x, y) => x.position.CompareTo(y.position));
+          measure.notes.Sort((x, y) => x.position.CompareTo(y.position));
+        });
         return model;
       } catch (Exception e) {
         Debug.LogErrorFormat("failed to parse bms file, path=<{0}> exception=<{1}>", path, e.ToString());
@@ -168,14 +172,14 @@ namespace BMS {
           case Channel.BgaLayer:
             content.measures[measureId].bgas.Add(new Bga {
               channelId = channelId,
-              bgaPath = header.bgaPaths[id],
+              bgaId = id,
               position = (float)i / meter,
             });
             break;
           default:
             content.measures[measureId].notes.Add(new Note {
               channelId = channelId,
-              wavPath = header.wavPaths[id],
+              wavId = id,
               position = (float)i / meter,
             });
             break;
