@@ -690,8 +690,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songFolderBasePath: BMS
   selectListArea: {fileID: 2132695254}
-  songListItemPrefab: {fileID: 437658511667867608, guid: 343b8432339284a2dba1585bda4d9838, type: 3}
-  folderListItemPrefab: {fileID: 6925914430901909121, guid: 419e00c614b06439694c3e3eeed2bdd3, type: 3}
+  songListItemPrefab: {fileID: 1995610645051661212, guid: c573605c7376448e79b7b79bb132c585, type: 3}
+  folderListItemPrefab: {fileID: 6474752011196681429, guid: 419e00c614b06439694c3e3eeed2bdd3, type: 3}
 --- !u!4 &1849210644
 Transform:
   m_ObjectHideFlags: 0

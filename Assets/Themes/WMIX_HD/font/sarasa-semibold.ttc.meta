@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 4481d64c509ca4c51b1c6b7eaae5056a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Sarasa Gothic CL
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 088a02634b00a4b89b69adeff06a09d4, type: 3}
+  - {fileID: 12800000, guid: b07a567130b974112bdfb7feb7616f7d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
