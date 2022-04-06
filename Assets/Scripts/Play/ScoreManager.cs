@@ -1,11 +1,9 @@
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour {
-  void Start() {
-
+  public void Start() {
   }
 
-  void Update() {
-
+  public void Update() {
   }
 }
