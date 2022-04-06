@@ -691,7 +691,7 @@ MonoBehaviour:
   songFolderBasePath: BMS
   selectListArea: {fileID: 2132695254}
   songListItemPrefab: {fileID: 1995610645051661212, guid: c573605c7376448e79b7b79bb132c585, type: 3}
-  folderListItemPrefab: {fileID: 6474752011196681429, guid: 419e00c614b06439694c3e3eeed2bdd3, type: 3}
+  folderListItemPrefab: {fileID: 8562716085090603685, guid: 419e00c614b06439694c3e3eeed2bdd3, type: 3}
 --- !u!4 &1849210644
 Transform:
   m_ObjectHideFlags: 0
