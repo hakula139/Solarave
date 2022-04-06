@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class SongManager : MonoBehaviour {
   public string songFolderBasePath;
@@ -23,15 +24,30 @@ public class SongManager : MonoBehaviour {
     }
 
     string[] extensions = new[] { ".bms", ".bme" };
-    foreach (string file in Directory.GetFiles(baseDir)) {
-      string path = Path.Combine(baseDir, file);
-      if (Directory.Exists(path)) {
-        // Add folder to select list.
-        GameObject listItemClone = Instantiate(folderListItemPrefab, selectListArea.transform);
-      } else if (extensions.Any(ext => Path.GetExtension(file) == ext)) {
-        // Add song to select list.
-        GameObject listItemClone = Instantiate(songListItemPrefab, selectListArea.transform);
+    foreach (string path in Directory.GetDirectories(baseDir)) {
+      SetupFolderListItem(path);
+    }
+    foreach (string path in Directory.GetFiles(baseDir)) {
+      if (extensions.Any(ext => Path.GetExtension(path) == ext)) {
+        SetupSongListItem(path);
       }
     }
+  }
+
+  public void SetupFolderListItem(string path) {
+    string filename = Path.GetFileName(path);
+    GameObject folderListItemClone = Instantiate(folderListItemPrefab, selectListArea.transform);
+    TMP_Text titleTMP = folderListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
+    titleTMP.text = filename;
+  }
+
+  public void SetupSongListItem(string path) {
+    string filename = Path.GetFileNameWithoutExtension(path);
+    GameObject songListItemClone = Instantiate(songListItemPrefab, selectListArea.transform);
+    TMP_Text titleTMP = songListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
+    titleTMP.text = filename;
+    TMP_Text levelTMP = songListItemClone.transform.Find("Level").GetComponent<TMP_Text>();
+    int level = 98765;
+    levelTMP.text = (level % 1000).ToString();
   }
 }
