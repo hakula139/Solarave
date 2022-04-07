@@ -5,6 +5,8 @@ public class SongListItem : MonoBehaviour, IPointerClickHandler {
   public string path;
 
   public void OnPointerClick(PointerEventData eventData) {
-    Debug.LogFormat("entering song, path=<{0}>", path);
+    if (eventData.button == PointerEventData.InputButton.Left) {
+      Debug.LogFormat("entering song, path=<{0}>", path);
+    }
   }
 }

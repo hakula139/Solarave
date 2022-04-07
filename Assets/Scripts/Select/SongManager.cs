@@ -6,21 +6,33 @@ using TMPro;
 public class SongManager : MonoBehaviour {
   public static SongManager instance;
 
-  public string songFolderBasePath;
-  public GameObject selectListArea;
+  protected Transform container;
   public GameObject songListItemPrefab;
   public GameObject folderListItemPrefab;
+
+  public string songFolderBasePath;
+  protected string currentPath;
 
   private void Awake() {
     instance = this;
   }
 
   public void Start() {
-    string baseDir = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
-    ReadSongFolder(baseDir);
+    container = transform.Find("Viewport/Container");
+
+    songFolderBasePath = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
+    ReadSongFolder(songFolderBasePath);
   }
 
   public void Update() {
+    // Right click to return.
+    if (Input.GetMouseButtonDown(1)) {
+      string parentPath = Directory.GetParent(currentPath).FullName;
+      Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
+      if (parentPath.StartsWith(songFolderBasePath)) {
+        SongManager.instance.ReadSongFolder(parentPath);
+      }
+    }
   }
 
   public void ReadSongFolder(string path) {
@@ -30,6 +42,8 @@ public class SongManager : MonoBehaviour {
     }
 
     ClearSelectList();
+    currentPath = path;
+
     string[] extensions = new[] { ".bms", ".bme" };
     foreach (string childPath in Directory.GetDirectories(path)) {
       SetupFolderListItem(childPath);
@@ -43,7 +57,7 @@ public class SongManager : MonoBehaviour {
 
   public void SetupFolderListItem(string path) {
     string filename = Path.GetFileName(path);
-    GameObject folderListItemClone = Instantiate(folderListItemPrefab, selectListArea.transform);
+    GameObject folderListItemClone = Instantiate(folderListItemPrefab, container);
     TMP_Text titleTMP = folderListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
     titleTMP.text = filename;
 
@@ -53,7 +67,7 @@ public class SongManager : MonoBehaviour {
 
   public void SetupSongListItem(string path) {
     string filename = Path.GetFileNameWithoutExtension(path);
-    GameObject songListItemClone = Instantiate(songListItemPrefab, selectListArea.transform);
+    GameObject songListItemClone = Instantiate(songListItemPrefab, container);
     TMP_Text titleTMP = songListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
     titleTMP.text = filename;
     TMP_Text levelTMP = songListItemClone.transform.Find("Level").GetComponent<TMP_Text>();
@@ -65,7 +79,7 @@ public class SongManager : MonoBehaviour {
   }
 
   public void ClearSelectList() {
-    foreach (Transform child in selectListArea.transform) {
+    foreach (Transform child in container) {
       Destroy(child.gameObject);
     }
   }
