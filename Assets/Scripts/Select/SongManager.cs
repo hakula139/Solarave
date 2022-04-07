@@ -4,32 +4,39 @@ using UnityEngine;
 using TMPro;
 
 public class SongManager : MonoBehaviour {
+  public static SongManager instance;
+
   public string songFolderBasePath;
   public GameObject selectListArea;
   public GameObject songListItemPrefab;
   public GameObject folderListItemPrefab;
 
+  private void Awake() {
+    instance = this;
+  }
+
   public void Start() {
-    ReadSongFolder();
+    string baseDir = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
+    ReadSongFolder(baseDir);
   }
 
   public void Update() {
   }
 
-  public void ReadSongFolder() {
-    string baseDir = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
-    if (!Directory.Exists(baseDir)) {
-      Debug.LogErrorFormat("song folder not found, path=<{0}>", baseDir);
+  public void ReadSongFolder(string path) {
+    if (!Directory.Exists(path)) {
+      Debug.LogErrorFormat("song folder not found, path=<{0}>", path);
       return;
     }
 
+    ClearSelectList();
     string[] extensions = new[] { ".bms", ".bme" };
-    foreach (string path in Directory.GetDirectories(baseDir)) {
-      SetupFolderListItem(path);
+    foreach (string childPath in Directory.GetDirectories(path)) {
+      SetupFolderListItem(childPath);
     }
-    foreach (string path in Directory.GetFiles(baseDir)) {
-      if (extensions.Any(ext => Path.GetExtension(path) == ext)) {
-        SetupSongListItem(path);
+    foreach (string childPath in Directory.GetFiles(path)) {
+      if (extensions.Any(ext => Path.GetExtension(childPath) == ext)) {
+        SetupSongListItem(childPath);
       }
     }
   }
@@ -39,6 +46,9 @@ public class SongManager : MonoBehaviour {
     GameObject folderListItemClone = Instantiate(folderListItemPrefab, selectListArea.transform);
     TMP_Text titleTMP = folderListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
     titleTMP.text = filename;
+
+    FolderListItem folderListItem = folderListItemClone.GetComponent<FolderListItem>();
+    folderListItem.path = path;
   }
 
   public void SetupSongListItem(string path) {
@@ -47,7 +57,16 @@ public class SongManager : MonoBehaviour {
     TMP_Text titleTMP = songListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
     titleTMP.text = filename;
     TMP_Text levelTMP = songListItemClone.transform.Find("Level").GetComponent<TMP_Text>();
-    int level = 98765;
+    int level = 98765;  // FIXME: remove mock data
     levelTMP.text = (level % 1000).ToString();
+
+    SongListItem songListItem = songListItemClone.GetComponent<SongListItem>();
+    songListItem.path = path;
+  }
+
+  public void ClearSelectList() {
+    foreach (Transform child in selectListArea.transform) {
+      Destroy(child.gameObject);
+    }
   }
 }
