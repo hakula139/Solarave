@@ -8,7 +8,7 @@ namespace BMS {
     public HeaderSection header = new();
     public ChannelSection content = new();
 
-    public static Model Parse(string path) {
+    public static Model Parse(string path, bool headerOnly = false) {
       string realPath = Path.Combine(Application.streamingAssetsPath, path);
       if (!File.Exists(realPath)) {
         Debug.LogErrorFormat("bms file not found, path=<{0}>", realPath);
@@ -19,7 +19,7 @@ namespace BMS {
       try {
         using (StreamReader sr = new(realPath)) {
           while (!sr.EndOfStream) {
-            model.ReadLine(sr.ReadLine());
+            model.ReadLine(sr.ReadLine(), headerOnly);
           }
         }
         model.content.measures.ForEach(measure => {
@@ -33,7 +33,7 @@ namespace BMS {
       }
     }
 
-    protected void ReadLine(string line) {
+    protected void ReadLine(string line, bool headerOnly = false) {
       // Debug.LogFormat("parsing: line=<{0}>", line);
       if (line.Length < 2 || !line.StartsWith('#')) {
         return;
@@ -45,12 +45,15 @@ namespace BMS {
         string keyword = lineSplit[0][1..].ToLower();
         string value = lineSplit.Length > 1 ? lineSplit[1] : "";
         ReadHeaderLine(keyword, value);
-      } else {
+      } else if (!headerOnly) {
         // Channel section logic.
         string[] lineSplit = line.Split(':', 2);
         string channel = lineSplit[0][1..].ToLower();
         string value = lineSplit.Length > 1 ? lineSplit[1] : "";
         ReadChannelLine(channel, value);
+      } else {
+        // Skip channel section.
+        return;
       }
     }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class SongManager : MonoBehaviour {
   public GameObject songListItemPrefab;
   public GameObject folderListItemPrefab;
 
+  private Dictionary<BMS.Difficulty, Color> difficultyColorMap;
+
   public string songFolderBasePath;
   protected string currentPath;
 
@@ -19,6 +22,15 @@ public class SongManager : MonoBehaviour {
 
   public void Start() {
     container = transform.Find("Viewport/Container");
+
+    difficultyColorMap = new() {
+      { BMS.Difficulty.Unknown, new Color(0.5f, 0.5f, 0.5f, 1) },
+      { BMS.Difficulty.Beginner, new Color(0.5f, 1, 0.5f, 1) },
+      { BMS.Difficulty.Normal, new Color(0.25f, 0.5f, 1, 1) },
+      { BMS.Difficulty.Hyper, new Color(1, 0.5f, 0.5f, 1) },
+      { BMS.Difficulty.Another, new Color(1, 0.125f, 0.125f, 1) },
+      { BMS.Difficulty.Insane, new Color(0.375f, 0.0625f, 0.75f, 1) },
+    };
 
     songFolderBasePath = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
     ReadSongFolder(songFolderBasePath);
@@ -30,7 +42,7 @@ public class SongManager : MonoBehaviour {
       string parentPath = Directory.GetParent(currentPath).FullName;
       Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
       if (parentPath.StartsWith(songFolderBasePath)) {
-        SongManager.instance.ReadSongFolder(parentPath);
+        instance.ReadSongFolder(parentPath);
       }
     }
   }
@@ -58,24 +70,24 @@ public class SongManager : MonoBehaviour {
   public void SetupFolderListItem(string path) {
     string filename = Path.GetFileName(path);
     GameObject folderListItemClone = Instantiate(folderListItemPrefab, container);
-    TMP_Text titleTMP = folderListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
-    titleTMP.text = filename;
-
     FolderListItem folderListItem = folderListItemClone.GetComponent<FolderListItem>();
     folderListItem.path = path;
+
+    TMP_Text titleTMP = folderListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
+    titleTMP.text = filename;
   }
 
   public void SetupSongListItem(string path) {
-    string filename = Path.GetFileNameWithoutExtension(path);
     GameObject songListItemClone = Instantiate(songListItemPrefab, container);
-    TMP_Text titleTMP = songListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
-    titleTMP.text = filename;
-    TMP_Text levelTMP = songListItemClone.transform.Find("Level").GetComponent<TMP_Text>();
-    int level = 98765;  // FIXME: remove mock data
-    levelTMP.text = (level % 1000).ToString();
-
     SongListItem songListItem = songListItemClone.GetComponent<SongListItem>();
     songListItem.path = path;
+
+    BMS.Model bms = BMS.Model.Parse(path, headerOnly: true);
+    TMP_Text titleTMP = songListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
+    titleTMP.text = bms.header.title;
+    TMP_Text levelTMP = songListItemClone.transform.Find("Level").GetComponent<TMP_Text>();
+    levelTMP.text = bms.header.level.ToString();
+    levelTMP.color = difficultyColorMap[bms.header.difficulty];
   }
 
   public void ClearSelectList() {
