@@ -17,7 +17,8 @@ namespace BMS {
 
       Model model = new();
       try {
-        using (StreamReader sr = new(realPath)) {
+        using (StreamReader sr = new(realPath, encoding: System.Text.Encoding.GetEncoding(932))) {
+          // Debug.LogFormat("parsing bms file, path=<{0}> encoding=<{1}>", realPath, sr.CurrentEncoding);
           while (!sr.EndOfStream) {
             model.ReadLine(sr.ReadLine(), headerOnly);
           }
