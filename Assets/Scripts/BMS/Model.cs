@@ -138,9 +138,9 @@ namespace BMS {
     }
 
     private (string, string) ReadTitle(string value) {
-      Regex pattern = new(@"-.*-|～.*～|\(.*\)|\[.*\]|<.*>|"".*""");
+      Regex pattern = new(@"\[.*\]|\(.*\)|-.*-|"".*""|～.*～|<.*>|  .*");
       Match match = pattern.Match(value);
-      string subtitle = match.Success ? value.Substring(match.Index).Trim() : null;
+      string subtitle = match.Success ? value[match.Index..].Trim() : null;
       string title = value.Substring(0, match.Index).Trim();
       return (title, subtitle);
     }
