@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace BMS {
@@ -71,13 +72,24 @@ namespace BMS {
           header.genre = value;
           break;
         case "title":
-          header.title = value;
+          (header.title, header.subtitle) = ReadTitle(value);
+          break;
+        case "subtitle":
+          if (string.IsNullOrEmpty(header.subtitle)) {
+            header.subtitle = value;
+          } else {
+            header.subtitle += $" {value}";
+          }
           break;
         case "artist":
           header.artist = value;
           break;
         case "subartist":
-          header.subartist = value;
+          if (string.IsNullOrEmpty(header.subartist)) {
+            header.subartist = value;
+          } else {
+            header.subartist += $" / {value}";
+          }
           break;
         case "bpm":
           header.bpm = float.Parse(value);
@@ -123,6 +135,14 @@ namespace BMS {
           }
           break;
       }
+    }
+
+    private (string, string) ReadTitle(string value) {
+      Regex pattern = new(@"-.*-|～.*～|\(.*\)|\[.*\]|<.*>|"".*""");
+      Match match = pattern.Match(value);
+      string subtitle = match.Success ? value.Substring(match.Index).Trim() : null;
+      string title = value.Substring(0, match.Index).Trim();
+      return (title, subtitle);
     }
 
     private void ReadChannelLine(string channel, string value) {
