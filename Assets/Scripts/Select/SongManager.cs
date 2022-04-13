@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class SongManager : MonoBehaviour {
@@ -19,7 +20,8 @@ public class SongManager : MonoBehaviour {
   private Dictionary<BMS.Difficulty, Color> difficultyColorMap;
 
   public string songFolderBasePath;
-  protected string currentPath;
+  public string currentPath;
+  public string currentFumenPath;
 
   private void Awake() {
     instance = this;
@@ -116,5 +118,10 @@ public class SongManager : MonoBehaviour {
     titleTMP.text = "";
     subtitleTMP.text = "";
     artistTMP.text = "";
+  }
+
+  public void EnterPlayScene(string path) {
+    currentFumenPath = path;
+    SceneManager.LoadScene("Play");
   }
 }

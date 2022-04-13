@@ -11,7 +11,7 @@ public class FumenManager : MonoBehaviour {
   private Dictionary<string, KeyController> keyMap;
   private Dictionary<BMS.Channel, string> keyNameMap;
 
-  public string filePath;
+  public string fumenPath;
 
   public float startDelay;    // ms
   public float inputLatency;  // ms
@@ -23,6 +23,7 @@ public class FumenManager : MonoBehaviour {
 
   private void Awake() {
     instance = this;
+    fumenPath = SongManager.instance.currentFumenPath;
   }
 
   public void Start() {
@@ -46,12 +47,12 @@ public class FumenManager : MonoBehaviour {
   }
 
   public void ReadDataFromFile() {
-    bms = BMS.Model.Parse(filePath);
+    bms = BMS.Model.Parse(fumenPath);
     Initialize();
   }
 
   public void Initialize() {
-    string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, filePath)).FullName;
+    string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, fumenPath)).FullName;
 
     // Initialize BPM.
     FumenScroller.instance.bpm = bms.header.bpm;
