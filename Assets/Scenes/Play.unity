@@ -1843,9 +1843,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823315d2131cd4b3dba5bf6c7c10a2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pgreatCountTMP: {fileID: 980773426}
+  greatCountTMP: {fileID: 1894364996}
+  goodCountTMP: {fileID: 96254864}
+  badCountTMP: {fileID: 2122115065}
+  poorCountTMP: {fileID: 451108772}
+  scoreRateTMP: {fileID: 740508912}
   exScoreTMP: {fileID: 1173614425}
   maxComboTMP: {fileID: 101400986}
   judgeTMP: {fileID: 491817769}
+  totalNotes: 0
 --- !u!4 &608173438
 Transform:
   m_ObjectHideFlags: 0
@@ -2889,7 +2896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fumenPath: 
-  startDelay: 0
+  startDelay: 1000
   inputLatency: 0
   pgreatRange: 21
   greatRange: 60

@@ -8,6 +8,7 @@ public class FumenManager : MonoBehaviour {
   public static FumenManager instance;
 
   private BMS.Model bms;
+  private int totalNotes;
 
   private Dictionary<string, KeyController> keyMap;
   private Dictionary<BMS.Channel, string> keyNameMap;
@@ -84,6 +85,9 @@ public class FumenManager : MonoBehaviour {
           keyMap[keyNameMap[note.channelId]].SetupNote(startY, measure.length, note);
         } catch (Exception e) {
           Debug.LogErrorFormat("failed to setup note, channelId=<{0}> exception=<{1}>", note.channelId, e.ToString());
+        }
+        if (note.channelId >= BMS.Channel.Key1 && note.channelId <= BMS.Channel.Key7) {  // scratch included
+          totalNotes++;
         }
       });
       return startY + measure.length;
