@@ -19,6 +19,7 @@ namespace BMS {
     public int player = 1;
     public string genre;
     public string title;
+    public string subtitle;
     public string artist;
     public string subartist;
     public float bpm = 130;

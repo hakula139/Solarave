@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace BMS {
@@ -8,7 +9,7 @@ namespace BMS {
     public HeaderSection header = new();
     public ChannelSection content = new();
 
-    public static Model Parse(string path) {
+    public static Model Parse(string path, bool headerOnly = false) {
       string realPath = Path.Combine(Application.streamingAssetsPath, path);
       if (!File.Exists(realPath)) {
         Debug.LogErrorFormat("bms file not found, path=<{0}>", realPath);
@@ -17,9 +18,10 @@ namespace BMS {
 
       Model model = new();
       try {
-        using (StreamReader sr = new(realPath)) {
+        using (StreamReader sr = new(realPath, encoding: System.Text.Encoding.GetEncoding(932))) {
+          // Debug.LogFormat("parsing bms file, path=<{0}> encoding=<{1}>", realPath, sr.CurrentEncoding);
           while (!sr.EndOfStream) {
-            model.ReadLine(sr.ReadLine());
+            model.ReadLine(sr.ReadLine(), headerOnly);
           }
         }
         model.content.measures.ForEach(measure => {
@@ -33,7 +35,7 @@ namespace BMS {
       }
     }
 
-    protected void ReadLine(string line) {
+    protected void ReadLine(string line, bool headerOnly = false) {
       // Debug.LogFormat("parsing: line=<{0}>", line);
       if (line.Length < 2 || !line.StartsWith('#')) {
         return;
@@ -45,12 +47,15 @@ namespace BMS {
         string keyword = lineSplit[0][1..].ToLower();
         string value = lineSplit.Length > 1 ? lineSplit[1] : "";
         ReadHeaderLine(keyword, value);
-      } else {
+      } else if (!headerOnly) {
         // Channel section logic.
         string[] lineSplit = line.Split(':', 2);
         string channel = lineSplit[0][1..].ToLower();
         string value = lineSplit.Length > 1 ? lineSplit[1] : "";
         ReadChannelLine(channel, value);
+      } else {
+        // Skip channel section.
+        return;
       }
     }
 
@@ -67,13 +72,24 @@ namespace BMS {
           header.genre = value;
           break;
         case "title":
-          header.title = value;
+          (header.title, header.subtitle) = ReadTitle(value);
+          break;
+        case "subtitle":
+          if (string.IsNullOrEmpty(header.subtitle)) {
+            header.subtitle = value;
+          } else {
+            header.subtitle += $" {value}";
+          }
           break;
         case "artist":
           header.artist = value;
           break;
         case "subartist":
-          header.subartist = value;
+          if (string.IsNullOrEmpty(header.subartist)) {
+            header.subartist = value;
+          } else {
+            header.subartist += $" / {value}";
+          }
           break;
         case "bpm":
           header.bpm = float.Parse(value);
@@ -119,6 +135,14 @@ namespace BMS {
           }
           break;
       }
+    }
+
+    private (string, string) ReadTitle(string value) {
+      Regex pattern = new(@"\[.*\]|\(.*\)|-.*-|"".*""|～.*～|<.*>|  .*");
+      Match match = pattern.Match(value);
+      string subtitle = match.Success ? value[match.Index..].Trim() : null;
+      string title = value.Substring(0, match.Index).Trim();
+      return (title, subtitle);
     }
 
     private void ReadChannelLine(string channel, string value) {
