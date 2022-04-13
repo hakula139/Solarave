@@ -1824,7 +1824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95dc24c021e481e91620413ddd5f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filePath: 
+  fumenPath: 
   startDelay: 1000
   inputLatency: 0
   pgreatRange: 21
