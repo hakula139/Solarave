@@ -1714,8 +1714,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -270.5, y: -6.5}
-  m_SizeDelta: {x: 260, y: 31.5}
+  m_AnchoredPosition: {x: -272, y: -4.5}
+  m_SizeDelta: {x: 260, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &593385075
 MonoBehaviour:
@@ -1764,8 +1764,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1852,7 +1852,6 @@ MonoBehaviour:
   exScoreTMP: {fileID: 1173614425}
   maxComboTMP: {fileID: 101400986}
   judgeTMP: {fileID: 491817769}
-  totalNotes: 0
 --- !u!4 &608173438
 Transform:
   m_ObjectHideFlags: 0
@@ -2895,6 +2894,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95dc24c021e481e91620413ddd5f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleTMP: {fileID: 593385075}
+  bpmTMP: {fileID: 69227820}
   fumenPath: 
   startDelay: 1000
   inputLatency: 0

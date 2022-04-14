@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class FumenManager : MonoBehaviour {
   public static FumenManager instance;
+
+  public TMP_Text titleTMP;
+  public TMP_Text bpmTMP;
 
   private BMS.Model bms;
   private int totalNotes;
@@ -56,8 +60,12 @@ public class FumenManager : MonoBehaviour {
   public void Initialize() {
     string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, fumenPath)).FullName;
 
+    // Initialize title.
+    titleTMP.text = bms.header.title + (string.IsNullOrEmpty(bms.header.subtitle) ? "" : $" {bms.header.subtitle}");
+
     // Initialize BPM.
     FumenScroller.instance.bpm = bms.header.bpm;
+    bpmTMP.text = $"{bms.header.bpm:000}";
 
     // Initialize key sounds.
     foreach ((string relativeWavPath, int wavId) in bms.header.wavPaths.Select((item, i) => (item, i))) {
