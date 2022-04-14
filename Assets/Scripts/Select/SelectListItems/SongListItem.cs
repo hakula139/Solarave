@@ -13,6 +13,7 @@ namespace Select {
           SongManager.instance.EnterPlayScene(path);
         } else {
           Debug.LogFormat("selected song, path=<{0}>", path);
+          SongManager.instance.selectSoundEffect.Play();
           SongManager.instance.SetupSongInfo(bms);
         }
       }

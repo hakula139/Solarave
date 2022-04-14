@@ -141,7 +141,7 @@ namespace BMS {
       Regex pattern = new(@"\[.*\]|\(.*\)|-.*-|"".*""|～.*～|<.*>|  .*");
       Match match = pattern.Match(value);
       string subtitle = match.Success ? value[match.Index..].Trim() : null;
-      string title = value.Substring(0, match.Index).Trim();
+      string title = match.Success ? value.Substring(0, match.Index).Trim() : value;
       return (title, subtitle);
     }
 
