@@ -10,7 +10,7 @@ namespace Play {
     public GameObject notePrefab;
     public readonly Queue<GameObject> notes = new();
     protected readonly Queue<KeySound> keySounds = new();
-    protected KeySound currentKeySound;
+    protected KeySound currentKeySound = null;
 
     public void Start() {
       sr = GetComponent<SpriteRenderer>();
@@ -46,24 +46,38 @@ namespace Play {
     protected class KeySound {
       public int wavId;
       public float time;
+      public bool isTriggered = false;  // note has been judged
     }
 
     public virtual void SetupKeySound(int wavId, float time) {
       keySounds.Enqueue(new() {
         wavId = wavId,
-        time = time - FumenManager.instance.poorRange,
+        time = time,
       });
     }
 
     public virtual void PlayKeySound() {
-      // Find the latest key sound to play.
       float currentTime = FumenScroller.instance.currentTime;
-      while (keySounds.TryPeek(out KeySound keySound) && currentTime >= keySound.time) {
-        currentKeySound = keySound;
-        _ = keySounds.Dequeue();
+
+      if (currentKeySound is null || currentKeySound.isTriggered) {
+        // Try to find the latest key sound to play.
+        while (keySounds.TryPeek(out KeySound keySound) && currentTime >= keySound.time - FumenManager.instance.poorRange) {
+          currentKeySound = keySound;
+          _ = keySounds.Dequeue();
+          if (currentTime <= keySound.time + FumenManager.instance.badRange) {
+            break;
+          }
+        }
       }
-      if (currentKeySound is not null) {
+
+      if (currentKeySound != null) {
         AudioLoader.instance.Play(currentKeySound.wavId, currentTime);
+      }
+    }
+
+    public void SetCurrentKeySoundToTriggered() {
+      if (currentKeySound != null) {
+        currentKeySound.isTriggered = true;
       }
     }
 
@@ -81,22 +95,21 @@ namespace Play {
       if (noteObject.isClickable) {
         if (error <= FumenManager.instance.badRange) {
           if (error <= FumenManager.instance.pgreatRange) {
-            Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
+            // Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.PgreatJudge();
           } else if (error <= FumenManager.instance.greatRange) {
-            Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
+            // Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GreatJudge();
           } else if (error <= FumenManager.instance.goodRange) {
-            Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
+            // Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GoodJudge();
           } else {
-            Debug.LogFormat("bad: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
+            // Debug.LogFormat("bad: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.BadJudge();
           }
-          noteObject.isClickable = false;
-          _ = notes.Dequeue();
+          noteObject.Disable();
         } else if (error <= FumenManager.instance.poorRange && isEarly) {
-          Debug.LogFormat("poor: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
+          // Debug.LogFormat("poor: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
           GameManager.instance.PoorJudge();
         }
       }

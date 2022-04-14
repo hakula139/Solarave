@@ -26,16 +26,21 @@ namespace Play {
 
       if (d > FumenManager.instance.badRange) {
         if (isClickable) {
-          Debug.LogFormat("miss: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, time);
+          // Debug.LogFormat("miss: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, time);
           GameManager.instance.MissJudge();
-          isClickable = false;
-          _ = lane.notes.Dequeue();
+          Disable();
         }
         gameObject.SetActive(false);
       } else if (d >= -FumenManager.instance.badRange) {
       } else if (d >= -FumenManager.instance.poorRange) {
         isClickable = true;
       }
+    }
+
+    public void Disable() {
+      isClickable = false;
+      _ = lane.notes.Dequeue();
+      lane.SetCurrentKeySoundToTriggered();
     }
   }
 }

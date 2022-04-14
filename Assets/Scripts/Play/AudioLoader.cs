@@ -35,7 +35,7 @@ namespace Play {
     }
 
     public void Play(int wavId, float time) {
-      if (audioSources[wavId].clip is not null) {
+      if (audioSources[wavId].clip != null) {
         audioSources[wavId].PlayScheduled((time + outputLatency + FumenScroller.instance.offset) / 1000f);
         // Debug.LogFormat("play key sound: wavId=<{0}> time=<{1}>", wavId, time + outputLatency);
       }
