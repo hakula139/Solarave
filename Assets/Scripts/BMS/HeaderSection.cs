@@ -20,8 +20,10 @@ namespace BMS {
     public string genre;
     public string title;
     public string subtitle;
+    public string FullTitle => title + (string.IsNullOrEmpty(subtitle) ? "" : $" {subtitle}");
     public string artist;
     public string subartist;
+    public string FullArtist => artist + (string.IsNullOrEmpty(subartist) ? "" : $" / {subartist}");
     public float bpm = 130;
     public Difficulty difficulty = Difficulty.Unknown;
     public int level = 0;
