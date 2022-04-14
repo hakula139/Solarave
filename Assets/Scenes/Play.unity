@@ -3869,7 +3869,7 @@ MonoBehaviour:
   isEnabled: 0
   bpm: 130
   baseSpeed: 4
-  hiSpeed: 300
+  hiSpeed: 330
   currentTime: 0
   lastNoteTime: 0
   offset: 0
