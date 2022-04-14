@@ -1,31 +1,66 @@
 using System.Linq;
+using UnityEngine;
 
-public class SpriteAssetHelper {
-  protected static string ToSprite(string name) {
-    return $"<sprite name=\"{name}\">";
-  }
+namespace Play {
+  public class SpriteAssetHelper : MonoBehaviour {
+    public static SpriteAssetHelper instance;
 
-  protected static string ToSpriteAnimation(int start, int stop, float frameRate = 60f) {
-    return $"<sprite anim=\"{start},{stop},{frameRate}\">";
-  }
+    public Sprite[] difficultySprites = new Sprite[6];
 
-  public static string GetJudge(Judge judge) {
-    return judge switch {
-      Judge.PGREAT => ToSpriteAnimation(40, 42),
-      Judge.GREAT => ToSprite("great"),
-      Judge.GOOD => ToSprite("good"),
-      Judge.BAD => ToSprite("bad"),
-      Judge.POOR => ToSprite("poor"),
-      _ => "",  // should not reach here.
-    };
-  }
+    private void Awake() {
+      instance = this;
+    }
 
-  public static string GetInteger(Judge judge, int integer) {
-    return judge != Judge.PGREAT
-        ? integer.ToString().Aggregate("", (acc, digit) => acc + ToSprite(digit.ToString()))
-        : integer.ToString().Aggregate("", (acc, digit) => {
-          int start = 10 + (3 * (digit - '0'));
-          return acc + ToSpriteAnimation(start, start + 2);
-        });
+    protected string ToSprite(string name) {
+      return $"<sprite name=\"{name}\">";
+    }
+
+    protected string ToSpriteAnimation(int start, int stop, float frameRate = 60f) {
+      return $"<sprite anim=\"{start},{stop},{frameRate}\">";
+    }
+
+    public string GetJudge(Judge judge) {
+      return judge switch {
+        Judge.PGREAT => ToSpriteAnimation(40, 42),
+        Judge.GREAT => ToSprite("great"),
+        Judge.GOOD => ToSprite("good"),
+        Judge.BAD => ToSprite("bad"),
+        Judge.POOR => ToSprite("poor"),
+        _ => "",  // should not reach here.
+      };
+    }
+
+    public string GetInteger(Judge judge, int integer) {
+      return judge != Judge.PGREAT
+          ? integer.ToString().Aggregate("", (acc, digit) => acc + ToSprite(digit.ToString()))
+          : integer.ToString().Aggregate("", (acc, digit) => {
+            int start = 10 + (3 * (digit - '0'));
+            return acc + ToSpriteAnimation(start, start + 2);
+          });
+    }
+
+    public Sprite GetDifficultySprite(BMS.Difficulty difficulty) {
+      return difficulty switch {
+        BMS.Difficulty.Unknown => difficultySprites[0],
+        BMS.Difficulty.Beginner => difficultySprites[1],
+        BMS.Difficulty.Normal => difficultySprites[2],
+        BMS.Difficulty.Hyper => difficultySprites[3],
+        BMS.Difficulty.Another => difficultySprites[4],
+        BMS.Difficulty.Insane => difficultySprites[5],
+        _ => difficultySprites[0],
+      };
+    }
+
+    public Color GetDifficultyColor(BMS.Difficulty difficulty) {
+      return difficulty switch {
+        BMS.Difficulty.Unknown => new Color(1, 1, 1, 1),
+        BMS.Difficulty.Beginner => new Color(0.0627f, 0.7608f, 0.3373f, 1),
+        BMS.Difficulty.Normal => new Color(0.2941f, 0.4471f, 1, 1),
+        BMS.Difficulty.Hyper => new Color(1, 0.7608f, 0.1647f, 1),
+        BMS.Difficulty.Another => new Color(0.9569f, 0.1412f, 0.2510f, 1),
+        BMS.Difficulty.Insane => new Color(0.9216f, 0.2941f, 0.9216f, 1),
+        _ => new Color(1, 1, 1, 1),
+      };
+    }
   }
 }

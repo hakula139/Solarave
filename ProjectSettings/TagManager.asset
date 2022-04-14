@@ -52,9 +52,6 @@ TagManager:
   - name: KeysFrame
     uniqueID: 2083288225
     locked: 0
-  - name: Indicators
-    uniqueID: 3659130647
-    locked: 0
-  - name: Canvas
+  - name: UI
     uniqueID: 2385493663
     locked: 0

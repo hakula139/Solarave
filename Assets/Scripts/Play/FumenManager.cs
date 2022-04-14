@@ -1,99 +1,132 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class FumenManager : MonoBehaviour {
-  public static FumenManager instance;
+namespace Play {
+  public class FumenManager : MonoBehaviour {
+    public static FumenManager instance;
 
-  private BMS.Model bms;
+    public TMP_Text titleTMP;
+    public Image difficultyFrame;
+    public TMP_Text levelTMP;
+    public TMP_Text bpmTMP;
 
-  private Dictionary<string, KeyController> keyMap;
-  private Dictionary<BMS.Channel, string> keyNameMap;
+    private BMS.Model bms;
+    private int totalNotes;
+    public string fumenPath;
 
-  public string fumenPath;
+    public float startDelay;    // ms
+    public float inputLatency;  // ms
+    public float pgreatRange;   // ms
+    public float greatRange;    // ms
+    public float goodRange;     // ms
+    public float badRange;      // ms
+    public float poorRange;     // ms
 
-  public float startDelay;    // ms
-  public float inputLatency;  // ms
-  public float pgreatRange;   // ms
-  public float greatRange;    // ms
-  public float goodRange;     // ms
-  public float badRange;      // ms
-  public float poorRange;     // ms
+    private void Awake() {
+      instance = this;
+      fumenPath = Select.SongManager.instance.currentFumenPath;
+    }
 
-  private void Awake() {
-    instance = this;
-    fumenPath = SongManager.instance.currentFumenPath;
-  }
+    private void Start() {
+      ReadDataFromFile();
+    }
 
-  public void Start() {
-    keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l.name switch {
-      "KeyBgm" => (BgmController)l,
-      "KeyScratch" => (ScratchController)l,
-      _ => l,
-    });
-    keyNameMap = new() {
-      { BMS.Channel.Bgm, "KeyBgm" },
-      { BMS.Channel.Scratch, "KeyScratch" },
-      { BMS.Channel.Key1, "Key1" },
-      { BMS.Channel.Key2, "Key2" },
-      { BMS.Channel.Key3, "Key3" },
-      { BMS.Channel.Key4, "Key4" },
-      { BMS.Channel.Key5, "Key5" },
-      { BMS.Channel.Key6, "Key6" },
-      { BMS.Channel.Key7, "Key7" },
-    };
-    ReadDataFromFile();
-  }
+    public void ReadDataFromFile() {
+      bms = BMS.Model.Parse(fumenPath);
+      Initialize();
+    }
 
-  public void ReadDataFromFile() {
-    bms = BMS.Model.Parse(fumenPath);
-    Initialize();
-  }
+    public void Initialize() {
+      InitializeUI();
+      InitializeFumenScroller();
+      InitializeKeySounds();
 
-  public void Initialize() {
-    string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, fumenPath)).FullName;
+      _ = bms.content.measures.Aggregate(0f, (startY, measure) => {
+        InitializeBgaByMeasure(measure);
+        InitializeNotesByMeasure(measure, startY);
+        return startY + measure.length;
+      });
 
-    // Initialize BPM.
-    FumenScroller.instance.bpm = bms.header.bpm;
+      Invoke(nameof(StartPlaying), startDelay / 1000f);
+    }
 
-    // Initialize key sounds.
-    foreach ((string relativeWavPath, int wavId) in bms.header.wavPaths.Select((item, i) => (item, i))) {
-      if (string.IsNullOrEmpty(relativeWavPath)) {
-        continue;
+    private void InitializeUI() {
+      titleTMP.text = bms.header.FullTitle;
+      difficultyFrame.sprite = SpriteAssetHelper.instance.GetDifficultySprite(bms.header.difficulty);
+      if (bms.header.difficulty != BMS.Difficulty.Unknown) {
+        levelTMP.text = bms.header.level.ToString();
+        levelTMP.color = SpriteAssetHelper.instance.GetDifficultyColor(bms.header.difficulty);
       }
+      bpmTMP.text = bms.header.bpm.ToString();
+    }
 
-      string wavPath = Path.Combine(baseDir, relativeWavPath);
-      if (!File.Exists(wavPath) && !File.Exists(wavPath = wavPath.Replace(".wav", ".ogg"))) {
-        Debug.LogWarningFormat("audio file not found, path=<{0}>", wavPath);
-      } else if (wavPath.EndsWith(".wav")) {
-        _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV));
-      } else if (wavPath.EndsWith(".ogg")) {
-        _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS));
+    private void InitializeFumenScroller() {
+      FumenScroller.instance.bpm = bms.header.bpm;
+    }
+
+    private void InitializeKeySounds() {
+      string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, fumenPath)).FullName;
+      foreach ((string relativeWavPath, int wavId) in bms.header.wavPaths.Select((item, i) => (item, i))) {
+        if (string.IsNullOrEmpty(relativeWavPath)) {
+          continue;
+        }
+
+        string wavPath = Path.Combine(baseDir, relativeWavPath);
+        if (!File.Exists(wavPath) && !File.Exists(wavPath = wavPath.Replace(".wav", ".ogg"))) {
+          Debug.LogWarningFormat("audio file not found, path=<{0}>", wavPath);
+        } else if (wavPath.EndsWith(".wav")) {
+          _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV));
+        } else if (wavPath.EndsWith(".ogg")) {
+          _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS));
+        }
       }
     }
 
-    _ = bms.content.measures.Aggregate(0f, (startY, measure) => {
+    private void InitializeBgaByMeasure(BMS.Measure measure) {
       measure.bgas.ForEach(bga => {
         // TODO: Initialize BGA.
       });
+    }
+
+    private void InitializeNotesByMeasure(BMS.Measure measure, float startY) {
+      Dictionary<string, KeyController> keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l.name switch {
+        "KeyBgm" => (BgmController)l,
+        "KeyScratch" => (ScratchController)l,
+        _ => l,
+      });
+
       measure.notes.ForEach(note => {
-        // Initialize notes.
-        try {
-          keyMap[keyNameMap[note.channelId]].SetupNote(startY, measure.length, note);
-        } catch (Exception e) {
-          Debug.LogErrorFormat("failed to setup note, channelId=<{0}> exception=<{1}>", note.channelId, e.ToString());
+        KeyController lane = note.channelId switch {
+          BMS.Channel.Bgm => keyMap["KeyBgm"],
+          BMS.Channel.Scratch => keyMap["KeyScratch"],
+          BMS.Channel.Key1 => keyMap["Key1"],
+          BMS.Channel.Key2 => keyMap["Key2"],
+          BMS.Channel.Key3 => keyMap["Key3"],
+          BMS.Channel.Key4 => keyMap["Key4"],
+          BMS.Channel.Key5 => keyMap["Key5"],
+          BMS.Channel.Key6 => keyMap["Key6"],
+          BMS.Channel.Key7 => keyMap["Key7"],
+          _ => null,
+        };
+        if (lane != null) {
+          lane.SetupNote(startY, measure.length, note);
+        } else {
+          Debug.LogErrorFormat("failed to setup note, channelId=<{0}>", note.channelId);
+        }
+
+        if (note.channelId is >= BMS.Channel.Key1 and <= BMS.Channel.Key7) {  // scratch included
+          totalNotes++;
         }
       });
-      return startY + measure.length;
-    });
+    }
 
-    Invoke(nameof(StartPlaying), startDelay / 1000f);
-  }
-
-  public void StartPlaying() {
-    FumenScroller.instance.offset = (float)AudioSettings.dspTime * 1000f;
-    FumenScroller.instance.isEnabled = true;
+    private void StartPlaying() {
+      FumenScroller.instance.offset = (float)AudioSettings.dspTime * 1000f;
+      FumenScroller.instance.isEnabled = true;
+    }
   }
 }
