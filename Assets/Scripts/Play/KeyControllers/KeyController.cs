@@ -28,7 +28,7 @@ namespace Play {
       }
     }
 
-    public virtual void SetupNote(float start, float length, BMS.Note note) {
+    public virtual float SetupNote(float start, float length, BMS.Note note) {
       GameObject noteClone = Instantiate(notePrefab, fumenArea.transform);
       float y = start + (length * note.position);
       float ratio = FumenScroller.instance.baseSpeed * FumenScroller.instance.hiSpeed / 100f;
@@ -41,6 +41,7 @@ namespace Play {
       // Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, keyAssigned, noteObject.time);
 
       SetupKeySound(note.wavId, noteObject.time);
+      return noteObject.time;
     }
 
     protected class KeySound {
