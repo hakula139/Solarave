@@ -9,8 +9,10 @@ namespace Play {
     public float baseSpeed;
     public float hiSpeed;
     protected float Speed => bpm * baseSpeed * hiSpeed / 24000f * Time.deltaTime;
-    public float currentTime;  // ms
-    public float offset;       // ms
+    public float currentTime;   // ms
+    public float lastNoteTime;  // ms
+    public float offset;        // ms
+    public float TimeLeft => lastNoteTime - currentTime + 2000f;
 
     private void Awake() {
       instance = this;

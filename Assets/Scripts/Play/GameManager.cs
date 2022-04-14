@@ -48,6 +48,10 @@ namespace Play {
         judgeTMP.text = " ";
         lastJudgeTime = 0f;
       }
+
+      if (FumenScroller.instance.TimeLeft <= 0 || Input.GetKeyDown(KeyCode.Escape)) {
+        Debug.LogFormat("enter result scene, currentTime=<{0}>", FumenScroller.instance.currentTime);
+      }
     }
 
     protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1) {
@@ -57,9 +61,9 @@ namespace Play {
       maxCombo = Math.Max(combo, maxCombo);
       lastJudgeTime = Time.time;
 
-      exScoreTMP.text = $"{exScore:0000}";
+      exScoreTMP.text = $"{exScore:D4}";
       scoreRateTMP.text = Math.Floor(scoreRate).ToString();
-      maxComboTMP.text = $"{maxCombo:0000}";
+      maxComboTMP.text = $"{maxCombo:D4}";
       string judgeText = SpriteAssetHelper.instance.GetJudge(judge);
       string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetInteger(judge, combo)}" : "";
       judgeTMP.text = judgeText + comboText;

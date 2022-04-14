@@ -4,7 +4,7 @@
       float currentTime = FumenScroller.instance.currentTime;
       float d = currentTime - time;
 
-      if (d >= -FumenManager.instance.poorRange) {
+      if (d >= -FumenManager.instance.goodRange) {
         ((BgmController)lane).PlayKeySound();
         gameObject.SetActive(false);
       }

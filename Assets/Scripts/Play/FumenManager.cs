@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Play {
     public static FumenManager instance;
 
     public TMP_Text titleTMP;
+    public TMP_Text timeLeftTMP;
     public Image difficultyFrame;
     public TMP_Text levelTMP;
     public TMP_Text bpmTMP;
@@ -35,6 +37,10 @@ namespace Play {
       ReadDataFromFile();
     }
 
+    private void Update() {
+      UpdateTimeLeft();
+    }
+
     public void ReadDataFromFile() {
       bms = BMS.Model.Parse(fumenPath);
       Initialize();
@@ -56,16 +62,22 @@ namespace Play {
 
     private void InitializeUI() {
       titleTMP.text = bms.header.FullTitle;
+
+      UpdateTimeLeft();
+
       difficultyFrame.sprite = SpriteAssetHelper.instance.GetDifficultySprite(bms.header.difficulty);
+
       if (bms.header.difficulty != BMS.Difficulty.Unknown) {
         levelTMP.text = bms.header.level.ToString();
         levelTMP.color = SpriteAssetHelper.instance.GetDifficultyColor(bms.header.difficulty);
       }
+
       bpmTMP.text = bms.header.bpm.ToString();
     }
 
     private void InitializeFumenScroller() {
       FumenScroller.instance.bpm = bms.header.bpm;
+      FumenScroller.instance.hiSpeed *= 150f / bms.header.bpm;  // fix hi-speed
     }
 
     private void InitializeKeySounds() {
@@ -113,7 +125,7 @@ namespace Play {
           _ => null,
         };
         if (lane != null) {
-          lane.SetupNote(startY, measure.length, note);
+          FumenScroller.instance.lastNoteTime = lane.SetupNote(startY, measure.length, note);
         } else {
           Debug.LogErrorFormat("failed to setup note, channelId=<{0}>", note.channelId);
         }
@@ -127,6 +139,14 @@ namespace Play {
     private void StartPlaying() {
       FumenScroller.instance.offset = (float)AudioSettings.dspTime * 1000f;
       FumenScroller.instance.isEnabled = true;
+    }
+
+    public void UpdateTimeLeft() {
+      float timeLeft = FumenScroller.instance.TimeLeft;
+      if (timeLeft >= 0) {
+        TimeSpan t = TimeSpan.FromMilliseconds(timeLeft);
+        timeLeftTMP.text = $"{(int)t.TotalMinutes} : {t.Seconds:D2}";
+      }
     }
   }
 }
