@@ -60,8 +60,8 @@ namespace Play {
       exScoreTMP.text = $"{exScore:0000}";
       scoreRateTMP.text = Math.Floor(scoreRate).ToString();
       maxComboTMP.text = $"{maxCombo:0000}";
-      string judgeText = SpriteAssetHelper.GetJudge(judge);
-      string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.GetInteger(judge, combo)}" : "";
+      string judgeText = SpriteAssetHelper.instance.GetJudge(judge);
+      string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetInteger(judge, combo)}" : "";
       judgeTMP.text = judgeText + comboText;
     }
 

@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 namespace Play {
@@ -10,14 +10,12 @@ namespace Play {
     public static FumenManager instance;
 
     public TMP_Text titleTMP;
+    public Image difficultyFrame;
+    public TMP_Text levelTMP;
     public TMP_Text bpmTMP;
 
     private BMS.Model bms;
     private int totalNotes;
-
-    private Dictionary<string, KeyController> keyMap;
-    private Dictionary<BMS.Channel, string> keyNameMap;
-
     public string fumenPath;
 
     public float startDelay;    // ms
@@ -34,22 +32,6 @@ namespace Play {
     }
 
     public void Start() {
-      keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l.name switch {
-        "KeyBgm" => (BgmController)l,
-        "KeyScratch" => (ScratchController)l,
-        _ => l,
-      });
-      keyNameMap = new() {
-      { BMS.Channel.Bgm, "KeyBgm" },
-      { BMS.Channel.Scratch, "KeyScratch" },
-      { BMS.Channel.Key1, "Key1" },
-      { BMS.Channel.Key2, "Key2" },
-      { BMS.Channel.Key3, "Key3" },
-      { BMS.Channel.Key4, "Key4" },
-      { BMS.Channel.Key5, "Key5" },
-      { BMS.Channel.Key6, "Key6" },
-      { BMS.Channel.Key7, "Key7" },
-    };
       ReadDataFromFile();
     }
 
@@ -74,7 +56,12 @@ namespace Play {
 
     private void InitializeUI() {
       titleTMP.text = bms.header.FullTitle;
-      bpmTMP.text = $"{bms.header.bpm:000}";
+      difficultyFrame.sprite = SpriteAssetHelper.instance.GetDifficultySprite(bms.header.difficulty);
+      if (bms.header.difficulty != BMS.Difficulty.Unknown) {
+        levelTMP.text = bms.header.level.ToString();
+        levelTMP.color = SpriteAssetHelper.instance.GetDifficultyColor(bms.header.difficulty);
+      }
+      bpmTMP.text = bms.header.bpm.ToString();
     }
 
     private void InitializeFumenScroller() {
@@ -106,13 +93,32 @@ namespace Play {
     }
 
     private void InitializeNotesByMeasure(BMS.Measure measure, float startY) {
+      Dictionary<string, KeyController> keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l.name switch {
+        "KeyBgm" => (BgmController)l,
+        "KeyScratch" => (ScratchController)l,
+        _ => l,
+      });
+
       measure.notes.ForEach(note => {
-        try {
-          keyMap[keyNameMap[note.channelId]].SetupNote(startY, measure.length, note);
-        } catch (Exception e) {
-          Debug.LogErrorFormat("failed to setup note, channelId=<{0}> exception=<{1}>", note.channelId, e.ToString());
+        KeyController lane = note.channelId switch {
+          BMS.Channel.Bgm => keyMap["KeyBgm"],
+          BMS.Channel.Scratch => keyMap["KeyScratch"],
+          BMS.Channel.Key1 => keyMap["Key1"],
+          BMS.Channel.Key2 => keyMap["Key2"],
+          BMS.Channel.Key3 => keyMap["Key3"],
+          BMS.Channel.Key4 => keyMap["Key4"],
+          BMS.Channel.Key5 => keyMap["Key5"],
+          BMS.Channel.Key6 => keyMap["Key6"],
+          BMS.Channel.Key7 => keyMap["Key7"],
+          _ => null,
+        };
+        if (lane != null) {
+          lane.SetupNote(startY, measure.length, note);
+        } else {
+          Debug.LogErrorFormat("failed to setup note, channelId=<{0}>", note.channelId);
         }
-        if (note.channelId >= BMS.Channel.Key1 && note.channelId <= BMS.Channel.Key7) {  // scratch included
+
+        if (note.channelId is >= BMS.Channel.Key1 and <= BMS.Channel.Key7) {  // scratch included
           totalNotes++;
         }
       });

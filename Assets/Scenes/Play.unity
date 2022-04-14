@@ -2847,7 +2847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1666e0cd8c6944cfb86232edf859045d, type: 2}
   m_sharedMaterial: {fileID: 3954438216327076385, guid: 1666e0cd8c6944cfb86232edf859045d, type: 2}
@@ -2856,8 +2856,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294375414
+  m_fontColor: {r: 0.96470594, g: 0.9686275, b: 0.96470594, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3059,7 +3059,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1431324864, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
+  m_Sprite: {fileID: -1030672214, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3107,6 +3107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleTMP: {fileID: 593385075}
+  difficultyFrame: {fileID: 1148189409}
+  levelTMP: {fileID: 1007771634}
   bpmTMP: {fileID: 69227820}
   fumenPath: 
   startDelay: 1000
@@ -4541,6 +4543,7 @@ GameObject:
   - component: {fileID: 2138477817}
   - component: {fileID: 2138477816}
   - component: {fileID: 2138477815}
+  - component: {fileID: 2138477818}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4637,6 +4640,25 @@ Canvas:
   m_SortingLayerID: -1909473633
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2138477818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138477813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce2377302d4a4d92a1c4b1421666e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficultySprites:
+  - {fileID: -1030672214, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
+  - {fileID: -969102728, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
+  - {fileID: -1719038910, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
+  - {fileID: 988488312, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
+  - {fileID: -1134327173, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
+  - {fileID: -1431324864, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
 --- !u!1 &2147099941
 GameObject:
   m_ObjectHideFlags: 0

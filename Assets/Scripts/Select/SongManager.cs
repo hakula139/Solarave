@@ -84,7 +84,7 @@ namespace Select {
       titleTMP.text = header.FullTitle;
       TMP_Text levelTMP = songListItemClone.transform.Find("Level").GetComponent<TMP_Text>();
       levelTMP.text = header.level.ToString();
-      levelTMP.color = Select.SpriteAssetHelper.GetDifficultyColor(header.difficulty);
+      levelTMP.color = SpriteAssetHelper.instance.GetDifficultyColor(header.difficulty);
     }
 
     public void ClearSelectList() {
