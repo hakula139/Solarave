@@ -77,6 +77,7 @@ namespace Play {
 
     private void InitializeFumenScroller() {
       FumenScroller.instance.bpm = bms.header.bpm;
+      FumenScroller.instance.hiSpeed *= 150f / bms.header.bpm;  // fix hi-speed
     }
 
     private void InitializeKeySounds() {
