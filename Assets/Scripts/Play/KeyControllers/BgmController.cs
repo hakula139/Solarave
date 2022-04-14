@@ -1,8 +1,5 @@
 namespace Play {
   public class BgmController : KeyController {
-    public new void Update() {
-    }
-
     public override void PlayKeySound() {
       // Find the latest key sound to play.
       if (keySounds.TryDequeue(out KeySound keySound)) {

@@ -14,7 +14,7 @@ namespace Play {
       instance = this;
     }
 
-    public void Start() {
+    private void Start() {
       audioSources = audioSources.Select(_ => {
         GameObject audioPlayer = new("Audio");
         audioPlayer.transform.parent = gameObject.transform;

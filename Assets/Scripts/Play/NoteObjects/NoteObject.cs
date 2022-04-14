@@ -10,11 +10,11 @@ namespace Play {
     public float spawnY;
     public float despawnY;
 
-    public void Start() {
+    private void Start() {
       sr = GetComponent<SpriteRenderer>();
     }
 
-    public void Update() {
+    private void Update() {
       if (transform.position.y < despawnY) {
         sr.enabled = false;
       } else if (transform.position.y < spawnY) {

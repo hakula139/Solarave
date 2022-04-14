@@ -25,13 +25,13 @@ namespace Select {
       instance = this;
     }
 
-    public void Start() {
+    private void Start() {
       container = transform.Find("Viewport/Container");
       songFolderBasePath = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
       ReadSongFolder(songFolderBasePath);
     }
 
-    public void Update() {
+    private void Update() {
       // Right click to return.
       if (Input.GetMouseButtonDown(1)) {
         string parentPath = Directory.GetParent(currentPath).FullName;

@@ -16,7 +16,7 @@ namespace Play {
       instance = this;
     }
 
-    public void Update() {
+    private void Update() {
       if (isEnabled) {
         transform.Translate(Vector3.down * Speed);
         currentTime += Time.deltaTime * 1000f;

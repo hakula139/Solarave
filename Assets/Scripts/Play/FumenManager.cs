@@ -31,7 +31,7 @@ namespace Play {
       fumenPath = Select.SongManager.instance.currentFumenPath;
     }
 
-    public void Start() {
+    private void Start() {
       ReadDataFromFile();
     }
 
@@ -124,7 +124,7 @@ namespace Play {
       });
     }
 
-    public void StartPlaying() {
+    private void StartPlaying() {
       FumenScroller.instance.offset = (float)AudioSettings.dspTime * 1000f;
       FumenScroller.instance.isEnabled = true;
     }

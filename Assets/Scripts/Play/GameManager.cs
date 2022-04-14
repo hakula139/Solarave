@@ -43,7 +43,7 @@ namespace Play {
       instance = this;
     }
 
-    public void Update() {
+    private void Update() {
       if (lastJudgeTime > 0f && Time.time - lastJudgeTime > JudgeDuration) {
         judgeTMP.text = " ";
         lastJudgeTime = 0f;
