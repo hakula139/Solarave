@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 namespace Play {
@@ -51,6 +52,7 @@ namespace Play {
 
       if (FumenScroller.instance.TimeLeft <= 0 || Input.GetKeyDown(KeyCode.Escape)) {
         Debug.LogFormat("enter result scene, currentTime=<{0}>", FumenScroller.instance.currentTime);
+        SceneManager.LoadScene("Result");
       }
     }
 
