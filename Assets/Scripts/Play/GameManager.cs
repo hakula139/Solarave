@@ -104,30 +104,30 @@ namespace Play {
 
     public void PgreatJudge() {
       NoteJudge(judge: Judge.PGREAT, scoreAdded: 2);
-      totalCount++;
       pgreatCount++;
+      totalCount++;
       pgreatCountTMP.text = pgreatCount.ToString();
     }
 
     public void GreatJudge() {
       NoteJudge(judge: Judge.GREAT, scoreAdded: 1);
-      totalCount++;
       greatCount++;
+      totalCount++;
       greatCountTMP.text = greatCount.ToString();
     }
 
     public void GoodJudge() {
       NoteJudge(judge: Judge.GOOD);
-      totalCount++;
       goodCount++;
+      totalCount++;
       goodCountTMP.text = goodCount.ToString();
     }
 
     public void BadJudge() {
       NoteJudge(judge: Judge.BAD, comboAdded: -combo);
+      badCount++;
       totalCount++;
       comboBreakCount++;
-      badCount++;
       badCountTMP.text = badCount.ToString();
     }
 
@@ -140,15 +140,15 @@ namespace Play {
 
     public void MissJudge() {
       NoteJudge(judge: Judge.POOR, comboAdded: -combo);
+      poorCount++;
       totalCount++;
       comboBreakCount++;
-      poorCount++;
       poorCountTMP.text = poorCount.ToString();
     }
 
     public void UpdateResult() {
       notJudgedCount = FumenManager.instance.totalNotes - totalCount;
-      totalCount = Play.FumenManager.instance.totalNotes;
+      totalCount = FumenManager.instance.totalNotes;
     }
   }
 }

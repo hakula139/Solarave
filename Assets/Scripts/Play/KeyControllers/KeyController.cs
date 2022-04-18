@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Play {
   public class KeyController : MonoBehaviour {
     protected SpriteRenderer sr;
+    protected Animator bomb;
 
     public KeyCode keyAssigned;
     public GameObject fumenArea;
@@ -14,6 +15,7 @@ namespace Play {
 
     private void Start() {
       sr = GetComponent<SpriteRenderer>();
+      bomb = transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Update() {
@@ -98,9 +100,11 @@ namespace Play {
           if (error <= FumenManager.instance.pgreatRange) {
             // Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.PgreatJudge();
+            TriggerBomb();
           } else if (error <= FumenManager.instance.greatRange) {
             // Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GreatJudge();
+            TriggerBomb();
           } else if (error <= FumenManager.instance.goodRange) {
             // Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GoodJudge();
@@ -114,6 +118,10 @@ namespace Play {
           GameManager.instance.PoorJudge();
         }
       }
+    }
+
+    private void TriggerBomb() {
+      bomb.Play("Bomb");
     }
   }
 }

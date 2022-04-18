@@ -2,7 +2,8 @@ using UnityEngine;
 namespace Play {
   public class ScratchController : KeyController {
     private void Start() {
-      sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
+      sr = transform.GetChild(1).GetComponent<SpriteRenderer>();
+      bomb = transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Update() {
