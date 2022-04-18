@@ -50,12 +50,11 @@ namespace Play {
     public int badCount;
     public int poorCount;
     public int totalCount;
-    public int MissCount => badCount + poorCount;
     public int comboBreakCount;
-    public float scoreRate;
-
-    public bool AllNotesJudged => totalCount >= FumenManager.instance.totalNotes;
-    public DjLevel ScoreDjLevel => scoreRate switch {
+    public int notJudgedCount;
+    public int MissCount => badCount + poorCount + notJudgedCount;
+    public float ScoreRate => totalCount > 0 ? (float)exScore / totalCount * 50f : 0f;
+    public DjLevel ScoreDjLevel => ScoreRate switch {
       >= 100f => DjLevel.MAX,
       >= 800f / 9f => DjLevel.AAA,
       >= 700f / 9f => DjLevel.AA,
@@ -77,21 +76,26 @@ namespace Play {
         lastJudgeTime = 0f;
       }
 
-      if (FumenScroller.instance.TimeLeft <= 0 || Input.GetKeyDown(KeyCode.Escape)) {
-        Debug.LogFormat("enter result scene, currentTime=<{0}>", FumenScroller.instance.currentTime);
+      if (FumenScroller.instance.TimeLeft <= 0) {
         SceneManager.LoadScene("Result");
+      } else if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (totalCount == poorCount) {
+          // Directly return to Select scene if the player hits nothing.
+          SceneManager.LoadScene("Select");
+        } else {
+          SceneManager.LoadScene("Result");
+        }
       }
     }
 
     protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1) {
       exScore += scoreAdded;
-      scoreRate = totalCount > 0 ? (float)exScore / totalCount * 50f : 0;
       combo += comboAdded;
       maxCombo = Math.Max(combo, maxCombo);
       lastJudgeTime = Time.time;
 
       exScoreTMP.text = $"{exScore:D4}";
-      scoreRateTMP.text = Math.Floor(scoreRate).ToString();
+      scoreRateTMP.text = Math.Floor(ScoreRate).ToString();
       maxComboTMP.text = $"{maxCombo:D4}";
       string judgeText = SpriteAssetHelper.instance.GetJudge(judge);
       string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetInteger(judge, combo)}" : "";
@@ -140,6 +144,11 @@ namespace Play {
       comboBreakCount++;
       poorCount++;
       poorCountTMP.text = poorCount.ToString();
+    }
+
+    public void UpdateResult() {
+      notJudgedCount = FumenManager.instance.totalNotes - totalCount;
+      totalCount = Play.FumenManager.instance.totalNotes;
     }
   }
 }

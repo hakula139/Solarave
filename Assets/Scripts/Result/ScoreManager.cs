@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -25,7 +26,14 @@ namespace Result {
     }
 
     private void Start() {
+      Play.GameManager.instance.UpdateResult();
       InitializeUI();
+    }
+
+    private void Update() {
+      if (Input.anyKeyDown) {
+        SceneManager.LoadScene("Select");
+      }
     }
 
     private void InitializeUI() {
@@ -43,7 +51,7 @@ namespace Result {
       goodCountTMP.text = Play.GameManager.instance.goodCount.ToString();
       badCountTMP.text = Play.GameManager.instance.badCount.ToString();
       poorCountTMP.text = Play.GameManager.instance.poorCount.ToString();
-      scoreRateTMP.text = $"{Play.GameManager.instance.scoreRate:0.00}%";
+      scoreRateTMP.text = $"{Play.GameManager.instance.ScoreRate:0.00}%";
     }
   }
 }
