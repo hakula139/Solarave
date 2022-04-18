@@ -13,6 +13,18 @@ namespace Play {
     POOR,
   }
 
+  public enum DjLevel {
+    F,
+    E,
+    D,
+    C,
+    B,
+    A,
+    AA,
+    AAA,
+    MAX,
+  }
+
   public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
@@ -26,19 +38,34 @@ namespace Play {
     public TMP_Text maxComboTMP;
     public TMP_Text judgeTMP;
 
-    private int exScore;
+    public int exScore;
     private int combo;
-    private int maxCombo;
+    public int maxCombo;
     private float lastJudgeTime;
     private const float JudgeDuration = 1f;
 
-    private int pgreatCount;
-    private int greatCount;
-    private int goodCount;
-    private int badCount;
-    private int poorCount;
-    private int totalCount = 0;
-    private float scoreRate;
+    public int pgreatCount;
+    public int greatCount;
+    public int goodCount;
+    public int badCount;
+    public int poorCount;
+    public int totalCount;
+    public int MissCount => badCount + poorCount;
+    public int comboBreakCount;
+    public float scoreRate;
+
+    public bool AllNotesJudged => totalCount >= FumenManager.instance.totalNotes;
+    public DjLevel ScoreDjLevel => scoreRate switch {
+      >= 100f => DjLevel.MAX,
+      >= 800f / 9f => DjLevel.AAA,
+      >= 700f / 9f => DjLevel.AA,
+      >= 600f / 9f => DjLevel.A,
+      >= 500f / 9f => DjLevel.B,
+      >= 400f / 9f => DjLevel.C,
+      >= 300f / 9f => DjLevel.D,
+      >= 200f / 9f => DjLevel.E,
+      _ => DjLevel.F
+    };
 
     private void Awake() {
       instance = this;
@@ -95,6 +122,7 @@ namespace Play {
     public void BadJudge() {
       NoteJudge(judge: Judge.BAD, comboAdded: -combo);
       totalCount++;
+      comboBreakCount++;
       badCount++;
       badCountTMP.text = badCount.ToString();
     }
@@ -109,6 +137,7 @@ namespace Play {
     public void MissJudge() {
       NoteJudge(judge: Judge.POOR, comboAdded: -combo);
       totalCount++;
+      comboBreakCount++;
       poorCount++;
       poorCountTMP.text = poorCount.ToString();
     }

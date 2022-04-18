@@ -17,7 +17,7 @@ namespace Play {
     public TMP_Text bpmTMP;
 
     private BMS.Model bms;
-    private int totalNotes;
+    public int totalNotes;
     public string fumenPath;
 
     public float startDelay;    // ms
@@ -66,6 +66,7 @@ namespace Play {
       UpdateTimeLeft();
 
       difficultyFrame.sprite = SpriteAssetHelper.instance.GetDifficultySprite(bms.header.difficulty);
+      difficultyFrame.SetNativeSize();
 
       if (bms.header.difficulty != BMS.Difficulty.Unknown) {
         levelTMP.text = bms.header.level.ToString();
