@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 namespace Play {
@@ -10,6 +11,18 @@ namespace Play {
     GOOD,
     BAD,
     POOR,
+  }
+
+  public enum DjLevel {
+    F,
+    E,
+    D,
+    C,
+    B,
+    A,
+    AA,
+    AAA,
+    MAX,
   }
 
   public class GameManager : MonoBehaviour {
@@ -25,19 +38,33 @@ namespace Play {
     public TMP_Text maxComboTMP;
     public TMP_Text judgeTMP;
 
-    private int exScore;
+    public int exScore;
     private int combo;
-    private int maxCombo;
+    public int maxCombo;
     private float lastJudgeTime;
     private const float JudgeDuration = 1f;
 
-    private int pgreatCount;
-    private int greatCount;
-    private int goodCount;
-    private int badCount;
-    private int poorCount;
-    private int totalCount = 0;
-    private float scoreRate;
+    public int pgreatCount;
+    public int greatCount;
+    public int goodCount;
+    public int badCount;
+    public int poorCount;
+    public int totalCount;
+    public int comboBreakCount;
+    public int notJudgedCount;
+    public int MissCount => badCount + poorCount + notJudgedCount;
+    public float ScoreRate => totalCount > 0 ? (float)exScore / totalCount * 50f : 0f;
+    public DjLevel ScoreDjLevel => ScoreRate switch {
+      >= 100f => DjLevel.MAX,
+      >= 800f / 9f => DjLevel.AAA,
+      >= 700f / 9f => DjLevel.AA,
+      >= 600f / 9f => DjLevel.A,
+      >= 500f / 9f => DjLevel.B,
+      >= 400f / 9f => DjLevel.C,
+      >= 300f / 9f => DjLevel.D,
+      >= 200f / 9f => DjLevel.E,
+      _ => DjLevel.F
+    };
 
     private void Awake() {
       instance = this;
@@ -49,20 +76,26 @@ namespace Play {
         lastJudgeTime = 0f;
       }
 
-      if (FumenScroller.instance.TimeLeft <= 0 || Input.GetKeyDown(KeyCode.Escape)) {
-        Debug.LogFormat("enter result scene, currentTime=<{0}>", FumenScroller.instance.currentTime);
+      if (FumenScroller.instance.TimeLeft <= 0) {
+        SceneManager.LoadScene("Result");
+      } else if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (totalCount == poorCount) {
+          // Directly return to Select scene if the player hits nothing.
+          SceneManager.LoadScene("Select");
+        } else {
+          SceneManager.LoadScene("Result");
+        }
       }
     }
 
     protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1) {
       exScore += scoreAdded;
-      scoreRate = totalCount > 0 ? (float)exScore / totalCount * 50f : 0;
       combo += comboAdded;
       maxCombo = Math.Max(combo, maxCombo);
       lastJudgeTime = Time.time;
 
       exScoreTMP.text = $"{exScore:D4}";
-      scoreRateTMP.text = Math.Floor(scoreRate).ToString();
+      scoreRateTMP.text = Math.Floor(ScoreRate).ToString();
       maxComboTMP.text = $"{maxCombo:D4}";
       string judgeText = SpriteAssetHelper.instance.GetJudge(judge);
       string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetInteger(judge, combo)}" : "";
@@ -93,6 +126,7 @@ namespace Play {
     public void BadJudge() {
       NoteJudge(judge: Judge.BAD, comboAdded: -combo);
       totalCount++;
+      comboBreakCount++;
       badCount++;
       badCountTMP.text = badCount.ToString();
     }
@@ -107,8 +141,14 @@ namespace Play {
     public void MissJudge() {
       NoteJudge(judge: Judge.POOR, comboAdded: -combo);
       totalCount++;
+      comboBreakCount++;
       poorCount++;
       poorCountTMP.text = poorCount.ToString();
+    }
+
+    public void UpdateResult() {
+      notJudgedCount = FumenManager.instance.totalNotes - totalCount;
+      totalCount = Play.FumenManager.instance.totalNotes;
     }
   }
 }
