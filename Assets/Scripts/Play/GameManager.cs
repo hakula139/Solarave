@@ -42,7 +42,7 @@ namespace Play {
     private int combo;
     public int maxCombo;
     private float lastJudgeTime;
-    private const float JudgeDuration = 1f;
+    private const float JudgeDuration = 1f;  // s
 
     public int pgreatCount;
     public int greatCount;
