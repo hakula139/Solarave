@@ -43,14 +43,14 @@ namespace Result {
       djLevelSprite.sprite = SpriteAssetHelper.instance.GetDjLevelSprite(Play.GameManager.instance.ScoreDjLevel);
       djLevelSprite.SetNativeSize();
       exScoreTMP.text = Play.GameManager.instance.exScore.ToString();
-      missCountTMP.text = Play.GameManager.instance.MissCount.ToString();
+      missCountTMP.text = Play.GameManager.instance.TotalMissCount.ToString();
 
-      comboTMP.text = $"{Play.GameManager.instance.maxCombo} / {Play.FumenManager.instance.totalNotes} ({Play.GameManager.instance.comboBreakCount})";
+      comboTMP.text = $"{Play.GameManager.instance.maxCombo} / {Play.FumenManager.instance.totalNotes} ({Play.GameManager.instance.ComboBreakCount})";
       pgreatCountTMP.text = Play.GameManager.instance.pgreatCount.ToString();
       greatCountTMP.text = Play.GameManager.instance.greatCount.ToString();
       goodCountTMP.text = Play.GameManager.instance.goodCount.ToString();
       badCountTMP.text = Play.GameManager.instance.badCount.ToString();
-      poorCountTMP.text = Play.GameManager.instance.poorCount.ToString();
+      poorCountTMP.text = Play.GameManager.instance.TotalPoorCount.ToString();
       scoreRateTMP.text = $"{Play.GameManager.instance.ScoreRate:0.00}%";
     }
   }

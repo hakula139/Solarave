@@ -42,18 +42,21 @@ namespace Play {
     private int combo;
     public int maxCombo;
     private float lastJudgeTime;
-    private const float JudgeDuration = 1f;
+    private const float JudgeDuration = 1f;  // s
 
     public int pgreatCount;
     public int greatCount;
     public int goodCount;
     public int badCount;
     public int poorCount;
-    public int totalCount;
-    public int comboBreakCount;
-    public int notJudgedCount;
-    public int MissCount => badCount + poorCount + notJudgedCount;
-    public float ScoreRate => totalCount > 0 ? (float)exScore / totalCount * 50f : 0f;
+    public int missCount;
+    public int judgedCount;
+
+    public int NotJudgedCount => FumenManager.instance.totalNotes - judgedCount;
+    public int ComboBreakCount => badCount + missCount;
+    public int TotalPoorCount => poorCount + missCount;
+    public int TotalMissCount => ComboBreakCount + poorCount;
+    public float ScoreRate => judgedCount > 0 ? (float)exScore / judgedCount * 50f : 0f;
     public DjLevel ScoreDjLevel => ScoreRate switch {
       >= 100f => DjLevel.MAX,
       >= 800f / 9f => DjLevel.AAA,
@@ -79,7 +82,7 @@ namespace Play {
       if (FumenScroller.instance.TimeLeft <= 0) {
         SceneManager.LoadScene("Result");
       } else if (Input.GetKeyDown(KeyCode.Escape)) {
-        if (totalCount == poorCount) {
+        if (judgedCount == poorCount) {
           // Directly return to Select scene if the player hits nothing.
           SceneManager.LoadScene("Select");
         } else {
@@ -104,30 +107,29 @@ namespace Play {
 
     public void PgreatJudge() {
       NoteJudge(judge: Judge.PGREAT, scoreAdded: 2);
-      totalCount++;
       pgreatCount++;
+      judgedCount++;
       pgreatCountTMP.text = pgreatCount.ToString();
     }
 
     public void GreatJudge() {
       NoteJudge(judge: Judge.GREAT, scoreAdded: 1);
-      totalCount++;
       greatCount++;
+      judgedCount++;
       greatCountTMP.text = greatCount.ToString();
     }
 
     public void GoodJudge() {
       NoteJudge(judge: Judge.GOOD);
-      totalCount++;
       goodCount++;
+      judgedCount++;
       goodCountTMP.text = goodCount.ToString();
     }
 
     public void BadJudge() {
       NoteJudge(judge: Judge.BAD, comboAdded: -combo);
-      totalCount++;
-      comboBreakCount++;
       badCount++;
+      judgedCount++;
       badCountTMP.text = badCount.ToString();
     }
 
@@ -135,20 +137,19 @@ namespace Play {
     public void PoorJudge() {
       NoteJudge(judge: Judge.POOR, comboAdded: 0);
       poorCount++;
-      poorCountTMP.text = poorCount.ToString();
+      poorCountTMP.text = TotalPoorCount.ToString();
     }
 
     public void MissJudge() {
       NoteJudge(judge: Judge.POOR, comboAdded: -combo);
-      totalCount++;
-      comboBreakCount++;
-      poorCount++;
-      poorCountTMP.text = poorCount.ToString();
+      missCount++;
+      judgedCount++;
+      poorCountTMP.text = TotalPoorCount.ToString();
     }
 
     public void UpdateResult() {
-      notJudgedCount = FumenManager.instance.totalNotes - totalCount;
-      totalCount = Play.FumenManager.instance.totalNotes;
+      missCount += NotJudgedCount;
+      judgedCount = FumenManager.instance.totalNotes;
     }
   }
 }

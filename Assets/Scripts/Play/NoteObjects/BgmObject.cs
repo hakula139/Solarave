@@ -1,5 +1,8 @@
 ﻿namespace Play {
   public class BgmObject : NoteObject {
+    private void Start() {
+    }
+
     private void Update() {
       float currentTime = FumenScroller.instance.currentTime;
       float d = currentTime - time;

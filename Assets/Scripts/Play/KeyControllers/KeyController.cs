@@ -8,6 +8,10 @@ namespace Play {
     public KeyCode keyAssigned;
     public GameObject fumenArea;
     public GameObject notePrefab;
+    public Animator bombPrefab;
+    public Animator laserPrefab;
+    protected const float BombDuration = 0.2f;  // s
+
     public readonly Queue<GameObject> notes = new();
     protected readonly Queue<KeySound> keySounds = new();
     protected KeySound currentKeySound = null;
@@ -19,16 +23,18 @@ namespace Play {
     private void Update() {
       if (Input.GetKeyDown(keyAssigned)) {
         sr.color = new Color(1, 1, 1, 0.25f);
+        laserPrefab.SetBool("KeyDown", true);
         JudgeNote();
         PlayKeySound();
       }
 
       if (Input.GetKeyUp(keyAssigned)) {
         sr.color = new Color(1, 1, 1, 0);
+        laserPrefab.SetBool("KeyDown", false);
       }
     }
 
-    public virtual float SetupNote(float start, float length, BMS.Note note) {
+    public float SetupNote(float start, float length, BMS.Note note) {
       GameObject noteClone = Instantiate(notePrefab, fumenArea.transform);
       float y = start + (length * note.position);
       float ratio = FumenScroller.instance.baseSpeed * FumenScroller.instance.hiSpeed / 100f;
@@ -50,7 +56,7 @@ namespace Play {
       public bool isTriggered = false;  // note has been judged
     }
 
-    public virtual void SetupKeySound(int wavId, float time) {
+    public void SetupKeySound(int wavId, float time) {
       keySounds.Enqueue(new() {
         wavId = wavId,
         time = time,
@@ -98,9 +104,11 @@ namespace Play {
           if (error <= FumenManager.instance.pgreatRange) {
             // Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.PgreatJudge();
+            TriggerBomb();
           } else if (error <= FumenManager.instance.greatRange) {
             // Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GreatJudge();
+            TriggerBomb();
           } else if (error <= FumenManager.instance.goodRange) {
             // Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GoodJudge();
@@ -114,6 +122,12 @@ namespace Play {
           GameManager.instance.PoorJudge();
         }
       }
+    }
+
+    private void TriggerBomb() {
+      Animator bombClone = Instantiate(bombPrefab, transform);
+      bombClone.Play("Bomb");
+      Destroy(bombClone.gameObject, BombDuration);
     }
   }
 }
