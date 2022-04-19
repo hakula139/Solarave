@@ -849,7 +849,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      splash_7: 1691589565
       splash_31: 791221339
       splash_5: -2099758921
       splash_24: 1209522867
@@ -868,6 +867,7 @@ TextureImporter:
       splash_13: 1099864969
       splash_8: 1395823465
       splash_33: -723057796
+      splash_6: -1270671313
       splash_22: 1515223275
       splash_27: -590933663
       splash_30: 1640438454
@@ -878,12 +878,12 @@ TextureImporter:
       splash_10: 157787740
       splash_3: -1212422479
       splash_23: 915469461
+      splash_15: 1672220229
       splash_0: -1578743485
       splash_4: -1706854067
-      splash_6: -1270671313
       splash_18: 453321352
-      splash_15: 1672220229
       splash_16: -1826244595
+      splash_7: 1691589565
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
