@@ -2,7 +2,7 @@ using UnityEngine;
 namespace Play {
   public class ScratchController : KeyController {
     private void Start() {
-      sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
+      sr = transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
     private void Update() {
@@ -13,8 +13,13 @@ namespace Play {
       }
 
       if (Input.GetKeyDown(keyAssigned)) {
+        laserPrefab.SetBool("KeyDown", true);
         JudgeNote();
         PlayKeySound();
+      }
+
+      if (Input.GetKeyUp(keyAssigned)) {
+        laserPrefab.SetBool("KeyDown", false);
       }
     }
   }
