@@ -54,6 +54,7 @@ namespace Play {
 
     public int NotJudgedCount => FumenManager.instance.totalNotes - judgedCount;
     public int ComboBreakCount => badCount + missCount;
+    public int TotalPoorCount => poorCount + missCount;
     public int TotalMissCount => ComboBreakCount + poorCount;
     public float ScoreRate => judgedCount > 0 ? (float)exScore / judgedCount * 50f : 0f;
     public DjLevel ScoreDjLevel => ScoreRate switch {
@@ -136,14 +137,14 @@ namespace Play {
     public void PoorJudge() {
       NoteJudge(judge: Judge.POOR, comboAdded: 0);
       poorCount++;
-      poorCountTMP.text = poorCount.ToString();
+      poorCountTMP.text = TotalPoorCount.ToString();
     }
 
     public void MissJudge() {
       NoteJudge(judge: Judge.POOR, comboAdded: -combo);
-      poorCount++;
+      missCount++;
       judgedCount++;
-      poorCountTMP.text = poorCount.ToString();
+      poorCountTMP.text = TotalPoorCount.ToString();
     }
 
     public void UpdateResult() {

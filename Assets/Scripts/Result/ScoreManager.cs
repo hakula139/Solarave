@@ -50,7 +50,7 @@ namespace Result {
       greatCountTMP.text = Play.GameManager.instance.greatCount.ToString();
       goodCountTMP.text = Play.GameManager.instance.goodCount.ToString();
       badCountTMP.text = Play.GameManager.instance.badCount.ToString();
-      poorCountTMP.text = Play.GameManager.instance.poorCount.ToString();
+      poorCountTMP.text = Play.GameManager.instance.TotalPoorCount.ToString();
       scoreRateTMP.text = $"{Play.GameManager.instance.ScoreRate:0.00}%";
     }
   }
