@@ -9,6 +9,7 @@ namespace Play {
     public GameObject fumenArea;
     public GameObject notePrefab;
     public Animator bombPrefab;
+    public Animator laserPrefab;
     protected const float BombDuration = 0.2f;  // s
 
     public readonly Queue<GameObject> notes = new();
@@ -22,12 +23,14 @@ namespace Play {
     private void Update() {
       if (Input.GetKeyDown(keyAssigned)) {
         sr.color = new Color(1, 1, 1, 0.25f);
+        laserPrefab.SetBool("KeyDown", true);
         JudgeNote();
         PlayKeySound();
       }
 
       if (Input.GetKeyUp(keyAssigned)) {
         sr.color = new Color(1, 1, 1, 0);
+        laserPrefab.SetBool("KeyDown", false);
       }
     }
 
