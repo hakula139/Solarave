@@ -15,7 +15,7 @@ namespace Play {
     protected const int BombPoolSize = 4;
     protected const float BombDuration = 0.2f;  // s
 
-    public readonly Queue<GameObject> notes = new();
+    public readonly Queue<NoteObject> notes = new();
     protected readonly Queue<KeySound> keySounds = new();
     protected KeySound currentKeySound = null;
 
@@ -44,10 +44,11 @@ namespace Play {
       float ratio = FumenScroller.instance.baseSpeed * FumenScroller.instance.hiSpeed / 100f;
       noteClone.transform.Translate(ratio * y * Vector3.up);
       noteClone.SetActive(true);
-      notes.Enqueue(noteClone);
 
       NoteObject noteObject = noteClone.GetComponent<NoteObject>();
       noteObject.time = y * 240000f / FumenScroller.instance.bpm;
+      notes.Enqueue(noteObject);
+
       // Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, keyAssigned, noteObject.time);
 
       SetupKeySound(note.wavId, noteObject.time);
@@ -93,12 +94,11 @@ namespace Play {
     }
 
     public void JudgeNote() {
-      if (!notes.TryPeek(out GameObject note)) {
+      if (!notes.TryPeek(out NoteObject noteObject)) {
         return;
       }
 
       float currentTime = FumenScroller.instance.currentTime;
-      NoteObject noteObject = note.GetComponent<NoteObject>();
       float d = currentTime - noteObject.time - FumenManager.instance.inputLatency;
       float error = Mathf.Abs(d);
       bool isEarly = d < 0;
