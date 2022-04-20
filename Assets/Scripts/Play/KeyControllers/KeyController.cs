@@ -1,15 +1,18 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Play {
   public class KeyController : MonoBehaviour {
     protected SpriteRenderer sr;
+    protected List<Animator> bombPool = new();
 
     public KeyCode keyAssigned;
     public GameObject fumenArea;
     public GameObject notePrefab;
-    public Animator bombPrefab;
     public Animator laserPrefab;
+    public Animator bombPrefab;
+    protected const int BombPoolSize = 4;
     protected const float BombDuration = 0.2f;  // s
 
     public readonly Queue<GameObject> notes = new();
@@ -18,6 +21,7 @@ namespace Play {
 
     private void Start() {
       sr = GetComponent<SpriteRenderer>();
+      SetupBombPool();
     }
 
     private void Update() {
@@ -124,10 +128,29 @@ namespace Play {
       }
     }
 
-    private void TriggerBomb() {
-      Animator bombClone = Instantiate(bombPrefab, transform);
-      bombClone.Play("Bomb");
-      Destroy(bombClone.gameObject, BombDuration);
+    protected void SetupBombPool() {
+      for (int i = 0; i < BombPoolSize; i++) {
+        Animator bombClone = Instantiate(bombPrefab, transform);
+        bombClone.gameObject.SetActive(false);
+        bombPool.Add(bombClone);
+      }
+    }
+
+    protected void TriggerBomb() {
+      for (int i = 0; i < BombPoolSize; i++) {
+        if (!bombPool[i].isActiveAndEnabled) {
+          Animator bombClone = bombPool[i];
+          bombClone.gameObject.SetActive(true);
+          bombClone.Play("Bomb");
+          _ = StartCoroutine(DisableBomb(bombClone));
+          break;
+        }
+      }
+    }
+
+    protected IEnumerator DisableBomb(Animator bomb) {
+      yield return new WaitForSeconds(BombDuration);
+      bomb.gameObject.SetActive(false);
     }
   }
 }

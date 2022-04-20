@@ -626,6 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 4
   keyAssigned: 100
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 228523974550606564}
@@ -729,6 +730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 4
   keyAssigned: 102
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 3418315871514340985}
@@ -832,6 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 4
   keyAssigned: 106
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 5255176844691949070}
@@ -1011,6 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 4
   keyAssigned: 115
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 2970671037213504937}
@@ -2070,6 +2074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d517eeb7206254a2abbd84c575216190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 0
   keyAssigned: 0
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 1988420636646340646}
@@ -2503,6 +2508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 4
   keyAssigned: 108
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 2408975162727382741}
@@ -3915,6 +3921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0254354a7c7491caeaeb09d77f7c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 4
   keyAssigned: 97
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 9052093231402539159}
@@ -4162,6 +4169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 4
   keyAssigned: 107
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 6559765432217023807}
@@ -5022,6 +5030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22f6b5000357408c9b986fb92bbbedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bombPoolSize: 4
   keyAssigned: 32
   fumenArea: {fileID: 1470654905}
   notePrefab: {fileID: 2477406783207639678}

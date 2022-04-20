@@ -3,6 +3,7 @@ namespace Play {
   public class ScratchController : KeyController {
     private void Start() {
       sr = transform.GetChild(1).GetComponent<SpriteRenderer>();
+      SetupBombPool();
     }
 
     private void Update() {
