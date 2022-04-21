@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -94,11 +93,11 @@ namespace Play {
     protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1) {
       exScore += scoreAdded;
       combo += comboAdded;
-      maxCombo = Math.Max(combo, maxCombo);
+      maxCombo = Mathf.Max(combo, maxCombo);
       lastJudgeTime = Time.time;
 
       exScoreTMP.text = $"{exScore:D4}";
-      scoreRateTMP.text = Math.Floor(ScoreRate).ToString();
+      scoreRateTMP.text = Mathf.Floor(ScoreRate).ToString();
       maxComboTMP.text = $"{maxCombo:D4}";
       string judgeText = SpriteAssetHelper.instance.GetJudge(judge);
       string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetInteger(judge, combo)}" : "";
