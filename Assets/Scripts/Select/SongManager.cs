@@ -39,7 +39,7 @@ namespace Select {
       // Right click to return.
       if (Input.GetMouseButtonDown(1)) {
         string parentPath = Directory.GetParent(currentPath).FullName;
-        Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
+        // Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
         if (parentPath.StartsWith(songFolderBasePath)) {
           closeSoundEffect.Play();
           instance.ReadSongFolder(parentPath);
