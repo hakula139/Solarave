@@ -12,7 +12,7 @@ namespace Play {
     public float currentTime;   // ms
     public float lastNoteTime;  // ms
     public float offset;        // ms
-    public float TimeLeft => lastNoteTime - currentTime + 2000f;
+    public float TimeLeft => lastNoteTime - currentTime + 3000f;
 
     private void Awake() {
       instance = this;

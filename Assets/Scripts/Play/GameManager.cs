@@ -79,6 +79,7 @@ namespace Play {
       }
 
       if (FumenScroller.instance.TimeLeft <= 0) {
+        FumenScroller.instance.isEnabled = false;
         SceneManager.LoadScene("Result");
       } else if (Input.GetKeyDown(KeyCode.Escape)) {
         if (judgedCount == poorCount) {
