@@ -15,9 +15,10 @@ namespace Play {
     }
 
     private void Update() {
-      if (transform.position.y < despawnY) {
+      float y = transform.position.y;
+      if (y < despawnY) {
         sr.enabled = false;
-      } else if (transform.position.y < spawnY) {
+      } else if (y < spawnY) {
         sr.enabled = true;
       }
 
