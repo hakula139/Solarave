@@ -10,6 +10,8 @@ namespace Play {
   public class FumenManager : MonoBehaviour {
     public static FumenManager instance;
 
+    private KeyController[] lanes;
+
     public TMP_Text titleTMP;
     public TMP_Text timeLeftTMP;
     public Image difficultyFrame;
@@ -34,6 +36,7 @@ namespace Play {
     }
 
     private void Start() {
+      lanes = FindObjectsOfType<KeyController>();
       ReadDataFromFile();
     }
 
@@ -106,7 +109,7 @@ namespace Play {
     }
 
     private void InitializeNotesByMeasure(BMS.Measure measure, float startY) {
-      Dictionary<string, KeyController> keyMap = FindObjectsOfType<KeyController>().ToDictionary(l => l.name, l => l.name switch {
+      Dictionary<string, KeyController> keyMap = lanes.ToDictionary(l => l.name, l => l.name switch {
         "KeyBgm" => (BgmController)l,
         "KeyScratch" => (ScratchController)l,
         _ => l,
@@ -138,8 +141,10 @@ namespace Play {
     }
 
     private void StartPlaying() {
-      FumenScroller.instance.offset = (float)AudioSettings.dspTime * 1000f;
-      FumenScroller.instance.isEnabled = true;
+      FumenScroller.instance.Enable();
+      foreach (KeyController lane in lanes) {
+        lane.Enable();
+      }
     }
 
     public void UpdateTimeLeft() {

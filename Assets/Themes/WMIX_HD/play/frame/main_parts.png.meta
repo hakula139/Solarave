@@ -775,6 +775,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: max
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 767
+        width: 44
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f62cd5137104190b5f4dad2eb8fd01
+      internalID: -1282043629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: min
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 748
+        width: 44
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6579826bafab497aba5b457e385c9ce
+      internalID: -844712323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avg
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 729
+        width: 44
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 541a4f91d66cd4cfb95aac1bba3557bb
+      internalID: 1548180880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cst
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 710
+        width: 44
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc5e0faeaca554899b44f090c4467691
+      internalID: 707523383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: judge_line_light
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 931
+        width: 377
+        height: 100
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb3f04bf46aac4bc6b51fbd238220d94
+      internalID: -581005610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -786,11 +891,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      judge_line_light: -581005610
       extra_stage: -1646473318
       hi-speed: -469041455
       pgreat_1: 906664893
       beginner_1p: -969102728
       3rd_stage: -1871303897
+      avg: 1548180880
       bpm: 1794943619
       unknown_1p: -1030672214
       hyper_2p: -1959496591
@@ -804,14 +911,17 @@ TextureImporter:
       demo_play: -1170688524
       score_detail_1: 1555970678
       4th_stage: -1724491159
+      max: -1282043629
       insane_2p: -1007585046
       time_left: -1282198463
       another_2p: 261748336
       pgreat_0: 1580385666
+      min: -844712323
       ex_score: 1941971988
       pgreat_2: -585394059
       colon: 851514233
       normal_2p: 842946296
+      cst: 707523383
       min_bpm: -1297836705
       beginner_2p: 855713628
       hyper_1p: 988488312

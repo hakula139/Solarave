@@ -7,20 +7,22 @@ namespace Play {
     }
 
     private void Update() {
-      if (Input.GetKey(keyAssigned)) {
-        sr.transform.Rotate(360f * Time.deltaTime * Vector3.forward);
-      } else {
-        sr.transform.Rotate(360f * Time.deltaTime * Vector3.back);
-      }
+      if (isEnabled) {
+        if (Input.GetKey(keyAssigned)) {
+          sr.transform.Rotate(360f * Time.deltaTime * Vector3.forward);
+        } else {
+          sr.transform.Rotate(360f * Time.deltaTime * Vector3.back);
+        }
 
-      if (Input.GetKeyDown(keyAssigned)) {
-        laserPrefab.SetBool("KeyDown", true);
-        JudgeNote();
-        PlayKeySound();
-      }
+        if (Input.GetKeyDown(keyAssigned)) {
+          laserPrefab.SetBool("KeyDown", true);
+          JudgeNote();
+          PlayKeySound();
+        }
 
-      if (Input.GetKeyUp(keyAssigned)) {
-        laserPrefab.SetBool("KeyDown", false);
+        if (Input.GetKeyUp(keyAssigned)) {
+          laserPrefab.SetBool("KeyDown", false);
+        }
       }
     }
   }
