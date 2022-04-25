@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -85,13 +84,13 @@ namespace Play {
 
       if (FumenScroller.instance.TimeLeft <= 0) {
         FumenScroller.instance.Disable();
-        SceneManager.LoadScene("Result");
+        SceneTransitionManager.instance.EnterScene("Result");
       } else if (Input.GetKeyDown(KeyCode.Escape)) {
         if (judgedCount == poorCount) {
           // Directly return to Select scene if the player hits nothing.
-          SceneManager.LoadScene("Select");
+          SceneTransitionManager.instance.EnterScene("Select");
         } else {
-          SceneManager.LoadScene("Result");
+          SceneTransitionManager.instance.EnterScene("Result");
         }
       }
     }

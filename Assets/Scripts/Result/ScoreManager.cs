@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -34,7 +33,7 @@ namespace Result {
 
     private void Update() {
       if (Input.anyKeyDown) {
-        SceneManager.LoadScene("Select");
+        SceneTransitionManager.instance.EnterScene("Select");
       }
     }
 

@@ -1,7 +1,6 @@
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 namespace Select {
@@ -12,9 +11,11 @@ namespace Select {
     public GameObject songListItemPrefab;
     public GameObject folderListItemPrefab;
 
+    public GameObject soundEffects;
     public AudioSource openSoundEffect;
     public AudioSource closeSoundEffect;
     public AudioSource selectSoundEffect;
+    public AudioSource enterSoundEffect;
 
     public TMP_Text genreTMP;
     public TMP_Text titleTMP;
@@ -32,6 +33,7 @@ namespace Select {
     private void Start() {
       container = transform.Find("Viewport/Container");
       songFolderBasePath = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
+      DontDestroyOnLoad(soundEffects);
       ReadSongFolder(songFolderBasePath);
     }
 
@@ -115,7 +117,7 @@ namespace Select {
 
     public void EnterPlayScene(string path) {
       currentFumenPath = path;
-      SceneManager.LoadScene("Play");
+      SceneTransitionManager.instance.EnterScene("Play");
     }
   }
 }
