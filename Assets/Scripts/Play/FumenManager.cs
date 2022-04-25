@@ -97,9 +97,9 @@ namespace Play {
         if (!File.Exists(wavPath) && !File.Exists(wavPath = wavPath.Replace(".wav", ".ogg"))) {
           Debug.LogWarningFormat("audio file not found, path=<{0}>", wavPath);
         } else if (wavPath.EndsWith(".wav")) {
-          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV));
+          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV, bms.header.volume));
         } else if (wavPath.EndsWith(".ogg")) {
-          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS));
+          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS, bms.header.volume));
         }
       }
     }

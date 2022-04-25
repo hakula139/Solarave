@@ -73,6 +73,12 @@ namespace BMS {
         case "genre":
           header.genre = value;
           break;
+        case "comment":
+          if (value.StartsWith("\"") && value.EndsWith("\"")) {
+            value = value[1..^1];
+          }
+          header.comment = value;
+          break;
         case "title":
           (header.title, header.subtitle) = ReadTitle(value);
           break;
@@ -116,6 +122,9 @@ namespace BMS {
           break;
         case "lnobj":
           header.lnObj = IntegerHelper.ParseBase36(value);
+          break;
+        case "volwav":
+          header.volume = int.Parse(value) / 100f;
           break;
         default:
           if (keyword.StartsWith("wav")) {
