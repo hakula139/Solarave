@@ -5,6 +5,7 @@ namespace Play {
     public static FumenScroller instance;
 
     public Animator judgeLineLight;
+    public Animator difficultyFrame;
 
     public bool isEnabled;
     public float bpm;
@@ -28,13 +29,21 @@ namespace Play {
     }
 
     public void Enable() {
+      InitializeUI();
       offset = (float)AudioSettings.dspTime * 1000f;
-      judgeLineLight.SetTrigger("IsEnabled");
       isEnabled = true;
     }
 
     public void Disable() {
       isEnabled = false;
+    }
+
+    private void InitializeUI() {
+      float animSpeed = bpm / 120f;
+      judgeLineLight.SetTrigger("IsEnabled");
+      judgeLineLight.speed = animSpeed;
+      difficultyFrame.SetTrigger("IsEnabled");
+      difficultyFrame.speed = animSpeed;
     }
   }
 }
