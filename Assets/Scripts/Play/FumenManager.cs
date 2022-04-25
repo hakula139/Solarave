@@ -45,7 +45,7 @@ namespace Play {
     }
 
     public void ReadDataFromFile() {
-      bms.Parse(fumenPath);
+      _ = bms.Parse(fumenPath);
       _ = StartCoroutine(Initialize());
     }
 
@@ -102,12 +102,6 @@ namespace Play {
           yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS));
         }
       }
-    }
-
-    private void InitializeBgaByMeasure(BMS.Measure measure) {
-      measure.bgas.ForEach(bga => {
-        // TODO: Initialize BGA.
-      });
     }
 
     private void InitializeNotesByMeasure(BMS.Measure measure, float startY) {

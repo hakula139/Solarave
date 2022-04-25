@@ -82,7 +82,7 @@ namespace Select {
       SongListItem songListItem = songListItemClone.GetComponent<SongListItem>();
       songListItem.path = path;
       songListItem.bms = new();
-      songListItem.bms.Parse(path, headerOnly: true);
+      _ = songListItem.bms.Parse(path, headerOnly: true);
 
       BMS.HeaderSection header = songListItem.bms.header;
       TMP_Text titleTMP = songListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
