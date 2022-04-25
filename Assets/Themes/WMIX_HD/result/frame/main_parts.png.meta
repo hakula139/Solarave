@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -107,10 +107,10 @@ TextureImporter:
       name: score_panel_1p
       rect:
         serializedVersion: 2
-        x: 0
-        y: 227
-        width: 362
-        height: 280
+        x: 1
+        y: 228
+        width: 360
+        height: 278
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,10 +128,10 @@ TextureImporter:
       name: score_panel_2p
       rect:
         serializedVersion: 2
-        x: 385
-        y: 227
-        width: 362
-        height: 280
+        x: 386
+        y: 228
+        width: 360
+        height: 278
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,10 +149,10 @@ TextureImporter:
       name: dj_level_frame
       rect:
         serializedVersion: 2
-        x: 0
-        y: 520
-        width: 362
-        height: 188
+        x: 1
+        y: 521
+        width: 360
+        height: 186
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,10 +212,10 @@ TextureImporter:
       name: max
       rect:
         serializedVersion: 2
-        x: 865
-        y: 501
-        width: 58
-        height: 21
+        x: 866
+        y: 502
+        width: 56
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,10 +233,10 @@ TextureImporter:
       name: aaa
       rect:
         serializedVersion: 2
-        x: 866
-        y: 480
-        width: 57
-        height: 21
+        x: 867
+        y: 481
+        width: 55
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,9 +255,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 875
-        y: 459
-        width: 39
-        height: 21
+        y: 460
+        width: 38
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -275,10 +275,10 @@ TextureImporter:
       name: a
       rect:
         serializedVersion: 2
-        x: 883
-        y: 438
-        width: 22
-        height: 21
+        x: 884
+        y: 439
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -296,10 +296,10 @@ TextureImporter:
       name: b
       rect:
         serializedVersion: 2
-        x: 883
-        y: 417
-        width: 22
-        height: 21
+        x: 884
+        y: 418
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -317,10 +317,10 @@ TextureImporter:
       name: c
       rect:
         serializedVersion: 2
-        x: 883
-        y: 396
-        width: 22
-        height: 21
+        x: 884
+        y: 397
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,10 +338,10 @@ TextureImporter:
       name: d
       rect:
         serializedVersion: 2
-        x: 883
-        y: 375
-        width: 22
-        height: 21
+        x: 884
+        y: 376
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -359,10 +359,10 @@ TextureImporter:
       name: e
       rect:
         serializedVersion: 2
-        x: 883
-        y: 354
-        width: 22
-        height: 21
+        x: 884
+        y: 355
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,10 +380,10 @@ TextureImporter:
       name: f
       rect:
         serializedVersion: 2
-        x: 883
-        y: 333
-        width: 22
-        height: 21
+        x: 884
+        y: 334
+        width: 20
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -401,10 +401,10 @@ TextureImporter:
       name: judge_detail_panel_1p
       rect:
         serializedVersion: 2
-        x: 0
-        y: 38
-        width: 362
-        height: 169
+        x: 1
+        y: 39
+        width: 360
+        height: 167
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -422,10 +422,10 @@ TextureImporter:
       name: judge_detail_panel_2p
       rect:
         serializedVersion: 2
-        x: 385
-        y: 38
-        width: 362
-        height: 169
+        x: 387
+        y: 39
+        width: 359
+        height: 167
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -435,6 +435,69 @@ TextureImporter:
       bones: []
       spriteID: 0c3ada183ed1943a7b5b260f153b25a1
       internalID: 1911702881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pgreat_0
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 586
+        width: 54
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b63d5ac1ea0794008bf11439f1be761e
+      internalID: -1902083218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pgreat_1
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 575
+        width: 54
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a830be60dc52249748368a82a2833514
+      internalID: 732355441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pgreat_2
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 564
+        width: 54
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f98222dae68534d859ef3fa5395bab0b
+      internalID: -588443185
       vertices: []
       indices: 
       edges: []
@@ -452,6 +515,7 @@ TextureImporter:
     nameFileIdTable:
       judge_detail_panel_2p: 1911702881
       a: 1458138716
+      pgreat_1: 732355441
       stage_result_clear: 2117359045
       b: 1125877760
       c: 1879337162
@@ -460,9 +524,11 @@ TextureImporter:
       max: 1909628507
       score_panel_1p: -1195411599
       aaa: -245141036
+      pgreat_0: -1902083218
       stage_result_failed: 1477855790
       judge_detail_panel_1p: -518191390
       aa: 709572005
+      pgreat_2: -588443185
       f: 2003083134
       e: -1089507370
       d: 672824789
