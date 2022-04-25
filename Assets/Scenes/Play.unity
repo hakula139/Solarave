@@ -4118,6 +4118,7 @@ MonoBehaviour:
   notePrefab: {fileID: 9052093231402539159}
   laserPrefab: {fileID: 2173017953911936524}
   bombPrefab: {fileID: 3409948690774826228, guid: 154e03d58360f4f8b87cecaee18cc33e, type: 3}
+  key2Assigned: 59
 --- !u!1 &1420166649
 GameObject:
   m_ObjectHideFlags: 0
