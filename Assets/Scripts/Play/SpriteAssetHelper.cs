@@ -5,6 +5,7 @@ namespace Play {
   public class SpriteAssetHelper : MonoBehaviour {
     public static SpriteAssetHelper instance;
 
+    public Sprite[] fastSlowIndicatorSprites = new Sprite[2];
     public Sprite[] difficultySprites = new Sprite[6];
 
     private void Awake() {
@@ -37,6 +38,10 @@ namespace Play {
             int start = 10 + (3 * (digit - '0'));
             return acc + ToSpriteAnimation(start, start + 2);
           });
+    }
+
+    public Sprite GetFastSlowIndicatorSprite(bool isEarly) {
+      return isEarly ? fastSlowIndicatorSprites[0] : fastSlowIndicatorSprites[1];
     }
 
     public Sprite GetDifficultySprite(BMS.Difficulty difficulty) {

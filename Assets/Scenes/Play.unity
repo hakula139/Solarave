@@ -1440,7 +1440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -820986947, guid: 267902abbfbeb4c53a2a4ca463c2cce4, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1941,6 +1941,7 @@ MonoBehaviour:
   exScoreTMP: {fileID: 1173614425}
   maxComboTMP: {fileID: 101400986}
   judgeTMP: {fileID: 491817769}
+  fsSprite: {fileID: 463719855}
   exScore: 0
   maxCombo: 0
   pgreatCount: 0
@@ -5564,6 +5565,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce2377302d4a4d92a1c4b1421666e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fastSlowIndicatorSprites:
+  - {fileID: -820986947, guid: 267902abbfbeb4c53a2a4ca463c2cce4, type: 3}
+  - {fileID: -284242375, guid: 267902abbfbeb4c53a2a4ca463c2cce4, type: 3}
   difficultySprites:
   - {fileID: -1030672214, guid: 87583ff504e3943319028bdda84db6a7, type: 3}
   - {fileID: -969102728, guid: 87583ff504e3943319028bdda84db6a7, type: 3}

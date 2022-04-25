@@ -29,6 +29,7 @@ namespace Play {
         if (isClickable) {
           // Debug.LogFormat("miss: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, time);
           GameManager.instance.MissJudge();
+          GameManager.instance.ClearFastSlow();
           Disable();
         }
         gameObject.SetActive(false);

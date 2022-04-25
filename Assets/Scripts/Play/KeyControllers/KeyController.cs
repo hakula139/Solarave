@@ -94,11 +94,10 @@ namespace Play {
     }
 
     public void JudgeNote() {
+      float currentTime = FumenScroller.instance.currentTime;
       if (!notes.TryPeek(out NoteObject noteObject)) {
         return;
       }
-
-      float currentTime = FumenScroller.instance.currentTime;
       float d = currentTime - noteObject.time - FumenManager.instance.inputLatency;
       float error = Mathf.Abs(d);
       bool isEarly = d < 0;
@@ -108,22 +107,27 @@ namespace Play {
           if (error <= FumenManager.instance.pgreatRange) {
             // Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.PgreatJudge();
+            GameManager.instance.ClearFastSlow();
             TriggerBomb();
           } else if (error <= FumenManager.instance.greatRange) {
             // Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GreatJudge();
+            GameManager.instance.IndicateFastSlow(isEarly);
             TriggerBomb();
           } else if (error <= FumenManager.instance.goodRange) {
             // Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GoodJudge();
+            GameManager.instance.IndicateFastSlow(isEarly);
           } else {
             // Debug.LogFormat("bad: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.BadJudge();
+            GameManager.instance.IndicateFastSlow(isEarly);
           }
           noteObject.Disable();
         } else if (error <= FumenManager.instance.poorRange && isEarly) {
           // Debug.LogFormat("poor: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
           GameManager.instance.PoorJudge();
+          GameManager.instance.ClearFastSlow();
         }
       }
     }

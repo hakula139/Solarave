@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 namespace Play {
@@ -36,6 +37,7 @@ namespace Play {
     public TMP_Text exScoreTMP;
     public TMP_Text maxComboTMP;
     public TMP_Text judgeTMP;
+    public Image fsSprite;
 
     public int exScore;
     private int combo;
@@ -49,6 +51,8 @@ namespace Play {
     public int badCount;
     public int poorCount;
     public int missCount;
+    public int fastCount;
+    public int slowCount;
     public int judgedCount;
 
     public int NotJudgedCount => FumenManager.instance.totalNotes - judgedCount;
@@ -74,7 +78,8 @@ namespace Play {
 
     private void Update() {
       if (lastJudgeTime > 0f && Time.time - lastJudgeTime > JudgeDuration) {
-        judgeTMP.text = " ";
+        ClearJudge();
+        ClearFastSlow();
         lastJudgeTime = 0f;
       }
 
@@ -103,6 +108,7 @@ namespace Play {
       string judgeText = SpriteAssetHelper.instance.GetJudge(judge);
       string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetInteger(judge, combo)}" : "";
       judgeTMP.text = judgeText + comboText;
+      judgeTMP.gameObject.SetActive(true);
     }
 
     public void PgreatJudge() {
@@ -145,6 +151,24 @@ namespace Play {
       missCount++;
       judgedCount++;
       poorCountTMP.text = TotalPoorCount.ToString();
+    }
+
+    public void ClearJudge() {
+      judgeTMP.gameObject.SetActive(false);
+    }
+
+    public void IndicateFastSlow(bool isEarly) {
+      if (isEarly) {
+        fastCount++;
+      } else {
+        slowCount++;
+      }
+      fsSprite.sprite = SpriteAssetHelper.instance.GetFastSlowIndicatorSprite(isEarly);
+      fsSprite.gameObject.SetActive(true);
+    }
+
+    public void ClearFastSlow() {
+      fsSprite.gameObject.SetActive(false);
     }
 
     public void UpdateResult() {
