@@ -42,7 +42,7 @@ namespace Select {
         // Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
         if (parentPath.StartsWith(songFolderBasePath)) {
           closeSoundEffect.Play();
-          instance.ReadSongFolder(parentPath);
+          ReadSongFolder(parentPath);
         }
       }
     }
@@ -50,7 +50,6 @@ namespace Select {
     public void ReadSongFolder(string path) {
       if (!Directory.Exists(path)) {
         Debug.LogErrorFormat("song folder not found, path=<{0}>", path);
-        return;
       }
 
       ClearSelectList();
@@ -82,7 +81,8 @@ namespace Select {
       GameObject songListItemClone = Instantiate(songListItemPrefab, container);
       SongListItem songListItem = songListItemClone.GetComponent<SongListItem>();
       songListItem.path = path;
-      songListItem.bms = BMS.Model.Parse(path, headerOnly: true);
+      songListItem.bms = new();
+      songListItem.bms.Parse(path, headerOnly: true);
 
       BMS.HeaderSection header = songListItem.bms.header;
       TMP_Text titleTMP = songListItemClone.transform.Find("Title").GetComponent<TMP_Text>();

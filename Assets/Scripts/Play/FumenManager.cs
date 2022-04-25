@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,11 +19,10 @@ namespace Play {
     public TMP_Text levelTMP;
     public TMP_Text bpmTMP;
 
-    private BMS.Model bms;
+    private readonly BMS.Model bms = new();
     public int totalNotes;
     public string fumenPath;
 
-    public float startDelay;    // ms
     public float inputLatency;  // ms
     public float pgreatRange;   // ms
     public float greatRange;    // ms
@@ -45,22 +45,23 @@ namespace Play {
     }
 
     public void ReadDataFromFile() {
-      bms = BMS.Model.Parse(fumenPath);
-      Initialize();
+      bms.Parse(fumenPath);
+      _ = StartCoroutine(Initialize());
     }
 
-    public void Initialize() {
+    public IEnumerator Initialize() {
       InitializeUI();
       InitializeFumenScroller();
-      InitializeKeySounds();
+      _ = StartCoroutine(InitializeKeySounds());
 
-      _ = bms.content.measures.Aggregate(0f, (startY, measure) => {
-        InitializeBgaByMeasure(measure);
-        InitializeNotesByMeasure(measure, startY);
-        return startY + measure.length;
-      });
+      float startY = 0f;
+      foreach (BMS.Measure measure in bms.content.measures) {
+        // InitializeBgaByMeasure(measure);
+        yield return StartCoroutine(InitializeNotesByMeasure(measure, startY));
+        startY += measure.length;
+      }
 
-      Invoke(nameof(StartPlaying), startDelay / 1000f);
+      StartPlaying();
     }
 
     private void InitializeUI() {
@@ -84,7 +85,7 @@ namespace Play {
       FumenScroller.instance.hiSpeed *= 150f / bms.header.bpm;  // fix hi-speed
     }
 
-    private void InitializeKeySounds() {
+    private IEnumerator InitializeKeySounds() {
       string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, fumenPath)).FullName;
       foreach ((string relativeWavPath, int wavId) in bms.header.wavPaths.Select((item, i) => (item, i))) {
         if (string.IsNullOrEmpty(relativeWavPath)) {
@@ -95,9 +96,9 @@ namespace Play {
         if (!File.Exists(wavPath) && !File.Exists(wavPath = wavPath.Replace(".wav", ".ogg"))) {
           Debug.LogWarningFormat("audio file not found, path=<{0}>", wavPath);
         } else if (wavPath.EndsWith(".wav")) {
-          _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV));
+          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV));
         } else if (wavPath.EndsWith(".ogg")) {
-          _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS));
+          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS));
         }
       }
     }
@@ -108,14 +109,14 @@ namespace Play {
       });
     }
 
-    private void InitializeNotesByMeasure(BMS.Measure measure, float startY) {
+    private IEnumerator InitializeNotesByMeasure(BMS.Measure measure, float startY) {
       Dictionary<string, KeyController> keyMap = lanes.ToDictionary(l => l.name, l => l.name switch {
         "KeyBgm" => (BgmController)l,
         "KeyScratch" => (ScratchController)l,
         _ => l,
       });
 
-      measure.notes.ForEach(note => {
+      foreach (BMS.Note note in measure.notes) {
         KeyController lane = note.channelId switch {
           BMS.Channel.Bgm => keyMap["KeyBgm"],
           BMS.Channel.Scratch => keyMap["KeyScratch"],
@@ -137,14 +138,12 @@ namespace Play {
         if (note.channelId is >= BMS.Channel.Key1 and <= BMS.Channel.Key7) {  // scratch included
           totalNotes++;
         }
-      });
+      }
+      yield return null;
     }
 
     private void StartPlaying() {
       FumenScroller.instance.Enable();
-      foreach (KeyController lane in lanes) {
-        lane.Enable();
-      }
     }
 
     public void UpdateTimeLeft() {

@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -9,29 +8,24 @@ namespace BMS {
     public HeaderSection header = new();
     public ChannelSection content = new();
 
-    public static Model Parse(string path, bool headerOnly = false) {
+    public void Parse(string path, bool headerOnly = false) {
       string realPath = Path.Combine(Application.streamingAssetsPath, path);
       if (!File.Exists(realPath)) {
         Debug.LogErrorFormat("bms file not found, path=<{0}>", realPath);
-        return null;
       }
 
-      Model model = new();
-      try {
-        using (StreamReader sr = new(realPath, encoding: System.Text.Encoding.GetEncoding(932))) {
-          // Debug.LogFormat("parsing bms file, path=<{0}> encoding=<{1}>", realPath, sr.CurrentEncoding);
-          while (!sr.EndOfStream) {
-            model.ReadLine(sr.ReadLine(), headerOnly);
-          }
+      using (StreamReader sr = new(realPath, encoding: System.Text.Encoding.GetEncoding(932))) {
+        // Debug.LogFormat("parsing bms file, path=<{0}> encoding=<{1}>", realPath, sr.CurrentEncoding);
+        while (!sr.EndOfStream) {
+          ReadLine(sr.ReadLine(), headerOnly);
         }
-        model.content.measures.ForEach(measure => {
+      }
+
+      if (!headerOnly) {
+        foreach (Measure measure in content.measures) {
           measure.bgas.Sort((x, y) => x.position.CompareTo(y.position));
           measure.notes.Sort((x, y) => x.position.CompareTo(y.position));
-        });
-        return model;
-      } catch (Exception e) {
-        Debug.LogErrorFormat("failed to parse bms file, path=<{0}> exception=<{1}>", path, e.ToString());
-        return null;
+        }
       }
     }
 
@@ -55,7 +49,6 @@ namespace BMS {
         ReadChannelLine(channel, value);
       } else {
         // Skip channel section.
-        return;
       }
     }
 

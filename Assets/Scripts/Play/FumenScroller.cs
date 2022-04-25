@@ -6,7 +6,7 @@ namespace Play {
 
     public Animator judgeLineLight;
 
-    protected bool isEnabled;
+    public bool isEnabled;
     public float bpm;
     public float baseSpeed;
     public float hiSpeed;

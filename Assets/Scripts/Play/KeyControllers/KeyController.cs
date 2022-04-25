@@ -7,7 +7,6 @@ namespace Play {
     protected SpriteRenderer sr;
     protected List<Animator> bombPool = new();
 
-    protected bool isEnabled;
     public KeyCode keyAssigned;
     public GameObject fumenArea;
     public GameObject notePrefab;
@@ -26,27 +25,17 @@ namespace Play {
     }
 
     private void Update() {
-      if (isEnabled) {
-        if (Input.GetKeyDown(keyAssigned)) {
-          sr.color = new Color(1, 1, 1, 0.25f);
-          laserPrefab.SetBool("KeyDown", true);
-          JudgeNote();
-          PlayKeySound();
-        }
-
-        if (Input.GetKeyUp(keyAssigned)) {
-          sr.color = new Color(1, 1, 1, 0);
-          laserPrefab.SetBool("KeyDown", false);
-        }
+      if (Input.GetKeyDown(keyAssigned)) {
+        sr.color = new Color(1, 1, 1, 0.25f);
+        laserPrefab.SetBool("KeyDown", true);
+        JudgeNote();
+        PlayKeySound();
       }
-    }
 
-    public void Enable() {
-      isEnabled = true;
-    }
-
-    public void Disable() {
-      isEnabled = false;
+      if (Input.GetKeyUp(keyAssigned)) {
+        sr.color = new Color(1, 1, 1, 0);
+        laserPrefab.SetBool("KeyDown", false);
+      }
     }
 
     public float SetupNote(float start, float length, BMS.Note note) {
