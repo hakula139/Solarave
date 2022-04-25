@@ -11,12 +11,6 @@ namespace Select {
     public GameObject songListItemPrefab;
     public GameObject folderListItemPrefab;
 
-    public GameObject soundEffects;
-    public AudioSource openSoundEffect;
-    public AudioSource closeSoundEffect;
-    public AudioSource selectSoundEffect;
-    public AudioSource enterSoundEffect;
-
     public TMP_Text genreTMP;
     public TMP_Text titleTMP;
     public TMP_Text subtitleTMP;
@@ -33,7 +27,6 @@ namespace Select {
     private void Start() {
       container = transform.Find("Viewport/Container");
       songFolderBasePath = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
-      DontDestroyOnLoad(soundEffects);
       ReadSongFolder(songFolderBasePath);
     }
 
@@ -43,7 +36,7 @@ namespace Select {
         string parentPath = Directory.GetParent(currentPath).FullName;
         // Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
         if (parentPath.StartsWith(songFolderBasePath)) {
-          closeSoundEffect.Play();
+          SoundEffectsManager.instance.closeSoundEffect.Play();
           ReadSongFolder(parentPath);
         }
       }

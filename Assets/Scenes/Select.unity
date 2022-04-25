@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 12395811}
+  - component: {fileID: 12395812}
   m_Layer: 0
   m_Name: SoundEffects
   m_TagString: Untagged
@@ -158,6 +159,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &12395812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12395810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 539de7f15342c4bebb886469e220c8f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openSoundEffect: {fileID: 912521960}
+  closeSoundEffect: {fileID: 1128956476}
+  selectSoundEffect: {fileID: 1671179242}
+  enterSoundEffect: {fileID: 482512394}
 --- !u!1 &80056511
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,11 +997,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songListItemPrefab: {fileID: 2818016796041854988, guid: c573605c7376448e79b7b79bb132c585, type: 3}
   folderListItemPrefab: {fileID: 400345174810330906, guid: 419e00c614b06439694c3e3eeed2bdd3, type: 3}
-  soundEffects: {fileID: 12395810}
-  openSoundEffect: {fileID: 912521960}
-  closeSoundEffect: {fileID: 1128956476}
-  selectSoundEffect: {fileID: 1671179242}
-  enterSoundEffect: {fileID: 482512394}
   genreTMP: {fileID: 2124871467}
   titleTMP: {fileID: 2052343647}
   subtitleTMP: {fileID: 408151214}
