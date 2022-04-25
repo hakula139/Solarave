@@ -125,7 +125,7 @@ namespace Play {
           _ => null,
         };
         if (lane != null) {
-          FumenScroller.instance.lastNoteTime = lane.SetupNote(startY, measure.length, note);
+          FumenScroller.instance.lastNoteTime = lane.SetupNote(startY, measure.length, note) + 3000f;
         } else {
           Debug.LogErrorFormat("failed to setup note, channelId=<{0}>", note.channelId);
         }

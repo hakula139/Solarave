@@ -5,6 +5,7 @@ namespace Play {
     public static FumenScroller instance;
 
     public Animator judgeLineLight;
+    public Animator progressBar;
     public Animator difficultyFrame;
 
     public bool isEnabled;
@@ -15,7 +16,8 @@ namespace Play {
     public float currentTime;   // ms
     public float lastNoteTime;  // ms
     public float offset;        // ms
-    public float TimeLeft => lastNoteTime - currentTime + 3000f;
+    public float TimeLeft => lastNoteTime - currentTime;
+    public float progressBarTrackLength;
 
     private void Awake() {
       instance = this;
@@ -23,8 +25,12 @@ namespace Play {
 
     private void Update() {
       if (isEnabled) {
+        float deltaTime = Time.deltaTime * 1000f;
+        currentTime += deltaTime;
+
         transform.Translate(Vector3.down * Speed);
-        currentTime += Time.deltaTime * 1000f;
+        float progressBarSpeed = progressBarTrackLength * deltaTime / lastNoteTime;
+        progressBar.gameObject.transform.Translate(Vector3.down * progressBarSpeed);
       }
     }
 
@@ -42,6 +48,8 @@ namespace Play {
       float animSpeed = bpm / 120f;
       judgeLineLight.SetTrigger("IsEnabled");
       judgeLineLight.speed = animSpeed;
+      progressBar.SetTrigger("IsEnabled");
+      progressBar.speed = animSpeed;
       difficultyFrame.SetTrigger("IsEnabled");
       difficultyFrame.speed = animSpeed;
     }
