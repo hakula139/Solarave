@@ -52,12 +52,13 @@ namespace Play {
     public IEnumerator Initialize() {
       InitializeUI();
       InitializeFumenScroller();
-      _ = StartCoroutine(InitializeKeySounds());
+      yield return StartCoroutine(InitializeKeySounds());
 
       float startY = 0f;
       foreach (BMS.Measure measure in bms.content.measures) {
         // InitializeBgaByMeasure(measure);
-        yield return StartCoroutine(InitializeNotesByMeasure(measure, startY));
+        InitializeNotesByMeasure(measure, startY);
+        yield return null;
         startY += measure.length;
       }
 
@@ -109,7 +110,7 @@ namespace Play {
       });
     }
 
-    private IEnumerator InitializeNotesByMeasure(BMS.Measure measure, float startY) {
+    private void InitializeNotesByMeasure(BMS.Measure measure, float startY) {
       Dictionary<string, KeyController> keyMap = lanes.ToDictionary(l => l.name, l => l.name switch {
         "KeyBgm" => (BgmController)l,
         "KeyScratch" => (ScratchController)l,
@@ -139,7 +140,6 @@ namespace Play {
           totalNotes++;
         }
       }
-      yield return null;
     }
 
     private void StartPlaying() {
