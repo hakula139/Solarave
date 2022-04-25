@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -11,7 +10,7 @@ namespace Play {
   public class FumenManager : MonoBehaviour {
     public static FumenManager instance;
 
-    private KeyController[] lanes;
+    public KeyController[] lanes;
 
     public TMP_Text titleTMP;
     public TMP_Text timeLeftTMP;
@@ -36,7 +35,6 @@ namespace Play {
     }
 
     private void Start() {
-      lanes = FindObjectsOfType<KeyController>();
       ReadDataFromFile();
     }
 
@@ -105,23 +103,17 @@ namespace Play {
     }
 
     private void InitializeNotesByMeasure(BMS.Measure measure, float startY) {
-      Dictionary<string, KeyController> keyMap = lanes.ToDictionary(l => l.name, l => l.name switch {
-        "KeyBgm" => (BgmController)l,
-        "KeyScratch" => (ScratchController)l,
-        _ => l,
-      });
-
       foreach (BMS.Note note in measure.notes) {
         KeyController lane = note.channelId switch {
-          BMS.Channel.Bgm => keyMap["KeyBgm"],
-          BMS.Channel.Scratch => keyMap["KeyScratch"],
-          BMS.Channel.Key1 => keyMap["Key1"],
-          BMS.Channel.Key2 => keyMap["Key2"],
-          BMS.Channel.Key3 => keyMap["Key3"],
-          BMS.Channel.Key4 => keyMap["Key4"],
-          BMS.Channel.Key5 => keyMap["Key5"],
-          BMS.Channel.Key6 => keyMap["Key6"],
-          BMS.Channel.Key7 => keyMap["Key7"],
+          BMS.Channel.Bgm => (BgmController)lanes[0],
+          BMS.Channel.Key1 => lanes[1],
+          BMS.Channel.Key2 => lanes[2],
+          BMS.Channel.Key3 => lanes[3],
+          BMS.Channel.Key4 => lanes[4],
+          BMS.Channel.Key5 => lanes[5],
+          BMS.Channel.Key6 => lanes[6],
+          BMS.Channel.Key7 => lanes[7],
+          BMS.Channel.Scratch => (ScratchController)lanes[8],
           _ => null,
         };
         if (lane != null) {

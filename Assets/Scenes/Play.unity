@@ -3734,6 +3734,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95dc24c021e481e91620413ddd5f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lanes:
+  - {fileID: 672147486}
+  - {fileID: 275994899}
+  - {fileID: 142725242}
+  - {fileID: 143285089}
+  - {fileID: 2067538441}
+  - {fileID: 243996012}
+  - {fileID: 1478612036}
+  - {fileID: 862691464}
+  - {fileID: 1381692868}
   titleTMP: {fileID: 593385075}
   timeLeftTMP: {fileID: 882788121}
   difficultyFrame: {fileID: 1148189409}

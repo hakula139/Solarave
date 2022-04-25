@@ -28,9 +28,9 @@ namespace Play {
         float deltaTime = Time.deltaTime * 1000f;
         currentTime += deltaTime;
 
-        transform.Translate(Vector3.down * Speed);
+        transform.Translate(Speed * Vector3.down);
         float progressBarSpeed = progressBarTrackLength * deltaTime / lastNoteTime;
-        progressBar.gameObject.transform.Translate(Vector3.down * progressBarSpeed);
+        progressBar.gameObject.transform.Translate(progressBarSpeed * Vector3.down);
       }
     }
 

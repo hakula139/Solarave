@@ -38,7 +38,7 @@ namespace BMS {
 
     protected bool ReadLine(string line, bool headerOnly = false) {
       // Debug.LogFormat("parsing: line=<{0}>", line);
-      if (line.Length < 2 || !line.StartsWith('#')) {
+      if (line.Length < 2 || line[0] != '#') {
         return true;
       }
 
@@ -74,7 +74,7 @@ namespace BMS {
           header.genre = value;
           break;
         case "comment":
-          if (value.StartsWith("\"") && value.EndsWith("\"")) {
+          if (value.Length >= 2 && value[0] == '\"' && value[^1] == '\"') {
             value = value[1..^1];
           }
           header.comment = value;
