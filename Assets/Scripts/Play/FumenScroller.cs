@@ -4,15 +4,20 @@ namespace Play {
   public class FumenScroller : MonoBehaviour {
     public static FumenScroller instance;
 
-    public bool isEnabled = false;
+    public Animator judgeLineLight;
+    public Animator progressBar;
+    public Animator difficultyFrame;
+
+    public bool isEnabled;
     public float bpm;
     public float baseSpeed;
     public float hiSpeed;
-    protected float Speed => bpm * baseSpeed * hiSpeed / 24000f * Time.deltaTime;
+    public float Speed => bpm * baseSpeed * hiSpeed / 24000f * Time.deltaTime;
     public float currentTime;   // ms
     public float lastNoteTime;  // ms
     public float offset;        // ms
-    public float TimeLeft => lastNoteTime - currentTime + 2000f;
+    public float TimeLeft => lastNoteTime - currentTime;
+    public float progressBarTrackLength;
 
     private void Awake() {
       instance = this;
@@ -20,9 +25,33 @@ namespace Play {
 
     private void Update() {
       if (isEnabled) {
-        transform.Translate(Vector3.down * Speed);
-        currentTime += Time.deltaTime * 1000f;
+        float deltaTime = Time.deltaTime * 1000f;
+        currentTime += deltaTime;
+
+        transform.Translate(Speed * Vector3.down);
+        float progressBarSpeed = progressBarTrackLength * deltaTime / lastNoteTime;
+        progressBar.gameObject.transform.Translate(progressBarSpeed * Vector3.down);
       }
+    }
+
+    public void Enable() {
+      InitializeUI();
+      offset = (float)AudioSettings.dspTime * 1000f;
+      isEnabled = true;
+    }
+
+    public void Disable() {
+      isEnabled = false;
+    }
+
+    private void InitializeUI() {
+      float animSpeed = bpm / 120f;
+      judgeLineLight.SetTrigger("IsEnabled");
+      judgeLineLight.speed = animSpeed;
+      progressBar.SetTrigger("IsEnabled");
+      progressBar.speed = animSpeed;
+      difficultyFrame.SetTrigger("IsEnabled");
+      difficultyFrame.speed = animSpeed;
     }
   }
 }

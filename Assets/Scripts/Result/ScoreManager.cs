@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -13,6 +12,8 @@ namespace Result {
     public TMP_Text exScoreTMP;
     public TMP_Text missCountTMP;
 
+    public TMP_Text fastTMP;
+    public TMP_Text slowTMP;
     public TMP_Text comboTMP;
     public TMP_Text pgreatCountTMP;
     public TMP_Text greatCountTMP;
@@ -32,7 +33,7 @@ namespace Result {
 
     private void Update() {
       if (Input.anyKeyDown) {
-        SceneManager.LoadScene("Select");
+        SceneTransitionManager.instance.EnterScene("Select");
       }
     }
 
@@ -45,6 +46,8 @@ namespace Result {
       exScoreTMP.text = Play.GameManager.instance.exScore.ToString();
       missCountTMP.text = Play.GameManager.instance.TotalMissCount.ToString();
 
+      fastTMP.text = Play.GameManager.instance.fastCount.ToString();
+      slowTMP.text = Play.GameManager.instance.slowCount.ToString();
       comboTMP.text = $"{Play.GameManager.instance.maxCombo} / {Play.FumenManager.instance.totalNotes} ({Play.GameManager.instance.ComboBreakCount})";
       pgreatCountTMP.text = Play.GameManager.instance.pgreatCount.ToString();
       greatCountTMP.text = Play.GameManager.instance.greatCount.ToString();

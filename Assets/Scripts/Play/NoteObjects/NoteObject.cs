@@ -15,9 +15,10 @@ namespace Play {
     }
 
     private void Update() {
-      if (transform.position.y < despawnY) {
+      float y = transform.position.y;
+      if (y < despawnY) {
         sr.enabled = false;
-      } else if (transform.position.y < spawnY) {
+      } else if (y < spawnY) {
         sr.enabled = true;
       }
 
@@ -28,6 +29,7 @@ namespace Play {
         if (isClickable) {
           // Debug.LogFormat("miss: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, time);
           GameManager.instance.MissJudge();
+          GameManager.instance.ClearFastSlow();
           Disable();
         }
         gameObject.SetActive(false);

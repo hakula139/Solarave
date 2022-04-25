@@ -22,7 +22,7 @@ namespace Play {
       }).ToArray();
     }
 
-    public IEnumerator Load(string wavPath, int wavId, AudioType type) {
+    public IEnumerator Load(string wavPath, int wavId, AudioType type, float volume = 1f) {
       using UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip("file://" + wavPath, type);
       yield return uwr.SendWebRequest();
 
@@ -30,6 +30,7 @@ namespace Play {
         Debug.LogWarningFormat("failed to load audio file, error=<{0}>", uwr.error);
       } else {
         audioSources[wavId].clip = DownloadHandlerAudioClip.GetContent(uwr);
+        audioSources[wavId].volume = volume;
         yield return null;
       }
     }

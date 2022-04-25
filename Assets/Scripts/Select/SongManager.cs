@@ -1,7 +1,6 @@
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 namespace Select {
@@ -11,10 +10,6 @@ namespace Select {
     protected Transform container;
     public GameObject songListItemPrefab;
     public GameObject folderListItemPrefab;
-
-    public AudioSource openSoundEffect;
-    public AudioSource closeSoundEffect;
-    public AudioSource selectSoundEffect;
 
     public TMP_Text genreTMP;
     public TMP_Text titleTMP;
@@ -39,10 +34,10 @@ namespace Select {
       // Right click to return.
       if (Input.GetMouseButtonDown(1)) {
         string parentPath = Directory.GetParent(currentPath).FullName;
-        Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
+        // Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
         if (parentPath.StartsWith(songFolderBasePath)) {
-          closeSoundEffect.Play();
-          instance.ReadSongFolder(parentPath);
+          SoundEffectsManager.instance.closeSoundEffect.Play();
+          ReadSongFolder(parentPath);
         }
       }
     }
@@ -50,7 +45,6 @@ namespace Select {
     public void ReadSongFolder(string path) {
       if (!Directory.Exists(path)) {
         Debug.LogErrorFormat("song folder not found, path=<{0}>", path);
-        return;
       }
 
       ClearSelectList();
@@ -82,7 +76,8 @@ namespace Select {
       GameObject songListItemClone = Instantiate(songListItemPrefab, container);
       SongListItem songListItem = songListItemClone.GetComponent<SongListItem>();
       songListItem.path = path;
-      songListItem.bms = BMS.Model.Parse(path, headerOnly: true);
+      songListItem.bms = new();
+      _ = songListItem.bms.Parse(path, headerOnly: true);
 
       BMS.HeaderSection header = songListItem.bms.header;
       TMP_Text titleTMP = songListItemClone.transform.Find("Title").GetComponent<TMP_Text>();
@@ -115,7 +110,7 @@ namespace Select {
 
     public void EnterPlayScene(string path) {
       currentFumenPath = path;
-      SceneManager.LoadScene("Play");
+      SceneTransitionManager.instance.EnterScene("Play");
     }
   }
 }
