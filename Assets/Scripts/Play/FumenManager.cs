@@ -21,6 +21,7 @@ namespace Play {
     private readonly BMS.Model bms = new();
     public int totalNotes;
     public string fumenPath;
+    public float startDelay;    // ms
     public float inputLatency;  // ms
 
     public float pgreatRange;   // ms
@@ -58,7 +59,7 @@ namespace Play {
       InitializeUI();
       InitializeFumenScroller();
       InitializeGameManager();
-      yield return StartCoroutine(InitializeKeySounds());
+      InitializeKeySounds();
 
       float startY = 0f;
       foreach (BMS.Measure measure in bms.content.measures) {
@@ -71,7 +72,8 @@ namespace Play {
 
       InitializeJudgeRange();
       InitializeGrooveGauge();
-      StartPlaying();
+
+      Invoke(nameof(StartPlaying), startDelay / 1000f);
     }
 
     private void InitializeUI() {
@@ -164,7 +166,7 @@ namespace Play {
       }
     }
 
-    private IEnumerator InitializeKeySounds() {
+    private void InitializeKeySounds() {
       string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, fumenPath)).FullName;
       foreach ((string relativeWavPath, int wavId) in bms.header.wavPaths.Select((item, i) => (item, i))) {
         if (string.IsNullOrEmpty(relativeWavPath)) {
@@ -179,7 +181,6 @@ namespace Play {
         } else if (wavPath.EndsWith(".ogg")) {
           _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS, bms.header.volume));
         }
-        yield return null;
       }
     }
 

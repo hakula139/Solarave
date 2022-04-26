@@ -58,7 +58,7 @@ namespace Play {
 
     public void SetupSeparator(float y) {
       GameObject separatorClone = Instantiate(separatorPrefab, transform);
-      separatorClone.transform.Translate((SpeedRatio * y) * Vector3.up);
+      separatorClone.transform.Translate(SpeedRatio * y * Vector3.up);
       separatorClone.SetActive(true);
     }
   }

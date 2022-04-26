@@ -3988,6 +3988,7 @@ MonoBehaviour:
   bpmTMP: {fileID: 69227820}
   totalNotes: 0
   fumenPath: 
+  startDelay: 2000
   inputLatency: 0
   pgreatRange: 0
   greatRange: 0

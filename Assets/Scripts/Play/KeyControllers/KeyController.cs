@@ -41,8 +41,7 @@ namespace Play {
     public float SetupNote(float start, float length, BMS.Note note) {
       GameObject noteClone = Instantiate(notePrefab, fumenArea.transform);
       float y = start + (length * note.position);
-      float ratio = FumenScroller.instance.baseSpeed * FumenScroller.instance.hiSpeed / 100f;
-      noteClone.transform.Translate(ratio * y * Vector3.up);
+      noteClone.transform.Translate(FumenScroller.instance.SpeedRatio * y * Vector3.up);
       noteClone.SetActive(true);
 
       NoteObject noteObject = noteClone.GetComponent<NoteObject>();
