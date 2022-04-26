@@ -60,6 +60,9 @@ namespace Play {
       GameObject separatorClone = Instantiate(separatorPrefab, transform);
       separatorClone.transform.Translate(SpeedRatio * y * Vector3.up);
       separatorClone.SetActive(true);
+
+      SeparatorObject separatorObject = separatorClone.GetComponent<SeparatorObject>();
+      separatorObject.time = y * 240000f / bpm;
     }
   }
 }
