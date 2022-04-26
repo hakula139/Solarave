@@ -112,16 +112,16 @@ namespace Play {
           } else if (error <= FumenManager.instance.greatRange) {
             // Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GreatJudge();
-            GameManager.instance.IndicateFastSlow(isEarly);
+            GameManager.instance.UpdateFastSlow(isEarly);
             TriggerBomb();
           } else if (error <= FumenManager.instance.goodRange) {
             // Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GoodJudge();
-            GameManager.instance.IndicateFastSlow(isEarly);
+            GameManager.instance.UpdateFastSlow(isEarly);
           } else {
             // Debug.LogFormat("bad: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.BadJudge();
-            GameManager.instance.IndicateFastSlow(isEarly);
+            GameManager.instance.UpdateFastSlow(isEarly);
           }
           noteObject.Disable();
         } else if (error <= FumenManager.instance.poorRange && isEarly) {

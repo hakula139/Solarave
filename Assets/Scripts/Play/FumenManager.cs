@@ -100,8 +100,8 @@ namespace Play {
         case Select.GaugeMode.EASY:
         case Select.GaugeMode.NORMAL:
         default:
-          GameManager.instance.gauge = 20f;
           GameManager.instance.minGauge = 2f;
+          GameManager.instance.UpdateGauge(20f);
           break;
       }
     }

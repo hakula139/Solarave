@@ -14,7 +14,7 @@ namespace Play {
     }
 
     public string ToSprite(int id) {
-      return $"<sprite=\"{id}\">";
+      return $"<sprite={id}>";
     }
 
     public string ToSpriteByName(string name) {

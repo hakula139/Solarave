@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -53,9 +54,10 @@ namespace Play {
     public int maxCombo;
     public float gauge;
     public float minGauge;
+    public float maxGauge = 100f;
 
     private float lastJudgeTime;
-    private static readonly float JudgeDuration = 1f;  // s
+    private static readonly float JudgeDuration = 1000f;  // ms
 
     public int NotJudgedCount => FumenManager.instance.totalNotes - judgedCount;
     public int ComboBreakCount => badCount + missCount;
@@ -80,7 +82,7 @@ namespace Play {
     }
 
     private void Update() {
-      if (lastJudgeTime > 0f && Time.time - lastJudgeTime > JudgeDuration) {
+      if (lastJudgeTime > 0f && FumenScroller.instance.currentTime - lastJudgeTime > JudgeDuration) {
         ClearJudge();
         ClearFastSlow();
         lastJudgeTime = 0f;
@@ -100,20 +102,10 @@ namespace Play {
     }
 
     protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1, float gaugeAdded = 0) {
-      exScore += scoreAdded;
-      combo += comboAdded;
-      maxCombo = Mathf.Max(combo, maxCombo);
-      gauge = Mathf.Max(gauge + gaugeAdded, minGauge);
-      lastJudgeTime = Time.time;
-
-      exScoreTMP.text = $"{exScore:D4}";
-      scoreRateTMP.text = Mathf.FloorToInt(ScoreRate).ToString();
-      maxComboTMP.text = $"{maxCombo:D4}";
-      gaugeTMP.text = SpriteAssetHelper.instance.GetInteger(DisplayedGauge);
-      string judgeText = SpriteAssetHelper.instance.GetJudge(judge);
-      string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetComboInJudge(judge, combo)}" : "";
-      judgeTMP.text = judgeText + comboText;
-      judgeTMP.gameObject.SetActive(true);
+      UpdateScore(exScore + scoreAdded);
+      UpdateCombo(combo + comboAdded);
+      UpdateGauge(gauge + gaugeAdded);
+      UpdateJudge(judge, displayCombo: comboAdded > 0);
     }
 
     public void PgreatJudge() {
@@ -158,11 +150,38 @@ namespace Play {
       poorCountTMP.text = TotalPoorCount.ToString();
     }
 
+    public void UpdateScore(int exScore) {
+      this.exScore = exScore;
+      exScoreTMP.text = $"{exScore:D4}";
+      scoreRateTMP.text = Mathf.FloorToInt(ScoreRate).ToString();
+    }
+
+    public void UpdateCombo(int combo) {
+      this.combo = combo;
+      maxCombo = Mathf.Max(combo, maxCombo);
+      maxComboTMP.text = $"{maxCombo:D4}";
+    }
+
+    public void UpdateGauge(float gauge) {
+      this.gauge = Mathf.Min(Mathf.Max(gauge, minGauge), maxGauge);
+      gaugeTMP.text = SpriteAssetHelper.instance.GetInteger(DisplayedGauge);
+    }
+
+    public void UpdateJudge(Judge judge, bool displayCombo) {
+      lastJudgeTime = FumenScroller.instance.currentTime;
+      StringBuilder judgeText = new(SpriteAssetHelper.instance.GetJudge(judge));
+      if (displayCombo) {
+        _ = judgeText.Append("  ").Append(SpriteAssetHelper.instance.GetComboInJudge(judge, combo));
+      }
+      judgeTMP.text = judgeText.ToString();
+      judgeTMP.gameObject.SetActive(true);
+    }
+
     public void ClearJudge() {
       judgeTMP.gameObject.SetActive(false);
     }
 
-    public void IndicateFastSlow(bool isEarly) {
+    public void UpdateFastSlow(bool isEarly) {
       if (isEarly) {
         fastCount++;
       } else {
