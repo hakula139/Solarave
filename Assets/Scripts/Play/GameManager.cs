@@ -89,16 +89,21 @@ namespace Play {
       }
 
       if (FumenScroller.instance.TimeLeft <= 0) {
-        FumenScroller.instance.Disable();
-        SceneTransitionManager.instance.EnterScene("Result");
+        EnterResultScene();
       } else if (Input.GetKeyDown(KeyCode.Escape)) {
         if (judgedCount == poorCount) {
           // Directly return to Select scene if the player hits nothing.
           SceneTransitionManager.instance.EnterScene("Select");
         } else {
-          SceneTransitionManager.instance.EnterScene("Result");
+          EnterResultScene();
         }
       }
+    }
+
+    public void EnterResultScene() {
+      FumenScroller.instance.Disable();
+      UpdateResult();
+      SceneTransitionManager.instance.EnterScene("Result");
     }
 
     protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1, float gaugeAdded = 0) {
@@ -196,7 +201,10 @@ namespace Play {
     }
 
     public void UpdateResult() {
-      missCount += NotJudgedCount;
+      if (NotJudgedCount > 0) {
+        missCount += NotJudgedCount;
+        gauge = 0f;
+      }
       judgedCount = FumenManager.instance.totalNotes;
     }
   }

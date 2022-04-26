@@ -27,7 +27,6 @@ namespace Result {
     }
 
     private void Start() {
-      Play.GameManager.instance.UpdateResult();
       InitializeUI();
     }
 
