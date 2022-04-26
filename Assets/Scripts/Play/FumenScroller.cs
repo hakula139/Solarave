@@ -7,12 +7,14 @@ namespace Play {
     public Animator judgeLineLight;
     public Animator progressBar;
     public Animator difficultyFrame;
+    public GameObject separatorPrefab;
 
     public bool isEnabled;
     public float bpm;
     public float baseSpeed;
     public float hiSpeed;
     public float Speed => bpm * baseSpeed * hiSpeed / 24000f * Time.deltaTime;
+    public float SpeedRatio => baseSpeed * hiSpeed / 100f;
     public float currentTime;   // ms
     public float lastNoteTime;  // ms
     public float offset;        // ms
@@ -52,6 +54,12 @@ namespace Play {
       progressBar.speed = animSpeed;
       difficultyFrame.SetTrigger("IsEnabled");
       difficultyFrame.speed = animSpeed;
+    }
+
+    public void SetupSeparator(float y) {
+      GameObject separatorClone = Instantiate(separatorPrefab, transform);
+      separatorClone.transform.Translate((SpeedRatio * y) * Vector3.up);
+      separatorClone.SetActive(true);
     }
   }
 }

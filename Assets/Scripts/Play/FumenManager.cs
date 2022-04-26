@@ -66,6 +66,7 @@ namespace Play {
         InitializeNotesByMeasure(measure, startY);
         yield return null;
         startY += measure.length;
+        FumenScroller.instance.SetupSeparator(startY);
       }
 
       InitializeJudgeRange();
@@ -174,10 +175,11 @@ namespace Play {
         if (!File.Exists(wavPath) && !File.Exists(wavPath = wavPath.Replace(".wav", ".ogg"))) {
           Debug.LogWarningFormat("audio file not found, path=<{0}>", wavPath);
         } else if (wavPath.EndsWith(".wav")) {
-          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV, bms.header.volume));
+          _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV, bms.header.volume));
         } else if (wavPath.EndsWith(".ogg")) {
-          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS, bms.header.volume));
+          _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS, bms.header.volume));
         }
+        yield return null;
       }
     }
 
