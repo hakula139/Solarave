@@ -2,6 +2,12 @@ using UnityEngine;
 
 namespace Select {
   public class CursorController : MonoBehaviour {
+    public static CursorController instance;
+
+    private void Awake() {
+      instance = this;
+    }
+
     private void Start() {
       Cursor.visible = false;
     }

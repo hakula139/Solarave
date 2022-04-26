@@ -112,7 +112,7 @@ namespace BMS {
           header.rank = (JudgeRank)int.Parse(value);
           break;
         case "total":
-          header.total = float.Parse(value);
+          header.total = Mathf.Max(float.Parse(value), HeaderSection.MinTotal);
           break;
         case "banner":
           header.banner = value;

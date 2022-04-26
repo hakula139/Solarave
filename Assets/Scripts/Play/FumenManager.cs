@@ -21,13 +21,20 @@ namespace Play {
     private readonly BMS.Model bms = new();
     public int totalNotes;
     public string fumenPath;
-
     public float inputLatency;  // ms
+
     public float pgreatRange;   // ms
     public float greatRange;    // ms
     public float goodRange;     // ms
     public float badRange;      // ms
     public float poorRange;     // ms
+
+    public float pgreatGauge;
+    public float greatGauge;
+    public float goodGauge;
+    public float badGauge;
+    public float poorGauge;
+    public float missGauge;
 
     private void Awake() {
       instance = this;
@@ -50,6 +57,7 @@ namespace Play {
     public IEnumerator Initialize() {
       InitializeUI();
       InitializeFumenScroller();
+      InitializeGameManager();
       yield return StartCoroutine(InitializeKeySounds());
 
       float startY = 0f;
@@ -60,6 +68,8 @@ namespace Play {
         startY += measure.length;
       }
 
+      InitializeJudgeRange();
+      InitializeGrooveGauge();
       StartPlaying();
     }
 
@@ -81,7 +91,76 @@ namespace Play {
 
     private void InitializeFumenScroller() {
       FumenScroller.instance.bpm = bms.header.bpm;
-      FumenScroller.instance.hiSpeed *= 150f / bms.header.bpm;  // fix hi-speed
+      FumenScroller.instance.hiSpeed = Select.ConfigManager.instance.hiSpeed * 150f / bms.header.bpm;  // fix hi-speed
+    }
+
+    private void InitializeGameManager() {
+      switch (Select.ConfigManager.instance.gaugeMode) {
+        case Select.GaugeMode.AEASY:
+        case Select.GaugeMode.EASY:
+        case Select.GaugeMode.NORMAL:
+        default:
+          GameManager.instance.gauge = 20f;
+          GameManager.instance.minGauge = 2f;
+          break;
+      }
+    }
+
+    private void InitializeJudgeRange() {
+      switch (bms.header.rank) {
+        case BMS.JudgeRank.Easy:
+          pgreatRange = 21f;
+          greatRange = 60f;
+          goodRange = 120f;
+          badRange = 200f;
+          poorRange = 1000f;
+          break;
+        case BMS.JudgeRank.Hard:
+          pgreatRange = 15f;
+          greatRange = 30f;
+          goodRange = 60f;
+          badRange = 200f;
+          poorRange = 1000f;
+          break;
+        case BMS.JudgeRank.VeryHard:
+          pgreatRange = 8f;
+          greatRange = 24f;
+          goodRange = 40f;
+          badRange = 200f;
+          poorRange = 1000f;
+          break;
+        case BMS.JudgeRank.Normal:
+        default:
+          pgreatRange = 18f;
+          greatRange = 40f;
+          goodRange = 100f;
+          badRange = 200f;
+          poorRange = 1000f;
+          break;
+      }
+    }
+
+    private void InitializeGrooveGauge() {
+      switch (Select.ConfigManager.instance.gaugeMode) {
+        case Select.GaugeMode.AEASY:
+        case Select.GaugeMode.EASY:
+          pgreatGauge = bms.header.total / totalNotes * 1.2f;
+          greatGauge = pgreatGauge;
+          goodGauge = pgreatGauge / 2f;
+          badGauge = -4f;
+          poorGauge = -2f;
+          missGauge = -6f;
+          break;
+        case Select.GaugeMode.NORMAL:
+        default:
+          pgreatGauge = bms.header.total / totalNotes;
+          greatGauge = pgreatGauge;
+          goodGauge = pgreatGauge / 2f;
+          badGauge = -3.2f;
+          poorGauge = -1.6f;
+          missGauge = -4.8f;
+          break;
+      }
     }
 
     private IEnumerator InitializeKeySounds() {

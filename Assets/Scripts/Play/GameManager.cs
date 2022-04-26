@@ -35,14 +35,9 @@ namespace Play {
     public TMP_Text scoreRateTMP;
     public TMP_Text exScoreTMP;
     public TMP_Text maxComboTMP;
+    public TMP_Text gaugeTMP;
     public TMP_Text judgeTMP;
     public Image fsSprite;
-
-    public int exScore;
-    private int combo;
-    public int maxCombo;
-    private float lastJudgeTime;
-    private const float JudgeDuration = 1f;  // s
 
     public int pgreatCount;
     public int greatCount;
@@ -53,6 +48,14 @@ namespace Play {
     public int fastCount;
     public int slowCount;
     public int judgedCount;
+    public int exScore;
+    public int combo;
+    public int maxCombo;
+    public float gauge;
+    public float minGauge;
+
+    private float lastJudgeTime;
+    private static readonly float JudgeDuration = 1f;  // s
 
     public int NotJudgedCount => FumenManager.instance.totalNotes - judgedCount;
     public int ComboBreakCount => badCount + missCount;
@@ -70,6 +73,7 @@ namespace Play {
       >= 200f / 9f => DjLevel.E,
       _ => DjLevel.F
     };
+    public int DisplayedGauge => Mathf.FloorToInt(gauge) - (Mathf.FloorToInt(gauge) % 2);
 
     private void Awake() {
       instance = this;
@@ -95,44 +99,46 @@ namespace Play {
       }
     }
 
-    protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1) {
+    protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1, float gaugeAdded = 0) {
       exScore += scoreAdded;
       combo += comboAdded;
       maxCombo = Mathf.Max(combo, maxCombo);
+      gauge = Mathf.Max(gauge + gaugeAdded, minGauge);
       lastJudgeTime = Time.time;
 
       exScoreTMP.text = $"{exScore:D4}";
-      scoreRateTMP.text = Mathf.Floor(ScoreRate).ToString();
+      scoreRateTMP.text = Mathf.FloorToInt(ScoreRate).ToString();
       maxComboTMP.text = $"{maxCombo:D4}";
+      gaugeTMP.text = SpriteAssetHelper.instance.GetInteger(DisplayedGauge);
       string judgeText = SpriteAssetHelper.instance.GetJudge(judge);
-      string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetInteger(judge, combo)}" : "";
+      string comboText = comboAdded > 0 ? $"  {SpriteAssetHelper.instance.GetComboInJudge(judge, combo)}" : "";
       judgeTMP.text = judgeText + comboText;
       judgeTMP.gameObject.SetActive(true);
     }
 
     public void PgreatJudge() {
-      NoteJudge(judge: Judge.PGREAT, scoreAdded: 2);
+      NoteJudge(judge: Judge.PGREAT, scoreAdded: 2, gaugeAdded: FumenManager.instance.pgreatGauge);
       pgreatCount++;
       judgedCount++;
       pgreatCountTMP.text = pgreatCount.ToString();
     }
 
     public void GreatJudge() {
-      NoteJudge(judge: Judge.GREAT, scoreAdded: 1);
+      NoteJudge(judge: Judge.GREAT, scoreAdded: 1, gaugeAdded: FumenManager.instance.greatGauge);
       greatCount++;
       judgedCount++;
       greatCountTMP.text = greatCount.ToString();
     }
 
     public void GoodJudge() {
-      NoteJudge(judge: Judge.GOOD);
+      NoteJudge(judge: Judge.GOOD, gaugeAdded: FumenManager.instance.goodGauge);
       goodCount++;
       judgedCount++;
       goodCountTMP.text = goodCount.ToString();
     }
 
     public void BadJudge() {
-      NoteJudge(judge: Judge.BAD, comboAdded: -combo);
+      NoteJudge(judge: Judge.BAD, comboAdded: -combo, gaugeAdded: FumenManager.instance.badGauge);
       badCount++;
       judgedCount++;
       badCountTMP.text = badCount.ToString();
@@ -140,13 +146,13 @@ namespace Play {
 
     // 空 POOR
     public void PoorJudge() {
-      NoteJudge(judge: Judge.POOR, comboAdded: 0);
+      NoteJudge(judge: Judge.POOR, comboAdded: 0, gaugeAdded: FumenManager.instance.poorGauge);
       poorCount++;
       poorCountTMP.text = TotalPoorCount.ToString();
     }
 
     public void MissJudge() {
-      NoteJudge(judge: Judge.POOR, comboAdded: -combo);
+      NoteJudge(judge: Judge.POOR, comboAdded: -combo, gaugeAdded: FumenManager.instance.missGauge);
       missCount++;
       judgedCount++;
       poorCountTMP.text = TotalPoorCount.ToString();

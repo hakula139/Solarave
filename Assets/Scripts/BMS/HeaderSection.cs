@@ -30,6 +30,7 @@ namespace BMS {
     public int level = 0;
     public JudgeRank rank = JudgeRank.Normal;
     public float total = 160;
+    public static readonly float MinTotal = 60;
     public string banner;
     public string stageFile;
     public int? lnObj = null;

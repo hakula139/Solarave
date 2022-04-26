@@ -12,8 +12,8 @@ namespace Play {
     public GameObject notePrefab;
     public Animator laserPrefab;
     public Animator bombPrefab;
-    protected const int BombPoolSize = 4;
-    protected const float BombDuration = 0.2f;  // s
+    protected static readonly int BombPoolSize = 4;
+    protected static readonly float BombDuration = 0.2f;  // s
 
     public readonly Queue<NoteObject> notes = new();
     protected readonly Queue<KeySound> keySounds = new();
