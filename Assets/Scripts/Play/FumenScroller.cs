@@ -27,7 +27,7 @@ namespace Play {
 
     private void Update() {
       if (isEnabled) {
-        currentTime.Add(Time.deltaTime);
+        _ = currentTime.Add(Time.deltaTime);
 
         float deltaTimeMilli = Time.deltaTime * 1000f;
         MoveDown(Speed * deltaTimeMilli);

@@ -14,6 +14,7 @@ namespace Play {
     public Animator bombPrefab;
     protected static readonly int BombPoolSize = 4;
     protected static readonly float BombDuration = 0.2f;  // s
+    protected static readonly WaitForSeconds BombWaitForDuration = new(BombDuration);
 
     public readonly Queue<NoteObject> notes = new();
     protected readonly Queue<KeySound> keySounds = new();
@@ -152,7 +153,7 @@ namespace Play {
     }
 
     protected IEnumerator DisableBomb(Animator bomb) {
-      yield return new WaitForSeconds(BombDuration);
+      yield return BombWaitForDuration;
       bomb.gameObject.SetActive(false);
     }
   }

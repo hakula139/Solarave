@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 36847
+  controlID: 38990
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 36848
+  controlID: 38991
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 36849
+  controlID: 38992
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -186,8 +186,8 @@ MonoBehaviour:
     y: 0
     width: 264.5
     height: 613.5
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -226,7 +226,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 88a1e8ff8815e9ff68cfeaff665bf0ff1ef6f0ff2093f1ffc025f4ff5a6bf5ffc0fcfdfffefdfdff2afbffff2cfbffff2efbfffff4fffffffa610000626200007062000018630000546300007063000028a9000038b1000042b100004eb100009eb20000ceb2000016b3000078b30000e20401005805010060050100e00501005e060100c40c01009c0d0100120e01001a0e01009a0e0100180f01007e1c0100e61c0100f41c0100fc1c0100fa1d0100e21e01004a1f0100581f0100601f0100e01f01005e20010056240100cc240100d424010054250100d825010088270100fe27010006280100862801000a290100e2290100582a0100602a0100e02a0100642b0100
+      m_ExpandedIDs: 0e11e3ff4611e3ff8211e3ffe611e3fff211e3ffbc14e3fff614e3ff7816e3fff216e3fffe16e3ff88a1e8ff8815e9ff68cfeaff665bf0ff1ef6f0ff2093f1ffc025f4ff5a6bf5ffc0fcfdfffefdfdff2afbffff2cfbffff2efbfffff4fffffffa610000626200007062000018630000546300007063000028a9000038b1000042b100004eb100009eb20000ceb2000016b3000078b30000e20401005805010060050100e00501005e060100c40c01009c0d0100120e01001a0e01009a0e0100180f01007e1c0100e61c0100f41c0100fc1c0100fa1d0100e21e01004a1f0100581f0100601f0100e01f01005e20010056240100cc240100d424010054250100d825010088270100fe27010006280100862801000a290100e2290100582a0100602a0100e02a0100642b0100ee8701004c880100be880100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
