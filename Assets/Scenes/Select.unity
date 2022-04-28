@@ -157,7 +157,7 @@ Transform:
   - {fileID: 1128956477}
   - {fileID: 1671179243}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &12395812
 MonoBehaviour:
@@ -855,7 +855,7 @@ RectTransform:
   - {fileID: 776830082}
   - {fileID: 972830211}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -886,7 +886,6 @@ GameObject:
   - component: {fileID: 776830084}
   - component: {fileID: 776830083}
   - component: {fileID: 776830085}
-  - component: {fileID: 776830086}
   m_Layer: 5
   m_Name: SelectList
   m_TagString: Untagged
@@ -983,27 +982,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &776830086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776830081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d533a085e9c654ec5810c8edcfcdfc28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  songListItemPrefab: {fileID: 2818016796041854988, guid: c573605c7376448e79b7b79bb132c585, type: 3}
-  folderListItemPrefab: {fileID: 400345174810330906, guid: 419e00c614b06439694c3e3eeed2bdd3, type: 3}
-  genreTMP: {fileID: 2124871467}
-  titleTMP: {fileID: 2052343647}
-  subtitleTMP: {fileID: 408151214}
-  artistTMP: {fileID: 860764342}
-  songFolderBasePath: BMS
-  currentPath: 
-  currentFumenPath: 
 --- !u!1 &808154491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1465,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1028191006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1028191008}
+  - component: {fileID: 1028191007}
+  m_Layer: 0
+  m_Name: SongManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1028191007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028191006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d533a085e9c654ec5810c8edcfcdfc28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 2132695255}
+  songListItemPrefab: {fileID: 2818016796041854988, guid: c573605c7376448e79b7b79bb132c585, type: 3}
+  folderListItemPrefab: {fileID: 400345174810330906, guid: 419e00c614b06439694c3e3eeed2bdd3, type: 3}
+  genreTMP: {fileID: 2124871467}
+  titleTMP: {fileID: 2052343647}
+  subtitleTMP: {fileID: 408151214}
+  artistTMP: {fileID: 860764342}
+  songFolderBasePath: BMS
+  currentPath: 
+  currentFumenPath: 
+--- !u!4 &1028191008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028191006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1128956475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,7 +1730,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1429758718
 AudioSource:
@@ -1839,7 +1871,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1604909593
 GameObject:
@@ -1884,7 +1916,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1671179241
 GameObject:
@@ -2071,7 +2103,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 409152411
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 1711684220, guid: d9015415d4c6943f88f51c2251b52759, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2097,7 +2129,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1685503278
 MonoBehaviour:
