@@ -6,7 +6,7 @@ namespace Play {
 
     public float time;
     public static readonly float SpawnY = 4f;
-    public static readonly float DespawnY = -1.5f;
+    public static readonly float DespawnY = -1.22f;
     public static readonly float EpsilonY = 0.01f;
 
     private void Start() {
@@ -16,14 +16,20 @@ namespace Play {
     private void Update() {
       float y = transform.position.y;
       if (y < DespawnY) {
+        FixOffset();
         gameObject.SetActive(false);
       } else if (y < SpawnY) {
         sr.enabled = true;
       }
+    }
 
-      // Adjust time when lost sync.
-      if (Mathf.Abs(y + 0.05f) < EpsilonY) {
-        Debug.LogFormat("currentTime=<{0}>, timeDiff=<{1}>", FumenScroller.instance.currentTime, time - FumenScroller.instance.currentTime);
+    private void FixOffset() {
+      // Expected arriving time is 'time', but actual arriving time is 'currentTime'.
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
+      float offset = currentTime - time;
+      Debug.LogFormat("currentTime=<{0}>, offset=<{1}>", currentTime, offset);
+      if (offset > 0) {
+        FumenScroller.instance.MoveDown(FumenScroller.instance.Speed * offset);
       }
     }
   }

@@ -4,7 +4,7 @@
     }
 
     private void Update() {
-      float currentTime = FumenScroller.instance.currentTime;
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
       float d = currentTime - time;
 
       if (d >= -FumenManager.instance.goodRange) {

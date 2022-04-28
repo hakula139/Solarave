@@ -9,7 +9,7 @@ namespace Play {
     public KeyController lane;
 
     public static readonly float SpawnY = 4f;
-    public static readonly float DespawnY = -1.5f;
+    public static readonly float DespawnY = -1.3f;
 
     private void Start() {
       sr = GetComponent<SpriteRenderer>();
@@ -23,7 +23,7 @@ namespace Play {
         sr.enabled = true;
       }
 
-      float currentTime = FumenScroller.instance.currentTime;
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
       float d = currentTime - time;
 
       if (d > FumenManager.instance.badRange) {

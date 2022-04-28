@@ -45,7 +45,7 @@ namespace Play {
       noteClone.SetActive(true);
 
       NoteObject noteObject = noteClone.GetComponent<NoteObject>();
-      noteObject.time = y * 240000f / FumenScroller.instance.bpm;
+      noteObject.time = y * 2.4e5f / FumenScroller.instance.bpm;
       notes.Enqueue(noteObject);
 
       // Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, keyAssigned, noteObject.time);
@@ -68,7 +68,7 @@ namespace Play {
     }
 
     public virtual void PlayKeySound() {
-      float currentTime = FumenScroller.instance.currentTime;
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
 
       if (currentKeySound is null || currentKeySound.isTriggered) {
         // Try to find the latest key sound to play.
@@ -93,7 +93,7 @@ namespace Play {
     }
 
     public void JudgeNote() {
-      float currentTime = FumenScroller.instance.currentTime;
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
       if (!notes.TryPeek(out NoteObject noteObject)) {
         return;
       }

@@ -88,28 +88,22 @@ namespace Play {
     }
 
     private void Update() {
-      if (lastJudgeTime > 0f && FumenScroller.instance.currentTime - lastJudgeTime > JudgeDuration) {
+      if (lastJudgeTime > 0f && FumenScroller.instance.currentTime.DataMilli - lastJudgeTime > JudgeDuration) {
         ClearJudge();
         ClearFastSlow();
         lastJudgeTime = 0f;
       }
 
-      if (FumenScroller.instance.TimeLeft <= 0) {
-        EnterResultScene();
-      } else if (Input.GetKeyDown(KeyCode.Escape)) {
-        if (judgedCount == poorCount) {
+      if (FumenScroller.instance.TimeLeft <= 0 || Input.GetKeyDown(KeyCode.Escape)) {
+        if (judgedCount == missCount) {
           // Directly return to Select scene if the player hits nothing.
           SceneTransitionManager.instance.EnterScene("Select");
         } else {
-          EnterResultScene();
+          FumenScroller.instance.Disable();
+          UpdateResult();
+          SceneTransitionManager.instance.EnterScene("Result");
         }
       }
-    }
-
-    public void EnterResultScene() {
-      FumenScroller.instance.Disable();
-      UpdateResult();
-      SceneTransitionManager.instance.EnterScene("Result");
     }
 
     protected void NoteJudge(Judge judge, int scoreAdded = 0, int comboAdded = 1, float gaugeAdded = 0) {
@@ -180,7 +174,7 @@ namespace Play {
     }
 
     public void UpdateJudge(Judge judge, bool displayCombo) {
-      lastJudgeTime = FumenScroller.instance.currentTime;
+      lastJudgeTime = FumenScroller.instance.currentTime.DataMilli;
       StringBuilder judgeText = new(SpriteAssetHelper.instance.GetJudge(judge));
       if (displayCombo) {
         _ = judgeText.Append("  ").Append(SpriteAssetHelper.instance.GetComboInJudge(judge, combo));
