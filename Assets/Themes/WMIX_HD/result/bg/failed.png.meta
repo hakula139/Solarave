@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg
+      name: bg_failed
       rect:
         serializedVersion: 2
         x: 0
@@ -243,7 +243,7 @@ TextureImporter:
       flash_1: 1560646554
       spinner_0: -1205688433
       flash_0: -644543201
-      bg: -1243199432
+      bg_failed: -1243199432
       spinner_1: 437545371
       failed: -673482598
   spritePackingTag: 

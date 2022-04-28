@@ -57,6 +57,8 @@ namespace Play {
     public float gauge;
     public float minGauge;
     public float maxGauge = 100f;
+    public float clearGauge;
+    public float failedGauge = 2f;
 
     private float lastJudgeTime;
     private static readonly float JudgeDuration = 1000f;  // ms
@@ -77,7 +79,9 @@ namespace Play {
       >= 200f / 9f => DjLevel.E,
       _ => DjLevel.F
     };
-    public int DisplayedGauge => Mathf.FloorToInt(gauge) - (Mathf.FloorToInt(gauge) % 2);
+    public int DisplayedGauge => Mathf.FloorToInt(gauge) + (Mathf.FloorToInt(gauge) % 2);
+    public bool IsCleared => gauge >= clearGauge;  // stage cleared or not
+    public bool IsFailed => gauge < failedGauge;  // sudden death in stage
 
     private void Awake() {
       instance = this;

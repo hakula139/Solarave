@@ -100,11 +100,16 @@ namespace Play {
     private void InitializeGameManager() {
       switch (Select.ConfigManager.instance.gaugeMode) {
         case Select.GaugeMode.AEASY:
+          GameManager.instance.minGauge = 2f;
+          GameManager.instance.UpdateGauge(20f);
+          GameManager.instance.clearGauge = 60f;
+          break;
         case Select.GaugeMode.EASY:
         case Select.GaugeMode.NORMAL:
         default:
           GameManager.instance.minGauge = 2f;
           GameManager.instance.UpdateGauge(20f);
+          GameManager.instance.clearGauge = 80f;
           break;
       }
     }

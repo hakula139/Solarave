@@ -7,7 +7,7 @@ namespace Select {
     NORMAL,
     HARD,
     EXHARD,
-    DAN,
+    GRADE,
   }
 
   public class ConfigManager : MonoBehaviour {
