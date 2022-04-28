@@ -7,16 +7,18 @@ namespace Play {
     public Animator judgeLineLight;
     public Animator progressBar;
     public Animator difficultyFrame;
+    public GameObject separatorPrefab;
 
     public bool isEnabled;
     public float bpm;
     public float baseSpeed;
     public float hiSpeed;
-    public float Speed => bpm * baseSpeed * hiSpeed / 24000f * Time.deltaTime;
-    public float currentTime;   // ms
+    public float Speed => bpm * baseSpeed * hiSpeed / 2.4e7f;
+    public float SpeedRatio => baseSpeed * hiSpeed / 100f;
+    public PreciseTime currentTime = new();
     public float lastNoteTime;  // ms
     public float offset;        // ms
-    public float TimeLeft => lastNoteTime - currentTime;
+    public float TimeLeft => lastNoteTime - currentTime.DataMilli;
     public float progressBarTrackLength;
 
     private void Awake() {
@@ -25,11 +27,11 @@ namespace Play {
 
     private void Update() {
       if (isEnabled) {
-        float deltaTime = Time.deltaTime * 1000f;
-        currentTime += deltaTime;
+        _ = currentTime.Add(Time.deltaTime);
 
-        transform.Translate(Speed * Vector3.down);
-        float progressBarSpeed = progressBarTrackLength * deltaTime / lastNoteTime;
+        float deltaTimeMilli = Time.deltaTime * 1000f;
+        MoveDown(Speed * deltaTimeMilli);
+        float progressBarSpeed = progressBarTrackLength * deltaTimeMilli / lastNoteTime;
         progressBar.gameObject.transform.Translate(progressBarSpeed * Vector3.down);
       }
     }
@@ -52,6 +54,19 @@ namespace Play {
       progressBar.speed = animSpeed;
       difficultyFrame.SetTrigger("IsEnabled");
       difficultyFrame.speed = animSpeed;
+    }
+
+    public void SetupSeparator(float y) {
+      GameObject separatorClone = Instantiate(separatorPrefab, transform);
+      separatorClone.transform.Translate(SpeedRatio * y * Vector3.up);
+      separatorClone.SetActive(true);
+
+      SeparatorObject separatorObject = separatorClone.GetComponent<SeparatorObject>();
+      separatorObject.time = y * 2.4e5f / bpm;
+    }
+
+    public void MoveDown(float y) {
+      transform.Translate(y * Vector3.down);
     }
   }
 }

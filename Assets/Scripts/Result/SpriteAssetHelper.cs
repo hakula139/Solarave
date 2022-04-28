@@ -4,11 +4,25 @@ namespace Result {
   public class SpriteAssetHelper : MonoBehaviour {
     public static SpriteAssetHelper instance;
 
-    public Sprite[] djLevelLargeSprites = new Sprite[8];
-    public Sprite[] djLevelSprites = new Sprite[9];
+    public Sprite[] backgroundSprites;
+    public Sprite[] titleSprites;
+
+    public Sprite[] djLevelLargeSprites;
+    public Sprite[] gaugeModeSprites;
+
+    public Sprite[] clearTypeSprites;
+    public Sprite[] djLevelSprites;
 
     private void Awake() {
       instance = this;
+    }
+
+    public Sprite GetBackgroundSprite(bool isCleared) {
+      return isCleared ? backgroundSprites[1] : backgroundSprites[0];
+    }
+
+    public Sprite GetTitleSprite(bool isCleared) {
+      return isCleared ? titleSprites[1] : titleSprites[0];
     }
 
     public Sprite GetDjLevelLargeSprite(Play.DjLevel djLevel) {
@@ -24,6 +38,26 @@ namespace Result {
         Play.DjLevel.MAX => djLevelLargeSprites[7],  // use AAA sprite
         _ => djLevelLargeSprites[0],
       };
+    }
+
+    public Sprite GetGaugeModeSprite(Select.GaugeMode gaugeMode) {
+      return gaugeMode switch {
+        Select.GaugeMode.EASY => gaugeModeSprites[0],
+        Select.GaugeMode.NORMAL => gaugeModeSprites[1],
+        Select.GaugeMode.HARD => gaugeModeSprites[2],
+        _ => null,  // not implemented yet
+      };
+    }
+
+    public Sprite GetClearTypeSprite(Select.GaugeMode gaugeMode, bool isCleared) {
+      return !isCleared
+          ? clearTypeSprites[0]
+          : gaugeMode switch {
+            Select.GaugeMode.EASY => clearTypeSprites[1],
+            Select.GaugeMode.NORMAL => clearTypeSprites[2],
+            Select.GaugeMode.HARD => clearTypeSprites[3],
+            _ => null,  // not implemented yet
+          };
     }
 
     public Sprite GetDjLevelSprite(Play.DjLevel djLevel) {

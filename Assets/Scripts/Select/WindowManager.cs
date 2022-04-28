@@ -12,9 +12,15 @@ namespace Select {
     private void Start() {
       float currentRatio = (float)Screen.width / Screen.height;
       if (currentRatio < targetRatio) {
-        Screen.SetResolution(Screen.width, (int)Mathf.Floor(Screen.width / targetRatio), Screen.fullScreenMode);
+        Screen.SetResolution(Screen.width, Mathf.FloorToInt(Screen.width / targetRatio), Screen.fullScreenMode);
       } else if (currentRatio > targetRatio) {
-        Screen.SetResolution((int)Mathf.Floor(Screen.height * targetRatio), Screen.height, Screen.fullScreenMode);
+        Screen.SetResolution(Mathf.FloorToInt(Screen.height * targetRatio), Screen.height, Screen.fullScreenMode);
+      }
+    }
+
+    private void Update() {
+      if (Input.GetKeyDown(KeyCode.Escape)) {
+        Application.Quit();
       }
     }
   }

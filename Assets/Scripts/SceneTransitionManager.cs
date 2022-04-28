@@ -6,7 +6,8 @@ public class SceneTransitionManager : MonoBehaviour {
   public static SceneTransitionManager instance;
 
   public Animator transition;
-  public const float transitionDuration = 0.5f;
+  protected static readonly float TransitionDuration = 0.5f;  // s
+  protected static readonly WaitForSeconds TransitionWaitForDuration = new(TransitionDuration);
 
   private void Awake() {
     instance = this;
@@ -23,7 +24,7 @@ public class SceneTransitionManager : MonoBehaviour {
 
   private void TransitionIn() {
     transition.SetTrigger("In");
-    Invoke(nameof(DisableEffectLayer), transitionDuration);
+    Invoke(nameof(DisableEffectLayer), TransitionDuration);
   }
 
   private void TransitionOut() {
@@ -32,7 +33,7 @@ public class SceneTransitionManager : MonoBehaviour {
   }
 
   private IEnumerator LoadScene(string sceneName) {
-    yield return new WaitForSeconds(transitionDuration);
+    yield return TransitionWaitForDuration;
     SceneManager.LoadScene(sceneName);
   }
 

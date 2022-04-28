@@ -7,8 +7,9 @@ namespace Play {
     public bool isClickable = false;
     public float time;
     public KeyController lane;
-    public float spawnY;
-    public float despawnY;
+
+    public static readonly float SpawnY = 4f;
+    public static readonly float DespawnY = -1.3f;
 
     private void Start() {
       sr = GetComponent<SpriteRenderer>();
@@ -16,13 +17,13 @@ namespace Play {
 
     private void Update() {
       float y = transform.position.y;
-      if (y < despawnY) {
+      if (y < DespawnY) {
         sr.enabled = false;
-      } else if (y < spawnY) {
+      } else if (y < SpawnY) {
         sr.enabled = true;
       }
 
-      float currentTime = FumenScroller.instance.currentTime;
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
       float d = currentTime - time;
 
       if (d > FumenManager.instance.badRange) {

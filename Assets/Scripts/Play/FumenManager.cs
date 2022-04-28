@@ -21,17 +21,25 @@ namespace Play {
     private readonly BMS.Model bms = new();
     public int totalNotes;
     public string fumenPath;
-
+    public float startDelay;    // ms
     public float inputLatency;  // ms
+
     public float pgreatRange;   // ms
     public float greatRange;    // ms
     public float goodRange;     // ms
     public float badRange;      // ms
     public float poorRange;     // ms
 
+    public float pgreatGauge;
+    public float greatGauge;
+    public float goodGauge;
+    public float badGauge;
+    public float poorGauge;
+    public float missGauge;
+
     private void Awake() {
       instance = this;
-      fumenPath = Select.SongManager.instance.currentFumenPath;
+      fumenPath = Select.SongManager.CurrentFumenPath;
     }
 
     private void Start() {
@@ -50,7 +58,8 @@ namespace Play {
     public IEnumerator Initialize() {
       InitializeUI();
       InitializeFumenScroller();
-      yield return StartCoroutine(InitializeKeySounds());
+      InitializeGameManager();
+      InitializeKeySounds();
 
       float startY = 0f;
       foreach (BMS.Measure measure in bms.content.measures) {
@@ -58,9 +67,13 @@ namespace Play {
         InitializeNotesByMeasure(measure, startY);
         yield return null;
         startY += measure.length;
+        FumenScroller.instance.SetupSeparator(startY);
       }
 
-      StartPlaying();
+      InitializeJudgeRange();
+      InitializeGrooveGauge();
+
+      Invoke(nameof(StartPlaying), startDelay / 1000f);
     }
 
     private void InitializeUI() {
@@ -81,10 +94,84 @@ namespace Play {
 
     private void InitializeFumenScroller() {
       FumenScroller.instance.bpm = bms.header.bpm;
-      FumenScroller.instance.hiSpeed *= 150f / bms.header.bpm;  // fix hi-speed
+      FumenScroller.instance.hiSpeed = Select.ConfigManager.instance.hiSpeed * 150f / bms.header.bpm;  // fix hi-speed
     }
 
-    private IEnumerator InitializeKeySounds() {
+    private void InitializeGameManager() {
+      switch (Select.ConfigManager.instance.gaugeMode) {
+        case Select.GaugeMode.AEASY:
+          GameManager.instance.minGauge = 2f;
+          GameManager.instance.UpdateGauge(20f);
+          GameManager.instance.clearGauge = 60f;
+          break;
+        case Select.GaugeMode.EASY:
+        case Select.GaugeMode.NORMAL:
+        default:
+          GameManager.instance.minGauge = 2f;
+          GameManager.instance.UpdateGauge(20f);
+          GameManager.instance.clearGauge = 80f;
+          break;
+      }
+    }
+
+    private void InitializeJudgeRange() {
+      switch (bms.header.rank) {
+        case BMS.JudgeRank.Easy:
+          pgreatRange = 21f;
+          greatRange = 60f;
+          goodRange = 120f;
+          badRange = 200f;
+          poorRange = 1000f;
+          break;
+        case BMS.JudgeRank.Hard:
+          pgreatRange = 15f;
+          greatRange = 30f;
+          goodRange = 60f;
+          badRange = 200f;
+          poorRange = 1000f;
+          break;
+        case BMS.JudgeRank.VeryHard:
+          pgreatRange = 8f;
+          greatRange = 24f;
+          goodRange = 40f;
+          badRange = 200f;
+          poorRange = 1000f;
+          break;
+        case BMS.JudgeRank.Normal:
+        default:
+          pgreatRange = 18f;
+          greatRange = 40f;
+          goodRange = 100f;
+          badRange = 200f;
+          poorRange = 1000f;
+          break;
+      }
+    }
+
+    private void InitializeGrooveGauge() {
+      switch (Select.ConfigManager.instance.gaugeMode) {
+        case Select.GaugeMode.AEASY:
+        case Select.GaugeMode.EASY:
+          pgreatGauge = bms.header.total / totalNotes * 1.2f;
+          greatGauge = pgreatGauge;
+          goodGauge = pgreatGauge / 2f;
+          badGauge = -4f;
+          poorGauge = -2f;
+          missGauge = -6f;
+          break;
+        case Select.GaugeMode.NORMAL:
+        default:
+          pgreatGauge = bms.header.total / totalNotes;
+          greatGauge = pgreatGauge;
+          goodGauge = pgreatGauge / 2f;
+          badGauge = -3.2f;
+          poorGauge = -1.6f;
+          missGauge = -4.8f;
+          break;
+      }
+    }
+
+    private void InitializeKeySounds() {
       string baseDir = Directory.GetParent(Path.Combine(Application.streamingAssetsPath, fumenPath)).FullName;
       foreach ((string relativeWavPath, int wavId) in bms.header.wavPaths.Select((item, i) => (item, i))) {
         if (string.IsNullOrEmpty(relativeWavPath)) {
@@ -95,9 +182,9 @@ namespace Play {
         if (!File.Exists(wavPath) && !File.Exists(wavPath = wavPath.Replace(".wav", ".ogg"))) {
           Debug.LogWarningFormat("audio file not found, path=<{0}>", wavPath);
         } else if (wavPath.EndsWith(".wav")) {
-          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV, bms.header.volume));
+          _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.WAV, bms.header.volume));
         } else if (wavPath.EndsWith(".ogg")) {
-          yield return StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS, bms.header.volume));
+          _ = StartCoroutine(AudioLoader.instance.Load(wavPath, wavId, AudioType.OGGVORBIS, bms.header.volume));
         }
       }
     }

@@ -12,8 +12,9 @@ namespace Play {
     public GameObject notePrefab;
     public Animator laserPrefab;
     public Animator bombPrefab;
-    protected const int BombPoolSize = 4;
-    protected const float BombDuration = 0.2f;  // s
+    protected static readonly int BombPoolSize = 4;
+    protected static readonly float BombDuration = 0.2f;  // s
+    protected static readonly WaitForSeconds BombWaitForDuration = new(BombDuration);
 
     public readonly Queue<NoteObject> notes = new();
     protected readonly Queue<KeySound> keySounds = new();
@@ -41,12 +42,11 @@ namespace Play {
     public float SetupNote(float start, float length, BMS.Note note) {
       GameObject noteClone = Instantiate(notePrefab, fumenArea.transform);
       float y = start + (length * note.position);
-      float ratio = FumenScroller.instance.baseSpeed * FumenScroller.instance.hiSpeed / 100f;
-      noteClone.transform.Translate(ratio * y * Vector3.up);
+      noteClone.transform.Translate(FumenScroller.instance.SpeedRatio * y * Vector3.up);
       noteClone.SetActive(true);
 
       NoteObject noteObject = noteClone.GetComponent<NoteObject>();
-      noteObject.time = y * 240000f / FumenScroller.instance.bpm;
+      noteObject.time = y * 2.4e5f / FumenScroller.instance.bpm;
       notes.Enqueue(noteObject);
 
       // Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, keyAssigned, noteObject.time);
@@ -69,7 +69,7 @@ namespace Play {
     }
 
     public virtual void PlayKeySound() {
-      float currentTime = FumenScroller.instance.currentTime;
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
 
       if (currentKeySound is null || currentKeySound.isTriggered) {
         // Try to find the latest key sound to play.
@@ -94,7 +94,7 @@ namespace Play {
     }
 
     public void JudgeNote() {
-      float currentTime = FumenScroller.instance.currentTime;
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
       if (!notes.TryPeek(out NoteObject noteObject)) {
         return;
       }
@@ -112,16 +112,16 @@ namespace Play {
           } else if (error <= FumenManager.instance.greatRange) {
             // Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GreatJudge();
-            GameManager.instance.IndicateFastSlow(isEarly);
+            GameManager.instance.UpdateFastSlow(isEarly);
             TriggerBomb();
           } else if (error <= FumenManager.instance.goodRange) {
             // Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GoodJudge();
-            GameManager.instance.IndicateFastSlow(isEarly);
+            GameManager.instance.UpdateFastSlow(isEarly);
           } else {
             // Debug.LogFormat("bad: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.BadJudge();
-            GameManager.instance.IndicateFastSlow(isEarly);
+            GameManager.instance.UpdateFastSlow(isEarly);
           }
           noteObject.Disable();
         } else if (error <= FumenManager.instance.poorRange && isEarly) {
@@ -153,7 +153,7 @@ namespace Play {
     }
 
     protected IEnumerator DisableBomb(Animator bomb) {
-      yield return new WaitForSeconds(BombDuration);
+      yield return BombWaitForDuration;
       bomb.gameObject.SetActive(false);
     }
   }

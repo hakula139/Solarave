@@ -7,7 +7,7 @@ namespace Select {
   public class SongManager : MonoBehaviour {
     public static SongManager instance;
 
-    protected Transform container;
+    public Transform container;
     public GameObject songListItemPrefab;
     public GameObject folderListItemPrefab;
 
@@ -17,23 +17,25 @@ namespace Select {
     public TMP_Text artistTMP;
 
     public string songFolderBasePath;
-    public string currentPath;
-    public string currentFumenPath;
+    public static string CurrentPath;
+    public static string CurrentFumenPath;
 
     private void Awake() {
       instance = this;
     }
 
     private void Start() {
-      container = transform.Find("Viewport/Container");
       songFolderBasePath = Path.Combine(Application.streamingAssetsPath, songFolderBasePath);
-      ReadSongFolder(songFolderBasePath);
+      if (string.IsNullOrEmpty(CurrentPath)) {
+        CurrentPath = songFolderBasePath;
+      }
+      ReadSongFolder(CurrentPath);
     }
 
     private void Update() {
       // Right click to return.
       if (Input.GetMouseButtonDown(1)) {
-        string parentPath = Directory.GetParent(currentPath).FullName;
+        string parentPath = Directory.GetParent(CurrentPath).FullName;
         // Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
         if (parentPath.StartsWith(songFolderBasePath)) {
           SoundEffectsManager.instance.closeSoundEffect.Play();
@@ -49,7 +51,7 @@ namespace Select {
 
       ClearSelectList();
       ClearSongInfo();
-      currentPath = path;
+      CurrentPath = path;
 
       string[] extensions = new[] { ".bms", ".bme" };
       foreach (string childPath in Directory.GetDirectories(path)) {
@@ -109,7 +111,7 @@ namespace Select {
     }
 
     public void EnterPlayScene(string path) {
-      currentFumenPath = path;
+      CurrentFumenPath = path;
       SceneTransitionManager.instance.EnterScene("Play");
     }
   }

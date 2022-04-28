@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -502,6 +502,384 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: gauge_frame
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 502
+        width: 320
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e15562f36d80401fab238a45b7cc94e
+      internalID: -1000959775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: groove
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 692
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 232d9ddf327a34b36affab248f92650b
+      internalID: -129744017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hard
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 674
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1cb24aba762441a69e9230f5023e354
+      internalID: -2013560573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: g-attack
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 602
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ef3643f29a92455aa9c863e19c7e1b7
+      internalID: -162035052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: p-attack
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 620
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 291b5b4958bcd473382115ab24437191
+      internalID: -520818206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hazard
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 656
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a383104c203548e4a7300266956ce38
+      internalID: -1828153601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: easy
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 638
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8754909f88114a7ca9ff7881a97cf5f
+      internalID: 1647743483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: course
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 568
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e55ef1fab15d4664bde125598f600b6
+      internalID: -604155870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grade
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 550
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc4f3b58afed64c30aca6e37a36e33a0
+      internalID: 207743052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nonstop
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 532
+        width: 110
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b7b13dd395af4a04980b22beeeee6b9
+      internalID: -834115656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full_combo_0
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 699
+        width: 82
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db42ebf1be46b46fa96f83dbae5de1a1
+      internalID: -1497545350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full_combo_1
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 683
+        width: 82
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b195de97ec6346cebf6f5516d5fc781
+      internalID: 442074695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full_combo_2
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 667
+        width: 82
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cd33443537674c79a3f6ded883d7a9a
+      internalID: 1488316700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hard_clear
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 650
+        width: 82
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4185a4c04658645b799124c12e5aba5a
+      internalID: -1711679895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clear
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 634
+        width: 82
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2147ca44dda294046b4acdda0d3e1412
+      internalID: -1697037943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: easy_clear
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 618
+        width: 82
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0753f9cb64ca4ad4822b4961942ba15
+      internalID: 875943895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: failed
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 602
+        width: 82
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e329fa6db0fa54f00b7d319aca999f5f
+      internalID: -1477041911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: no_play
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 586
+        width: 82
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc6f243c3f67e4536bc2b8357aa05830
+      internalID: 1181718997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -514,15 +892,30 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       judge_detail_panel_2p: 1911702881
+      groove: -129744017
+      easy: 1647743483
       a: 1458138716
+      nonstop: -834115656
+      no_play: 1181718997
+      grade: 207743052
+      hard_clear: -1711679895
       pgreat_1: 732355441
+      clear: -1697037943
       stage_result_clear: 2117359045
       b: 1125877760
+      full_combo_1: 442074695
+      gauge_frame: -1000959775
       c: 1879337162
       dj_level_frame: 1402438736
       score_panel_2p: 1309545254
+      hazard: -1828153601
+      full_combo_0: -1497545350
+      p-attack: -520818206
+      g-attack: -162035052
       max: 1909628507
+      course: -604155870
       score_panel_1p: -1195411599
+      full_combo_2: 1488316700
       aaa: -245141036
       pgreat_0: -1902083218
       stage_result_failed: 1477855790
@@ -530,8 +923,11 @@ TextureImporter:
       aa: 709572005
       pgreat_2: -588443185
       f: 2003083134
+      hard: -2013560573
+      easy_clear: 875943895
       e: -1089507370
       d: 672824789
+      failed: -1477041911
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

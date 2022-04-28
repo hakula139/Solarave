@@ -1,4 +1,5 @@
-using System.Linq;
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace Play {
@@ -12,32 +13,69 @@ namespace Play {
       instance = this;
     }
 
-    protected string ToSprite(string name) {
+    public string ToSprite(int id) {
+      return $"<sprite={id}>";
+    }
+
+    public string ToSpriteByName(string name) {
       return $"<sprite name=\"{name}\">";
     }
 
-    protected string ToSpriteAnimation(int start, int stop, float frameRate = 60f) {
+    public string ToSpriteByName(char name) {
+      return $"<sprite name=\"{name}\">";
+    }
+
+    public string ToSpriteAnimation(int start, int stop, float frameRate = 60f) {
       return $"<sprite anim=\"{start},{stop},{frameRate}\">";
+    }
+
+    private List<int> SplitInteger(int integer, int digitBase = 10) {
+      List<int> split = new();
+      if (integer < 0 || digitBase < 1) {
+        return split;
+      }
+
+      do {
+        split.Add(integer % digitBase);
+        integer /= digitBase;
+      } while (integer > 0);
+
+      split.Reverse();
+      return split;
+    }
+
+    public string GetInteger(int integer) {
+      StringBuilder text = new();
+      foreach (int digit in SplitInteger(integer)) {
+        _ = text.Append(ToSprite(digit));
+      }
+      return text.ToString();
     }
 
     public string GetJudge(Judge judge) {
       return judge switch {
         Judge.PGREAT => ToSpriteAnimation(40, 42),
-        Judge.GREAT => ToSprite("great"),
-        Judge.GOOD => ToSprite("good"),
-        Judge.BAD => ToSprite("bad"),
-        Judge.POOR => ToSprite("poor"),
+        Judge.GREAT => ToSpriteByName("great"),
+        Judge.GOOD => ToSpriteByName("good"),
+        Judge.BAD => ToSpriteByName("bad"),
+        Judge.POOR => ToSpriteByName("poor"),
         _ => "",  // should not reach here.
       };
     }
 
-    public string GetInteger(Judge judge, int integer) {
-      return judge != Judge.PGREAT
-          ? integer.ToString().Aggregate("", (acc, digit) => acc + ToSprite(digit.ToString()))
-          : integer.ToString().Aggregate("", (acc, digit) => {
-            int start = 10 + (3 * (digit - '0'));
-            return acc + ToSpriteAnimation(start, start + 2);
-          });
+    public string GetComboInJudge(Judge judge, int combo) {
+      StringBuilder text = new();
+      if (judge == Judge.PGREAT) {
+        foreach (int digit in SplitInteger(combo)) {
+          int i = 10 + (3 * digit);
+          _ = text.Append(ToSpriteAnimation(i, i + 2));
+        }
+      } else {
+        foreach (int digit in SplitInteger(combo)) {
+          _ = text.Append(ToSpriteByName(digit.ToString()));
+        }
+      }
+      return text.ToString();
     }
 
     public Sprite GetFastSlowIndicatorSprite(bool isEarly) {
