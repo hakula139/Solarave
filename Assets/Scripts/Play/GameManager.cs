@@ -37,6 +37,8 @@ namespace Play {
     public TMP_Text exScoreTMP;
     public TMP_Text maxComboTMP;
     public TMP_Text gaugeTMP;
+    public SpriteRenderer gaugeBarSr;
+    private static readonly float GaugeBarWidth = 0.07f;
     public TMP_Text judgeTMP;
     public Image fsSprite;
 
@@ -170,6 +172,7 @@ namespace Play {
     public void UpdateGauge(float gauge) {
       this.gauge = Mathf.Min(Mathf.Max(gauge, minGauge), maxGauge);
       gaugeTMP.text = SpriteAssetHelper.instance.GetInteger(DisplayedGauge);
+      gaugeBarSr.size = new Vector2(DisplayedGauge / 2 * GaugeBarWidth, gaugeBarSr.size.y);
     }
 
     public void UpdateJudge(Judge judge, bool displayCombo) {

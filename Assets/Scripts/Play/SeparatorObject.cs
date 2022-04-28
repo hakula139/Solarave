@@ -7,7 +7,7 @@ namespace Play {
     public float time;
     public static readonly float SpawnY = 4f;
     public static readonly float DespawnY = -1.5f;
-    public static readonly float EpsilonY = 1e-2f;
+    public static readonly float EpsilonY = 0.01f;
 
     private void Start() {
       sr = GetComponent<SpriteRenderer>();
