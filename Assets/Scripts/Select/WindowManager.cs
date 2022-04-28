@@ -17,5 +17,11 @@ namespace Select {
         Screen.SetResolution(Mathf.FloorToInt(Screen.height * targetRatio), Screen.height, Screen.fullScreenMode);
       }
     }
+
+    private void Update() {
+      if (Input.GetKeyDown(KeyCode.Escape)) {
+        Application.Quit();
+      }
+    }
   }
 }
