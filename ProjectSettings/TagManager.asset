@@ -46,11 +46,14 @@ TagManager:
   - name: PlayPanel
     uniqueID: 2791878399
     locked: 0
-  - name: FumenFrame
+  - name: FumenPanel
     uniqueID: 155537965
     locked: 0
   - name: KeysFrame
     uniqueID: 2083288225
+    locked: 0
+  - name: GrooveGauge
+    uniqueID: 163739873
     locked: 0
   - name: UI
     uniqueID: 2385493663

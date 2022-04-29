@@ -1,49 +1,57 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Play {
   public class KeyController : MonoBehaviour {
     protected SpriteRenderer sr;
+    protected List<Animator> bombPool = new();
 
     public KeyCode keyAssigned;
     public GameObject fumenArea;
     public GameObject notePrefab;
-    public Animator bombPrefab;
     public Animator laserPrefab;
-    protected const float BombDuration = 0.2f;  // s
+    protected static readonly float LaserDuration = 0.05f;  // s
+    public Animator bombPrefab;
+    protected static readonly int BombPoolSize = 4;
+    protected static readonly float BombDuration = 0.2f;  // s
+    protected static readonly WaitForSeconds BombWaitForDuration = new(BombDuration);
 
-    public readonly Queue<GameObject> notes = new();
+    public readonly Queue<NoteObject> notes = new();
     protected readonly Queue<KeySound> keySounds = new();
     protected KeySound currentKeySound = null;
 
     private void Start() {
       sr = GetComponent<SpriteRenderer>();
+      SetupBombPool();
     }
 
     private void Update() {
       if (Input.GetKeyDown(keyAssigned)) {
         sr.color = new Color(1, 1, 1, 0.25f);
-        laserPrefab.SetBool("KeyDown", true);
-        JudgeNote();
-        PlayKeySound();
+        TriggerLaser();
+        if (!FumenManager.instance.isAutoMode) {
+          JudgeNote();
+          PlayKeySound();
+        }
       }
 
       if (Input.GetKeyUp(keyAssigned)) {
         sr.color = new Color(1, 1, 1, 0);
-        laserPrefab.SetBool("KeyDown", false);
+        DisableLaser();
       }
     }
 
     public float SetupNote(float start, float length, BMS.Note note) {
       GameObject noteClone = Instantiate(notePrefab, fumenArea.transform);
       float y = start + (length * note.position);
-      float ratio = FumenScroller.instance.baseSpeed * FumenScroller.instance.hiSpeed / 100f;
-      noteClone.transform.Translate(ratio * y * Vector3.up);
+      noteClone.transform.Translate(FumenScroller.instance.SpeedRatio * y * Vector3.up);
       noteClone.SetActive(true);
-      notes.Enqueue(noteClone);
 
       NoteObject noteObject = noteClone.GetComponent<NoteObject>();
-      noteObject.time = y * 240000f / FumenScroller.instance.bpm;
+      noteObject.time = y * 2.4e5f / FumenScroller.instance.bpm;
+      notes.Enqueue(noteObject);
+
       // Debug.LogFormat("setup note: position=<{0}> keyAssigned=<{1}> time=<{2}>", noteClone.transform.position, keyAssigned, noteObject.time);
 
       SetupKeySound(note.wavId, noteObject.time);
@@ -64,9 +72,9 @@ namespace Play {
     }
 
     public virtual void PlayKeySound() {
-      float currentTime = FumenScroller.instance.currentTime;
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
 
-      if (currentKeySound is null || currentKeySound.isTriggered) {
+      if (currentKeySound == null || currentKeySound.isTriggered) {
         // Try to find the latest key sound to play.
         while (keySounds.TryPeek(out KeySound keySound) && currentTime >= keySound.time - FumenManager.instance.poorRange) {
           currentKeySound = keySound;
@@ -89,12 +97,10 @@ namespace Play {
     }
 
     public void JudgeNote() {
-      if (!notes.TryPeek(out GameObject note)) {
+      float currentTime = FumenScroller.instance.currentTime.DataMilli;
+      if (!notes.TryPeek(out NoteObject noteObject)) {
         return;
       }
-
-      float currentTime = FumenScroller.instance.currentTime;
-      NoteObject noteObject = note.GetComponent<NoteObject>();
       float d = currentTime - noteObject.time - FumenManager.instance.inputLatency;
       float error = Mathf.Abs(d);
       bool isEarly = d < 0;
@@ -104,30 +110,66 @@ namespace Play {
           if (error <= FumenManager.instance.pgreatRange) {
             // Debug.LogFormat("pgreat: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.PgreatJudge();
+            GameManager.instance.ClearFastSlow();
             TriggerBomb();
           } else if (error <= FumenManager.instance.greatRange) {
             // Debug.LogFormat("great: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GreatJudge();
+            GameManager.instance.UpdateFastSlow(isEarly);
             TriggerBomb();
           } else if (error <= FumenManager.instance.goodRange) {
             // Debug.LogFormat("good: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.GoodJudge();
+            GameManager.instance.UpdateFastSlow(isEarly);
           } else {
             // Debug.LogFormat("bad: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
             GameManager.instance.BadJudge();
+            GameManager.instance.UpdateFastSlow(isEarly);
           }
           noteObject.Disable();
         } else if (error <= FumenManager.instance.poorRange && isEarly) {
           // Debug.LogFormat("poor: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, noteObject.time);
           GameManager.instance.PoorJudge();
+          GameManager.instance.ClearFastSlow();
         }
       }
     }
 
-    private void TriggerBomb() {
-      Animator bombClone = Instantiate(bombPrefab, transform);
-      bombClone.Play("Bomb");
-      Destroy(bombClone.gameObject, BombDuration);
+    protected void SetupBombPool() {
+      for (int i = 0; i < BombPoolSize; i++) {
+        Animator bombClone = Instantiate(bombPrefab, transform);
+        bombClone.gameObject.SetActive(false);
+        bombPool.Add(bombClone);
+      }
+    }
+
+    public void TriggerBomb() {
+      for (int i = 0; i < BombPoolSize; i++) {
+        if (!bombPool[i].isActiveAndEnabled) {
+          Animator bombClone = bombPool[i];
+          bombClone.gameObject.SetActive(true);
+          bombClone.Play("Bomb");
+          _ = StartCoroutine(DisableBomb(bombClone));
+          break;
+        }
+      }
+    }
+
+    public IEnumerator DisableBomb(Animator bomb) {
+      yield return BombWaitForDuration;
+      bomb.gameObject.SetActive(false);
+    }
+
+    public void TriggerLaser() {
+      laserPrefab.SetBool("KeyDown", true);
+    }
+
+    public void DisableLaser() {
+      laserPrefab.SetBool("KeyDown", false);
+    }
+
+    public void DisableLaserWithDelay() {
+      Invoke(nameof(DisableLaser), LaserDuration);
     }
   }
 }

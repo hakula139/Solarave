@@ -18,6 +18,7 @@ namespace BMS {
   public class HeaderSection {
     public int player = 1;
     public string genre;
+    public string comment;
     public string title;
     public string subtitle;
     public string FullTitle => title + (string.IsNullOrEmpty(subtitle) ? "" : $" {subtitle}");
@@ -29,9 +30,11 @@ namespace BMS {
     public int level = 0;
     public JudgeRank rank = JudgeRank.Normal;
     public float total = 160;
+    public static readonly float MinTotal = 60;
     public string banner;
     public string stageFile;
     public int? lnObj = null;
+    public float volume = 1f;
 
     public string[] wavPaths = new string[36 * 36];
     public string[] bgaPaths = new string[36 * 36];
