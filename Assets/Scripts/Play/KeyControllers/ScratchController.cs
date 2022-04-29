@@ -17,8 +17,10 @@ namespace Play {
 
       if (Input.GetKeyDown(keyAssigned) || Input.GetKeyDown(key2Assigned)) {
         laserPrefab.SetBool("KeyDown", true);
-        JudgeNote();
-        PlayKeySound();
+        if (!FumenManager.instance.isAutoMode) {
+          JudgeNote();
+          PlayKeySound();
+        }
       }
 
       if (Input.GetKeyUp(keyAssigned) || Input.GetKeyUp(key2Assigned)) {

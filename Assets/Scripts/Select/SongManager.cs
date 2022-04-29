@@ -18,7 +18,8 @@ namespace Select {
 
     public string songFolderBasePath;
     public static string CurrentPath;
-    public static string CurrentFumenPath;
+    public string currentFumenPath;
+    public bool isAutoMode;
 
     private void Awake() {
       instance = this;
@@ -35,12 +36,17 @@ namespace Select {
     private void Update() {
       // Right click to return.
       if (Input.GetMouseButtonDown(1)) {
-        string parentPath = Directory.GetParent(CurrentPath).FullName;
-        // Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
-        if (parentPath.StartsWith(songFolderBasePath)) {
-          SoundEffectsManager.instance.closeSoundEffect.Play();
-          ReadSongFolder(parentPath);
-        }
+        CloseSongFolder();
+      }
+      // Press Enter to play.
+      if (Input.GetKeyDown(KeyCode.Return) && !string.IsNullOrEmpty(currentFumenPath)) {
+        isAutoMode = false;
+        EnterSong();
+      }
+      // Press A to autoplay.
+      if (Input.GetKeyDown(KeyCode.A) && !string.IsNullOrEmpty(currentFumenPath)) {
+        isAutoMode = true;
+        EnterSong();
       }
     }
 
@@ -51,7 +57,6 @@ namespace Select {
 
       ClearSelectList();
       ClearSongInfo();
-      CurrentPath = path;
 
       string[] extensions = new[] { ".bms", ".bme" };
       foreach (string childPath in Directory.GetDirectories(path)) {
@@ -95,6 +100,25 @@ namespace Select {
       }
     }
 
+    public void EnterSongFolder(string path) {
+      // Debug.LogFormat("entering song folder, path=<{0}>", path);
+      SoundEffectsManager.instance.openSoundEffect.Play();
+      CurrentPath = path;
+      currentFumenPath = null;
+      ReadSongFolder(path);
+    }
+
+    public void CloseSongFolder() {
+      string parentPath = Directory.GetParent(CurrentPath).FullName;
+      // Debug.LogFormat("returning to parent folder, path=<{0}>", parentPath);
+      if (parentPath.StartsWith(songFolderBasePath)) {
+        SoundEffectsManager.instance.closeSoundEffect.Play();
+        CurrentPath = parentPath;
+        currentFumenPath = null;
+        ReadSongFolder(parentPath);
+      }
+    }
+
     public void SetupSongInfo(BMS.Model bms) {
       BMS.HeaderSection header = bms.header;
       genreTMP.text = header.genre;
@@ -110,8 +134,15 @@ namespace Select {
       artistTMP.text = "";
     }
 
-    public void EnterPlayScene(string path) {
-      CurrentFumenPath = path;
+    public void SelectSong(string path, BMS.Model bms) {
+      Debug.LogFormat("selected song, path=<{0}>", path);
+      SoundEffectsManager.instance.selectSoundEffect.Play();
+      currentFumenPath = path;
+      SetupSongInfo(bms);
+    }
+
+    public void EnterSong() {
+      SoundEffectsManager.instance.enterSoundEffect.Play();
       SceneTransitionManager.instance.EnterScene("Play");
     }
   }
