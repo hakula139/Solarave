@@ -4,7 +4,7 @@ namespace Play {
   public class NoteObject : MonoBehaviour {
     protected SpriteRenderer sr;
 
-    public bool isClickable = false;
+    public bool isClickable;
     public float time;
     public KeyController lane;
 
@@ -26,6 +26,13 @@ namespace Play {
       float currentTime = FumenScroller.instance.currentTime.DataMilli;
       float d = currentTime - time;
 
+      if (FumenManager.instance.isAutoMode && d >= 0 && isClickable) {
+        lane.TriggerLaser();
+        lane.JudgeNote();
+        lane.PlayKeySound();
+        lane.DisableLaserWithDelay();
+      }
+
       if (d > FumenManager.instance.badRange) {
         if (isClickable) {
           // Debug.LogFormat("miss: d=<{0}> currentTime=<{1}> noteTime=<{2}>", d, currentTime, time);
@@ -35,6 +42,7 @@ namespace Play {
         }
         gameObject.SetActive(false);
       } else if (d >= -FumenManager.instance.badRange) {
+        // Do nothing.
       } else if (d >= -FumenManager.instance.poorRange) {
         isClickable = true;
       }

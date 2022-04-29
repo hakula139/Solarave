@@ -95,8 +95,8 @@ namespace Play {
       }
 
       if (FumenScroller.instance.TimeLeft <= 0 || Input.GetKeyDown(KeyCode.Escape)) {
-        if (judgedCount == missCount) {
-          // Directly return to Select scene if the player hits nothing.
+        if (judgedCount == missCount || FumenManager.instance.isAutoMode) {
+          // Directly return to Select scene if the player hits nothing or under autoplay mode.
           SceneTransitionManager.instance.EnterScene("Select");
         } else {
           FumenScroller.instance.Disable();
@@ -114,45 +114,45 @@ namespace Play {
     }
 
     public void PgreatJudge() {
-      NoteJudge(judge: Judge.PGREAT, scoreAdded: 2, gaugeAdded: FumenManager.instance.pgreatGauge);
       pgreatCount++;
       judgedCount++;
       pgreatCountTMP.text = pgreatCount.ToString();
+      NoteJudge(judge: Judge.PGREAT, scoreAdded: 2, gaugeAdded: FumenManager.instance.pgreatGauge);
     }
 
     public void GreatJudge() {
-      NoteJudge(judge: Judge.GREAT, scoreAdded: 1, gaugeAdded: FumenManager.instance.greatGauge);
       greatCount++;
       judgedCount++;
       greatCountTMP.text = greatCount.ToString();
+      NoteJudge(judge: Judge.GREAT, scoreAdded: 1, gaugeAdded: FumenManager.instance.greatGauge);
     }
 
     public void GoodJudge() {
-      NoteJudge(judge: Judge.GOOD, gaugeAdded: FumenManager.instance.goodGauge);
       goodCount++;
       judgedCount++;
       goodCountTMP.text = goodCount.ToString();
+      NoteJudge(judge: Judge.GOOD, gaugeAdded: FumenManager.instance.goodGauge);
     }
 
     public void BadJudge() {
-      NoteJudge(judge: Judge.BAD, comboAdded: -combo, gaugeAdded: FumenManager.instance.badGauge);
       badCount++;
       judgedCount++;
       badCountTMP.text = badCount.ToString();
+      NoteJudge(judge: Judge.BAD, comboAdded: -combo, gaugeAdded: FumenManager.instance.badGauge);
     }
 
     // 空 POOR
     public void PoorJudge() {
-      NoteJudge(judge: Judge.POOR, comboAdded: 0, gaugeAdded: FumenManager.instance.poorGauge);
       poorCount++;
       poorCountTMP.text = TotalPoorCount.ToString();
+      NoteJudge(judge: Judge.POOR, comboAdded: 0, gaugeAdded: FumenManager.instance.poorGauge);
     }
 
     public void MissJudge() {
-      NoteJudge(judge: Judge.POOR, comboAdded: -combo, gaugeAdded: FumenManager.instance.missGauge);
       missCount++;
       judgedCount++;
       poorCountTMP.text = TotalPoorCount.ToString();
+      NoteJudge(judge: Judge.POOR, comboAdded: -combo, gaugeAdded: FumenManager.instance.missGauge);
     }
 
     public void UpdateScore(int exScore) {

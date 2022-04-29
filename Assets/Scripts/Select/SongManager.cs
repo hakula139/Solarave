@@ -19,6 +19,7 @@ namespace Select {
     public string songFolderBasePath;
     public static string CurrentPath;
     public string currentFumenPath;
+    public bool isAutoMode;
 
     private void Awake() {
       instance = this;
@@ -37,8 +38,14 @@ namespace Select {
       if (Input.GetMouseButtonDown(1)) {
         CloseSongFolder();
       }
-
+      // Press Enter to play.
       if (Input.GetKeyDown(KeyCode.Return) && !string.IsNullOrEmpty(currentFumenPath)) {
+        isAutoMode = false;
+        EnterSong();
+      }
+      // Press A to autoplay.
+      if (Input.GetKeyDown(KeyCode.A) && !string.IsNullOrEmpty(currentFumenPath)) {
+        isAutoMode = true;
         EnterSong();
       }
     }

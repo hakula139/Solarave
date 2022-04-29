@@ -21,6 +21,7 @@ namespace Play {
     private readonly BMS.Model bms = new();
     public int totalNotes;
     public string fumenPath;
+    public bool isAutoMode;
     public float startDelay;    // ms
     public float inputLatency;  // ms
 
@@ -40,6 +41,7 @@ namespace Play {
     private void Awake() {
       instance = this;
       fumenPath = Select.SongManager.instance.currentFumenPath;
+      isAutoMode = Select.SongManager.instance.isAutoMode;
     }
 
     private void Start() {

@@ -11,6 +11,7 @@ namespace Play {
     public GameObject fumenArea;
     public GameObject notePrefab;
     public Animator laserPrefab;
+    protected static readonly float LaserDuration = 0.05f;  // s
     public Animator bombPrefab;
     protected static readonly int BombPoolSize = 4;
     protected static readonly float BombDuration = 0.2f;  // s
@@ -28,14 +29,16 @@ namespace Play {
     private void Update() {
       if (Input.GetKeyDown(keyAssigned)) {
         sr.color = new Color(1, 1, 1, 0.25f);
-        laserPrefab.SetBool("KeyDown", true);
-        JudgeNote();
-        PlayKeySound();
+        TriggerLaser();
+        if (!FumenManager.instance.isAutoMode) {
+          JudgeNote();
+          PlayKeySound();
+        }
       }
 
       if (Input.GetKeyUp(keyAssigned)) {
         sr.color = new Color(1, 1, 1, 0);
-        laserPrefab.SetBool("KeyDown", false);
+        DisableLaser();
       }
     }
 
@@ -140,7 +143,7 @@ namespace Play {
       }
     }
 
-    protected void TriggerBomb() {
+    public void TriggerBomb() {
       for (int i = 0; i < BombPoolSize; i++) {
         if (!bombPool[i].isActiveAndEnabled) {
           Animator bombClone = bombPool[i];
@@ -152,9 +155,21 @@ namespace Play {
       }
     }
 
-    protected IEnumerator DisableBomb(Animator bomb) {
+    public IEnumerator DisableBomb(Animator bomb) {
       yield return BombWaitForDuration;
       bomb.gameObject.SetActive(false);
+    }
+
+    public void TriggerLaser() {
+      laserPrefab.SetBool("KeyDown", true);
+    }
+
+    public void DisableLaser() {
+      laserPrefab.SetBool("KeyDown", false);
+    }
+
+    public void DisableLaserWithDelay() {
+      Invoke(nameof(DisableLaser), LaserDuration);
     }
   }
 }
