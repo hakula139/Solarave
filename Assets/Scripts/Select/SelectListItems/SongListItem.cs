@@ -9,13 +9,9 @@ namespace Select {
     public void OnPointerClick(PointerEventData eventData) {
       if (eventData.button == PointerEventData.InputButton.Left) {
         if (eventData.clickCount > 1) {
-          // Debug.LogFormat("entering song, path=<{0}>", path);
-          SoundEffectsManager.instance.enterSoundEffect.Play();
-          SongManager.instance.EnterPlayScene(path);
+          SongManager.instance.EnterSong();
         } else {
-          Debug.LogFormat("selected song, path=<{0}>", path);
-          SoundEffectsManager.instance.selectSoundEffect.Play();
-          SongManager.instance.SetupSongInfo(bms);
+          SongManager.instance.SelectSong(path, bms);
         }
       }
     }

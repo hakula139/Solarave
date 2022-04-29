@@ -71,7 +71,7 @@ namespace Play {
     public virtual void PlayKeySound() {
       float currentTime = FumenScroller.instance.currentTime.DataMilli;
 
-      if (currentKeySound is null || currentKeySound.isTriggered) {
+      if (currentKeySound == null || currentKeySound.isTriggered) {
         // Try to find the latest key sound to play.
         while (keySounds.TryPeek(out KeySound keySound) && currentTime >= keySound.time - FumenManager.instance.poorRange) {
           currentKeySound = keySound;

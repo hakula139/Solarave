@@ -39,7 +39,7 @@ namespace Play {
 
     private void Awake() {
       instance = this;
-      fumenPath = Select.SongManager.CurrentFumenPath;
+      fumenPath = Select.SongManager.instance.currentFumenPath;
     }
 
     private void Start() {
